@@ -1,0 +1,18 @@
+.container {
+    background: #000;
+    height: 25px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Rubik;
+}
+.logo{
+    height: 20px;
+    width: 50px;
+    display: flex;
+}
+.logo img{
+    height: auto;
+    object-fit: cover;
+}

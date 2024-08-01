@@ -1,6 +1,12 @@
+import styles from './navbar.module.css';
+
 const Navbar = () => {
   return (
-    <div>Navbar component</div>
+    <div className={styles.container}>
+      <div className={styles.logo}>
+        <img src='' />
+      </div>
+    </div>
   );
 };
 
