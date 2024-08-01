@@ -1,18 +1,156 @@
 .container {
     background: #000;
-    height: 25px;
+    height: auto;
+    width: 100vw;
+}
+
+.logoContainer {
+    background: #000;
+    padding: 0 50px;
+    height: 30px;
     width: 100vw;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-family: Rubik;
+    justify-content: space-between;
+    font-family: Rubik, sans-serif;
+    font-weight: 400;
+    color: #9c8e7f;
 }
-.logo{
+
+.logo {
     height: 20px;
     width: 50px;
     display: flex;
 }
-.logo img{
+
+.logo img {
     height: auto;
     object-fit: cover;
+}
+
+.games {
+    width: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.games:hover{
+    cursor: pointer;
+}
+
+.user {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.user1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text {
+    width: auto;
+}
+
+.sepr {
+    background: #9c8e7f75;
+    width: 1px;
+    height: 10px;
+}
+
+.text:hover {
+    color: #477ced;
+}
+
+
+/* Cards(Games) */
+
+.cards {
+    position:absolute;
+    height: 250px;
+    position: relative;
+}
+
+.card {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: -200px;
+    left: 300px;
+    animation-name: move;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.card2 {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: -200px;
+    left: 600px;
+    animation-name: move;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+}
+
+.card3 {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: -200px;
+    left: 900px;
+    animation-name: move;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.4s;
+}
+
+.card img,
+.card2 img,
+.card3 img {
+    padding: 0 10px;
+    background: #2d2a2a;
+    height: 130px;
+    width: 200px;
+    border-radius: 1em;
+    object-fit: contain;
+}
+
+.cardText {
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    color: #9c8e7f;
+    font-family: Rubik, sans-serif;
+}
+
+@keyframes move {
+    from {
+        top: -200px;
+    }
+
+    to {
+        top: 20px;
+    }
 }
