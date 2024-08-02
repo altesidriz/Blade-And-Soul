@@ -1,0 +1,17 @@
+.container {
+    background: #000;
+    width: 100vw;
+    height: 100vh;
+}
+
+.carousel{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+img{
+    width: 100vw;
+    height: auto;
+    object-fit: cover;
+}

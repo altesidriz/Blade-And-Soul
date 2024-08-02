@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/header/Header';
+import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
 
 function App() {
@@ -9,8 +10,8 @@ function App() {
       <div>
         <div className='main'>
           <Header />
+          <Navbar />
           <Home />
-          <h1>Blade and Soul Site Goes here soon</h1>
         </div>
       </div>
     </>

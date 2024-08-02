@@ -15,7 +15,7 @@ const Header = () => {
             <img src="/src/assets/header/ncsoft-seeklogo.svg" alt="" />
           </div>
           <span className={styles.games} 
-          onClick={()=> setShow(true)}
+          onClick={() => setShow(!show)}
          >
             Games
             <MdKeyboardArrowDown color='#9c8e7f' />
