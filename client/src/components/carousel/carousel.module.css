@@ -1,0 +1,48 @@
+.carousel {
+    width: 100vw;
+    height: 100vh;
+    background: white;
+}
+
+.caroContent{
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.caroContent .left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 5%;
+    height: 15%;
+    background: rgb(0, 0, 0, 0.7);
+}
+
+.caroContent .center {
+    flex: 90%;
+    height: 25%;
+    background: rgb(255, 0, 0, 0.7);
+    align-self: flex-end;
+}
+
+.caroContent .right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 5%;
+    height: 15%;
+    background: rgb(0, 0, 0, 0.7);
+}
+
+.caroContent .left, .right :hover{
+    cursor: pointer;
+}
+
