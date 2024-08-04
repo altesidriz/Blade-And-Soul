@@ -12,7 +12,7 @@ const Carousel = () => {
         <div className={styles.carousel}>
             <div className={styles.caroContent}
                 style={{ 
-                    backgroundImage: `url(${images[curImg]})`,
+                    backgroundImage: `url(${images[curImg].image})`,
                     transition: 'background-image 5s'
             }}
             >
@@ -21,7 +21,10 @@ const Carousel = () => {
                         curImg > 0 && setCurImg(curImg - 1);
                     }}
                 ><LiaAngleDoubleLeftSolid size={50} color="grey" /></div>
-                <div className={styles.center}></div>
+                <div className={styles.center}>
+                    <h1>{images[curImg].title}</h1>
+                    <span className={styles.button}>Learn More</span>
+                </div>
                 <div className={styles.right}
                     onClick={() => {
                         curImg < images.length-1 && setCurImg(curImg + 1);

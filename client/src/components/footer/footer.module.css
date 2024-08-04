@@ -1,0 +1,43 @@
+.container {
+    width: 100vw;
+    height: 500px;;
+    background-color: #04080b;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px ;
+    align-items: center;
+    justify-content: center;
+}
+
+.social {
+    padding-top: 50px;
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    color: rgba(255, 255, 255, 0.557);
+}
+
+.social span:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.pegi{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 150px;
+    font-family: Rubik, sans-serif;
+}
+
+.pegi img{
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+}
+.pegi span{
+    padding-bottom: 15px;
+}
