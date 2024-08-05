@@ -2,7 +2,8 @@ import './App.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
-import Home from './pages/home/Home';
+// import Home from './pages/home/Home';
+import News from './pages/news/News';
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
 
           <Header />
           <Navbar />
-          <Home />
+          {/* <Home /> */}
+          <News />
           <Footer />
 
       </div>
