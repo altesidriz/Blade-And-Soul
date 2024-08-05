@@ -41,3 +41,50 @@
 .pegi span{
     padding-bottom: 15px;
 }
+
+.separator{
+    width: 100vw;
+    height: 2px;
+    background: #9c8e7f;
+}
+
+.links{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.links a{
+    text-decoration: none;
+    padding-right: 15px;
+    font-family: Rubik, sans-serif;
+}
+
+.links a:not(:last-child){
+    border-right: 1px solid #9c8e7f;
+}
+
+.nc {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    font-family: Rubik, sans-serif;
+    font-size: 1.2rem;
+}
+
+.logoNc{
+    width: 100px;
+    height: auto;
+}
+
+.logoNc img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+}
