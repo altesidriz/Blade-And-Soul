@@ -1,0 +1,125 @@
+.container {
+    background: url('../../assets/news/news-bg.jpg');
+    height: auto;
+    width: 100vw;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    align-items: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profileBanner {
+    background: rgb(13, 1, 31);
+    width: 60%;
+    height: 200px;
+    position: relative;
+}
+
+.profileImg{
+    position: absolute;
+    top: 0;
+    left: -100px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    filter: drop-shadow(0 0 1.9rem rgb(191, 236, 253));
+}
+
+.profileImg>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bannerCover{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bannerCover .coverImg{
+    width: 100%;
+    height: 50%;
+}
+
+.coverImg>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bannerCover .userInfo {
+    width: 70%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: end;
+    column-gap: 25px;
+    font-family: Rubik, sans-serif;
+}
+
+.userInfo>:first-child{
+    align-self: flex-start;
+    font-size: 2.9rem;
+}
+
+.userInfo>:nth-child(2) {
+    display: flex;
+    gap: 15px;
+}
+
+.role{
+    color: red;
+    border-right: 1px solid white;
+    padding-right: 15px;
+}
+
+/* section 2 */
+
+.playerActivity{
+    width: 60%;
+    height: 800px;
+    background: rgba(13, 1, 31, 0.361);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.galery{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.images {
+    height: 70%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    gap: 30px;
+    overflow: scroll;
+}
+
+.galery>h3 {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    height:50px;
+    border-bottom: 1px solid white;
+}
+
+.images img{
+    width: 250px;
+}
+

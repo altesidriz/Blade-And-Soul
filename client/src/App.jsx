@@ -2,6 +2,7 @@ import './App.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
+import Profile from './pages/profile/Profile';
 import Shop from './pages/shop/Shop';
 // import Home from './pages/home/Home';
 // import News from './pages/news/News';
@@ -15,7 +16,8 @@ function App() {
           <Navbar />
           {/* <Home /> */}
           {/* <News /> */}
-          <Shop />
+          {/* <Shop /> */}
+          <Profile />
           <Footer />
 
       </div>
