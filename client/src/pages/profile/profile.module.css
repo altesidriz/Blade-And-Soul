@@ -1,125 +1,86 @@
 .container {
-    background: url('../../assets/news/news-bg.jpg');
-    height: auto;
+    background: grey;
+    height: 1000px;
     width: 100vw;
-    padding-top: 100px;
     display: flex;
     flex-direction: column;
-    row-gap: 50px;
+    row-gap: 10px;
     align-items: center;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    justify-content: flex-start;
 }
 
-.profileBanner {
-    background: rgb(13, 1, 31);
-    width: 60%;
-    height: 200px;
+.cover{
+    margin-top: 50px;
+    width: 90%;
+    height: 300px;
+    background: #000;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+
+.cover .top {
+    width: 100%;
+    height: 70%;
+    background: blue;
     position: relative;
 }
 
-.profileImg{
+.top img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top .playerInfo{
     position: absolute;
-    top: 0;
-    left: -100px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-    filter: drop-shadow(0 0 1.9rem rgb(191, 236, 253));
+    z-index: 1;
+    bottom: 1%;
+    left: 12%;
 }
 
-.profileImg>img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.bannerCover{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.bannerCover .coverImg{
-    width: 100%;
-    height: 50%;
-}
-
-.coverImg>img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.bannerCover .userInfo {
-    width: 70%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: end;
-    column-gap: 25px;
+.playerInfo h1,h5{
+    background: #423d3c;
+    padding: 0 5px;
     font-family: Rubik, sans-serif;
 }
 
-.userInfo>:first-child{
-    align-self: flex-start;
-    font-size: 2.9rem;
-}
-
-.userInfo>:nth-child(2) {
+.cover .bottom {
+    position: relative;
+    width: 100%;
+    height: 30%;
+    background: #423d3c;
     display: flex;
-    gap: 15px;
+    align-items: end;
+    padding-left: 200px;
 }
 
-.role{
-    color: red;
-    border-right: 1px solid white;
-    padding-right: 15px;
+.bottom .profileImg {
+    position: absolute;
+    bottom: 25px;
+    left: 50px;
+    width: 120px;
+    height: 120px;
+    background: #470e62;
+    border-radius: 50%;
 }
 
-/* section 2 */
+.profileImg img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
-.playerActivity{
-    width: 60%;
-    height: 800px;
-    background: rgba(13, 1, 31, 0.361);
+.bottom .joined{
+    height: 70px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: start;
+    row-gap: 10px;
+    font-family: Rubik,sans-serif;
 }
 
-.galery{
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.playerContent {
+    background: #423d3c;
+    height: 500px;
+    width: 90%;
 }
-
-.images {
-    height: 70%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    gap: 30px;
-    overflow: scroll;
-}
-
-.galery>h3 {
-    text-align: center;
-    justify-content: center;
-    width: 100%;
-    height:50px;
-    border-bottom: 1px solid white;
-}
-
-.images img{
-    width: 250px;
-}
-
