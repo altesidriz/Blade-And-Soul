@@ -1,0 +1,71 @@
+.container {
+    background: #000;
+    width: 100%;
+    height: 950px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    row-gap: 15px;
+}
+
+.searchBar {
+    width: 60%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Rubik, sans-serif;
+}
+
+.searchBar input {
+    width: 90%;
+    height: 100%;
+    padding-left: 15px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 15px 0 0 15px;
+    outline: none;
+
+}
+
+.searchBar span {
+    background: #fff;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 15px 15px 0;
+    color: #000;
+}
+
+.searchBar span:hover {
+    background: #4f4b4b;
+    color: white;
+}
+.postList{
+    width: 60%;
+    height: 800px;
+    border-radius: 15px;
+}
+
+.paginationNum {
+    background: #312a28;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.paginationNum span {
+    height: 25px;
+    width: 25px;
+}
+
+.paginationNum span:hover {
+    background: #e26414;
+}

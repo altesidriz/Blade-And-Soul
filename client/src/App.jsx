@@ -2,10 +2,11 @@ import './App.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
-// import Shop from './pages/shop/Shop';
 // import Home from './pages/home/Home';
 // import News from './pages/news/News';
-import Profile from './pages/profile/Profile';
+// import Shop from './pages/shop/Shop';
+// import Profile from './pages/profile/Profile';
+import Forum from './pages/forum/Forum';
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
           {/* <Home /> */}
           {/* <News /> */}
           {/* <Shop /> */}
-          <Profile/>
+          {/* <Profile/> */}
+          <Forum />
           <Footer />
 
       </div>
