@@ -6,7 +6,8 @@ import Navbar from './components/navbar/Navbar';
 // import News from './pages/news/News';
 // import Shop from './pages/shop/Shop';
 // import Profile from './pages/profile/Profile';
-import Forum from './pages/forum/Forum';
+// import Forum from './pages/forum/Forum';
+import Signup from './pages/register/Signup';
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
           {/* <News /> */}
           {/* <Shop /> */}
           {/* <Profile/> */}
-          <Forum />
+          {/* <Forum /> */}
+          <Signup />
           <Footer />
 
       </div>
