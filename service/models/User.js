@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-import mongoose from "mongoose";
-
 const UserSchema = new mongoose.Schema(
   {
     name: {
@@ -17,16 +15,18 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
     },
-    characterName: {
-      type: String,
+    isAdmin: {
+      type: Boolean,
+      default: false
     },
     wallet: {
       type: Number,
       default: 0,
     },
     items: [{
-        itemName: String,
-        itemQuantity: Number,
+      itemImage: String,
+      itemName: String,
+      itemQuantity: Number,
     }],
     fromGoogle: {
       type: Boolean,
