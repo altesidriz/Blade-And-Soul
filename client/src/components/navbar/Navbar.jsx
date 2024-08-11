@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import styles from './navbar.module.css';
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,22 +11,24 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.leftContent}>
-        <div className={styles.logo}>
-          <img src='/src/assets/navbar/nav-logo.png' />
-        </div>
+        <Link to='/'>
+          <div className={styles.logo}>
+            <img src='/src/assets/navbar/nav-logo.png' />
+          </div>
+        </Link>
         <div className={styles.menu}>
-            <a href="#" 
-            onClick={()=> setArrow(!arrow)}
-            >Game {!arrow && <IoIosArrowDown />} {arrow && <IoIosArrowUp />}  </a>
-            <a href="#">News</a>
-            <a href="#">Forum</a>
-            <a href="#">Support</a>
-            <a href="#">Shop</a>
-            {arrow && <div className={styles.subMenu}>
-              <span>Races</span>
-              <span>Classes</span>
-              <span>Wiki</span>
-            </div>}
+          <a href="#"
+            onClick={() => setArrow(!arrow)}
+          >Game {!arrow && <IoIosArrowDown />} {arrow && <IoIosArrowUp />}  </a>
+          <Link to="/news">News</Link>
+          <Link to="/forum">Forum</Link>
+          <Link to="#">Support</Link>
+          <Link to="/shop">Shop</Link>
+          {arrow && <div className={styles.subMenu}>
+            <Link to='#'>Races</Link>
+            <Link to='#'>Classes</Link>
+            <Link to='#'>Wiki</Link>
+          </div>}
         </div>
       </div>
     </div>

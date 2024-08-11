@@ -3,6 +3,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { FiMonitor } from "react-icons/fi";
 import { MdPhoneAndroid } from "react-icons/md";
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -14,51 +15,51 @@ const Header = () => {
           <div className={styles.logo}>
             <img src="/src/assets/header/ncsoft-seeklogo.svg" alt="" />
           </div>
-          <span className={styles.games} 
-          onClick={() => setShow(!show)}
-         >
+          <span className={styles.games}
+            onClick={() => setShow(!show)}
+          >
             Games
             <MdKeyboardArrowDown color='#9c8e7f' />
           </span>
         </div>
         <div className={styles.user}>
           <div className={styles.sepr}></div>
-          <a className={styles.text} href='#'>
+          <Link className={styles.text} to='/signup'>
             Create Account
-          </a>
+          </Link>
           <div className={styles.sepr}></div>
           <a className={styles.text} href='#'>
             Log In
           </a>
         </div>
       </div>
-      {show && 
-      <div className={styles.cards}>
-        <div className={styles.card}>
-          <img src='/src/assets/header/lineage.png' alt='lineage.png' />
-          <div className={styles.cardText}>
-          <MdPhoneAndroid />
-          <FiMonitor/>
-          <span>Lineage II</span>
+      {show &&
+        <div className={styles.cards}>
+          <div className={styles.card}>
+            <img src='/src/assets/header/lineage.png' alt='lineage.png' />
+            <div className={styles.cardText}>
+              <MdPhoneAndroid />
+              <FiMonitor />
+              <span>Lineage II</span>
+            </div>
+          </div>
+          <div className={styles.card2}>
+            <img src='/src/assets/header/aion.png' alt='lineage.png' />
+            <div className={styles.cardText}>
+              <MdPhoneAndroid />
+              <FiMonitor />
+              <span>Lineage II</span>
+            </div>
+          </div>
+          <div className={styles.card3}>
+            <img src='/src/assets/header/bns.png' alt='lineage.png' />
+            <div className={styles.cardText}>
+              <MdPhoneAndroid />
+              <FiMonitor />
+              <span>Lineage II</span>
+            </div>
           </div>
         </div>
-        <div className={styles.card2}>
-          <img src='/src/assets/header/aion.png' alt='lineage.png' />
-          <div className={styles.cardText}>
-          <MdPhoneAndroid />
-          <FiMonitor/>
-          <span>Lineage II</span>
-          </div>
-        </div>
-        <div className={styles.card3}>
-          <img src='/src/assets/header/bns.png' alt='lineage.png' />
-          <div className={styles.cardText}>
-          <MdPhoneAndroid />
-          <FiMonitor/>
-          <span>Lineage II</span>
-          </div>
-        </div>
-      </div>
       }
     </div>
   );
