@@ -2,10 +2,6 @@
     background: #000;
     height: auto;
     width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
 }
 
 .logoContainer {
