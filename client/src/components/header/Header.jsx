@@ -28,9 +28,9 @@ const Header = () => {
             Create Account
           </Link>
           <div className={styles.sepr}></div>
-          <a className={styles.text} href='#'>
+          <Link className={styles.text} to='/login'>
             Log In
-          </a>
+          </Link>
         </div>
       </div>
       {show &&

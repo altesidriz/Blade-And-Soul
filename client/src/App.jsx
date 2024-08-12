@@ -15,6 +15,7 @@ import Profile from './pages/profile/Profile';
 import Forum from './pages/forum/Forum';
 import Post from './pages/post/Post';
 import Signup from './pages/register/Signup';
+import Login from './pages/login/Login';
 
 
 function App() {
@@ -33,10 +34,10 @@ function App() {
             <Route path='/forum' element={<Forum />} />
             <Route path='/post/:id' element={<Post />}/>
             <Route path='/signup' element={<Signup />} />
+            <Route path='/login' element={<Login />} />
           </Routes>
           <Footer />
         </BrowserRouter>
-
       </div>
     </>
   );
