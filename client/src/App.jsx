@@ -13,6 +13,7 @@ import News from './pages/news/News';
 import Shop from './pages/shop/Shop';
 import Profile from './pages/profile/Profile';
 import Forum from './pages/forum/Forum';
+import Post from './pages/post/Post';
 import Signup from './pages/register/Signup';
 
 
@@ -30,6 +31,7 @@ function App() {
             <Route path='/shop' element={<Shop />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/forum' element={<Forum />} />
+            <Route path='/post/:id' element={<Post />}/>
             <Route path='/signup' element={<Signup />} />
           </Routes>
           <Footer />

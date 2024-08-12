@@ -1,0 +1,65 @@
+.container{
+    height: 100vh;
+    width: 100vw;
+    background: #000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.postContent {
+    background: #252323;
+    padding: 25px 25px 25px 0;
+    font-family: Rubik, sans-serif;
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    border-radius: 15px;
+}
+
+.leftContent{
+    width: 15%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.avatar img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.rightContent{
+    padding: 0 5px;
+    width: 85%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    color: aliceblue;
+    line-height: 3.2rem;
+    row-gap: 15px;
+}
+
+.rightContent p {
+    border-bottom: 1px solid white ;
+    padding-bottom: 20px;
+}
+.likes{
+    align-self: flex-end;
+}
