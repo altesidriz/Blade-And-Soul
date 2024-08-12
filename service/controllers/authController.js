@@ -18,7 +18,7 @@ export const signup = async (req, res, next) => {
         res.status(200).send('User has been created!');
     } catch (err) {
         // next(err);
-        next(createError(400,"User or email is already registered!"));
+        next(createError(400, "User or email is already registered!"));
     }
 }
 
@@ -38,7 +38,7 @@ export const signin = async (req, res, next) => {
 
         const token = jwt.sign({ id: user._id }, process.env.SECRETKEY);
 
-        const {password, ...otherDetails} = user._doc;
+        const { password, ...otherDetails } = user._doc;
 
         res.cookie("access_token", token, {
             httpOnly: true
@@ -49,3 +49,8 @@ export const signin = async (req, res, next) => {
         // next(createError(500,"Something went wrong!"));
     }
 };
+
+export const logout = async (req, res, next) => {
+    res.clearCookie("access_token");
+    res.status(200).json("loged out successfully!")
+}

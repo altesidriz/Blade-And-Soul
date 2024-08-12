@@ -1,12 +1,28 @@
 import styles from './header.module.css';
+import { useDispatch } from 'react-redux';
+import { useSelector } from "react-redux";
+import axios from 'axios';
+
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FiMonitor } from "react-icons/fi";
 import { MdPhoneAndroid } from "react-icons/md";
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../../redux/userSlice';
 
 const Header = () => {
   const [show, setShow] = useState(false);
+
+  const { currentUser } = useSelector(state => state.user)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
+  const handleLogout = async () => {
+    await axios.get('/api/auth/logout')
+    dispatch(logout())
+    navigate('/')
+  }
 
   return (
     <div className={styles.container}>
@@ -24,13 +40,21 @@ const Header = () => {
         </div>
         <div className={styles.user}>
           <div className={styles.sepr}></div>
-          <Link className={styles.text} to='/signup'>
-            Create Account
-          </Link>
+          {currentUser ? (
+            <div>
+              {currentUser.name}
+            </div>) : (
+            <Link className={styles.text} to='/signup'>
+              Create Account
+            </Link>)}
           <div className={styles.sepr}></div>
-          <Link className={styles.text} to='/login'>
+          {currentUser ? (
+            <Link className={styles.text} to='/' onClick={handleLogout}>
+              Logout
+            </Link>
+          ) : (<Link className={styles.text} to='/login'>
             Log In
-          </Link>
+          </Link>)}
         </div>
       </div>
       {show &&
