@@ -20,6 +20,10 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
+    role: {
+      type: String,
+      default: 'Member'
+    },
     wallet: {
       type: Number,
       default: 0,

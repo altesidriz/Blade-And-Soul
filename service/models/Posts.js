@@ -12,9 +12,10 @@ const PostSchema = new mongoose.Schema(
         },
         images: {
             type: [String],
+            default:[]
         },
         userId: {
-            type: Number,
+            type: String,
         },
         category: {
             type: String,
@@ -24,10 +25,6 @@ const PostSchema = new mongoose.Schema(
             default: []
         },
         likes: {
-            type: [String],
-            default: []
-        },
-        dislikes: {
             type: [String],
             default: []
         }

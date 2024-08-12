@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const PostSchema = new mongoose.Schema(
+const ReplySchema = new mongoose.Schema(
     {
         userId: {
-            type: Number,
+            type: String,
             required: true,
         },
         postId: {
@@ -13,21 +13,9 @@ const PostSchema = new mongoose.Schema(
         description: {
             type: String,
             required: true,
-        },
-        tags: {
-            type: [String],
-            default: []
-        },
-        likes: {
-            type: [String],
-            default: []
-        },
-        dislikes: {
-            type: [String],
-            default: []
         }
     },
     { timestamps: true }
 );
 
-export default mongoose.model("Post", PostSchema);
+export default mongoose.model("Reply", ReplySchema);
