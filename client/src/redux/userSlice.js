@@ -4,6 +4,7 @@ const initialState = {
   currentUser: null,
   loading: false,
   error: false,
+  message: '',
 };
 
 export const userSlice = createSlice({
@@ -20,6 +21,7 @@ export const userSlice = createSlice({
     loginFailure: (state) => {
       state.loading = false;
       state.error = true;
+      state.message = 'Wrong username or password!';
     },
     logout: (state) => {
       state.currentUser = null;
@@ -29,7 +31,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout} =
+export const { loginStart, loginSuccess, loginFailure, logout } =
   userSlice.actions;
 
 export default userSlice.reducer;

@@ -18,7 +18,7 @@ export const signup = async (req, res, next) => {
         res.status(200).send('User has been created!');
     } catch (err) {
         // next(err);
-        next(createError(400, "User or email is already registered!"));
+        next(createError(400, "Username or email is already in use!"));
     }
 }
 
@@ -36,7 +36,7 @@ export const signin = async (req, res, next) => {
             return next(createError(400, "Email or password is incorrect!"))
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.SECRETKEY);
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.SECRETKEY);
 
         const { password, ...otherDetails } = user._doc;
 
@@ -52,5 +52,5 @@ export const signin = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
     res.clearCookie("access_token");
-    res.status(200).json("loged out successfully!")
+    res.status(200).json("Loged out successfully!")
 }

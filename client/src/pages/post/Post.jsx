@@ -1,18 +1,11 @@
 import styles from './post.module.css';
 import avatar from '../../assets/user/portrait.jpg';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+
 
 const Post = () => {
-    const [user, setUser] = useState({});
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await axios.get('/api/users/find/');
-      setUser(res.data);
-    };
-    fetchUser();
-  }, {});
+    
+    const {curentUser} = useSelector
+    
     return (
         <div className={styles.container}>
             <div className={styles.postContent}>
@@ -39,3 +32,20 @@ const Post = () => {
 };
 
 export default Post;
+
+
+
+
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
+
+
+//     const [user, setUser] = useState({});
+
+//   useEffect(() => {
+    //     const fetchUser = async () => {
+        //       const res = await axios.get('/api/users/find/');
+        //       setUser(res.data);
+        //     };
+        //     fetchUser();
+        //   }, {});
