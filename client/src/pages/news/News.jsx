@@ -1,115 +1,26 @@
 import styles from './news.module.css';
-import cardImg from '../../assets/news/card1.jpg';
+import NewsCard from '../../components/newsCard/NewsCard';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const News = () => {
+    const [news, setNews] = useState([]);
+
+    useEffect(() => {
+            const fetchData = async () => {
+                  const res = await axios.get('/api/news/all');
+                  setNews(res.data);
+                };
+                fetchData();
+              }, []);
+
     return (
         <div className={styles.container}>
             <div className={styles.select}>
                 <button>Select Category</button>
             </div>
             <div className={styles.cardList}>
-                {/* SINGLE CARD */}
-                <div className={styles.card}>
-                    <div className={styles.cardImg}>
-                        <img src={cardImg} alt="" />
-                    </div>
-                    <div className={styles.cardText}>
-                        <span>LIVE</span>
-                        <h3>Summer Starlight Packages</h3>
-                        <div>
-                            <span>July 23, 2024</span>
-                            <span>Sales</span>
-                        </div>
-                        <div className={styles.separator}></div>
-                        <p>A Refreshing Summer with the Latest Swimwear</p>
-                        <a href="#">Read More</a>
-                    </div>
-                </div>
-                {/* SINGLE CARD */}
-                <div className={styles.card}>
-                    <div className={styles.cardImg}>
-                        <img src={cardImg} alt="" />
-                    </div>
-                    <div className={styles.cardText}>
-                        <span>LIVE</span>
-                        <h3>Summer Starlight Packages</h3>
-                        <div>
-                            <span>July 23, 2024</span>
-                            <span>Sales</span>
-                        </div>
-                        <div className={styles.separator}></div>
-                        <p>A Refreshing Summer with the Latest Swimwear</p>
-                        <a href="#">Read More</a>
-                    </div>
-                </div>
-                {/* SINGLE CARD */}
-                <div className={styles.card}>
-                    <div className={styles.cardImg}>
-                        <img src={cardImg} alt="" />
-                    </div>
-                    <div className={styles.cardText}>
-                        <span>LIVE</span>
-                        <h3>Summer Starlight Packages</h3>
-                        <div>
-                            <span>July 23, 2024</span>
-                            <span>Sales</span>
-                        </div>
-                        <div className={styles.separator}></div>
-                        <p>A Refreshing Summer with the Latest Swimwear</p>
-                        <a href="#">Read More</a>
-                    </div>
-                </div>
-                {/* SINGLE CARD */}
-                <div className={styles.card}>
-                    <div className={styles.cardImg}>
-                        <img src={cardImg} alt="" />
-                    </div>
-                    <div className={styles.cardText}>
-                        <span>LIVE</span>
-                        <h3>Summer Starlight Packages</h3>
-                        <div>
-                            <span>July 23, 2024</span>
-                            <span>Sales</span>
-                        </div>
-                        <div className={styles.separator}></div>
-                        <p>A Refreshing Summer with the Latest Swimwear</p>
-                        <a href="#">Read More</a>
-                    </div>
-                </div>
-                {/* SINGLE CARD */}
-                <div className={styles.card}>
-                    <div className={styles.cardImg}>
-                        <img src={cardImg} alt="" />
-                    </div>
-                    <div className={styles.cardText}>
-                        <span>LIVE</span>
-                        <h3>Summer Starlight Packages</h3>
-                        <div>
-                            <span>July 23, 2024</span>
-                            <span>Sales</span>
-                        </div>
-                        <div className={styles.separator}></div>
-                        <p>A Refreshing Summer with the Latest Swimwear</p>
-                        <a href="#">Read More</a>
-                    </div>
-                </div>
-                {/* SINGLE CARD */}
-                <div className={styles.card}>
-                    <div className={styles.cardImg}>
-                        <img src={cardImg} alt="" />
-                    </div>
-                    <div className={styles.cardText}>
-                        <span>LIVE</span>
-                        <h3>Summer Starlight Packages</h3>
-                        <div>
-                            <span>July 23, 2024</span>
-                            <span>Sales</span>
-                        </div>
-                        <div className={styles.separator}></div>
-                        <p>A Refreshing Summer with the Latest Swimwear</p>
-                        <a href="#">Read More</a>
-                    </div>
-                </div>
+                {news.map((data) => (<NewsCard key={data._id} data={data}/>))}
             </div>
         </div>
     );
