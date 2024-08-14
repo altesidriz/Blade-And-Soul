@@ -31,6 +31,15 @@
     justify-content: space-between;
 }
 
+.cardTime{
+    display: flex;
+    column-gap: 15px;
+}
+
+.cardTime :nth-child(2) {
+    text-transform: capitalize;
+}
+
 .cardText .separator {
     width: 100%;
     height: 1px;

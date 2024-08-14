@@ -1,7 +1,15 @@
 import styles from './newsCard.module.css';
-import cardImg from '../../assets/news/card1.jpg';
+import { format } from 'timeago.js';
 
-const NewsCard = ({data}) => {
+const categoryColors = {
+    sales: 'red',
+    events: 'yellow',
+    general: 'white',
+    'patch notes': 'green'
+};
+
+const NewsCard = ({ data }) => {
+    const textColor = categoryColors[data.category]
     return (
         <div className={styles.card}>
             <div className={styles.cardImg}>
@@ -10,9 +18,9 @@ const NewsCard = ({data}) => {
             <div className={styles.cardText}>
                 <span>LIVE</span>
                 <h3>{data.title}</h3>
-                <div>
-                    <span>{data.createdAt}</span>
-                    <span>{data.category}</span>
+                <div className={styles.cardTime}>
+                    <span>{format(data.createdAt)}</span>
+                    <span style={{ color: textColor }}>{data.category}</span>
                 </div>
                 <div className={styles.separator}></div>
                 <a href="#">Read More</a>
