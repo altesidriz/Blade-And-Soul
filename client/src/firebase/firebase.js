@@ -1,7 +1,10 @@
 import { initializeApp } from "firebase/app";
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBAUNRew6g8Ds0TAn1eqpVfzNUNYfDdsu8",
+  apiKey: process.env.FBKEY,
   authDomain: "balde-and-soul-7c14b.firebaseapp.com",
   projectId: "balde-and-soul-7c14b",
   storageBucket: "balde-and-soul-7c14b.appspot.com",
