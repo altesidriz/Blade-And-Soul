@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './newsCard.module.css';
 import { format } from 'timeago.js';
 
@@ -9,7 +10,7 @@ const categoryColors = {
 };
 
 const NewsCard = ({ data }) => {
-    const textColor = categoryColors[data.category]
+    const textColor = categoryColors[data.category];
     return (
         <div className={styles.card}>
             <div className={styles.cardImg}>
@@ -23,7 +24,7 @@ const NewsCard = ({ data }) => {
                     <span style={{ color: textColor }}>{data.category}</span>
                 </div>
                 <div className={styles.separator}></div>
-                <a href="#">Read More</a>
+                <Link to={`/news/${data._id}`}>Read More</Link>
             </div>
         </div>
     )

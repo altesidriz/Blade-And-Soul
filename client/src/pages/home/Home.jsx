@@ -3,56 +3,37 @@ import styles from './home.module.css';
 import cardImg from '../../assets/news/card1.jpg';
 import bannerImg from '../../assets/banner/interim-home-define-style-destroyer.png';
 import { IoIosKeypad } from "react-icons/io";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Home = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+        const fetchData = async () => {
+              const res = await axios.get('/api/news/all');
+              setData(res.data);
+            };
+            fetchData();
+          }, []);
+
+      const curentNews = data.slice(0,4);
+
   return (
     <div className={styles.container}>
       <Carousel />
       <div className={styles.cards}>
-        <div className={styles.card}>
-          <img src={cardImg} alt="" />
+        {curentNews.map((i) =>  (
+          <div key={i._id} className={styles.card}>
+          <img src={i.image} alt="" />
           <div className={styles.cardInfo}>
-            <span className={styles.title}>Title</span>
+            <span className={styles.title}>{i.title}</span>
             <div style={{ display: "flex", columnGap: "15px" }}>
-              <span>Date</span>
-              <span>Category</span>
+              <span>{i.createdAt}</span>
+              <span>{i.category}</span>
             </div>
           </div>
-        </div>
-
-        <div className={styles.card}>
-          <img src={cardImg} alt="" />
-          <div className={styles.cardInfo}>
-            <span className={styles.title}>Title</span>
-            <div style={{ display: "flex", columnGap: "15px" }}>
-              <span>Date</span>
-              <span style={{ background: "red" }}>Category</span>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.card}>
-          <img src={cardImg} alt="" />
-          <div className={styles.cardInfo}>
-            <span className={styles.title}>Title</span>
-            <div style={{ display: "flex", columnGap: "15px" }}>
-              <span>Date</span>
-              <span>Category</span>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.card}>
-          <img src={cardImg} alt="" />
-          <div className={styles.cardInfo}>
-            <span className={styles.title}>Title</span>
-            <div style={{ display: "flex", columnGap: "15px" }}>
-              <span>Date</span>
-              <span>Category</span>
-            </div>
-          </div>
-        </div>
-
+        </div>))}
       </div>
       <button><IoIosKeypad /> View More News</button>
       <div className={styles.banner}>

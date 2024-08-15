@@ -42,7 +42,7 @@ const Header = () => {
           <div className={styles.sepr}></div>
           {currentUser ? (
             <div>
-              {currentUser.name}
+              {<Link to={'/profile'}>{currentUser.name}</Link>}
             </div>) : (
             <Link className={styles.text} to='/signup'>
               Create Account

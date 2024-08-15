@@ -5,7 +5,7 @@
     background-image: url("../../assets/news/news-bg.jpg");
     background-position: top;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,11 +14,34 @@
 }
 
 .select {
+    padding-top: 15px;
     width: 100vw;
     height: auto;
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    gap: 15px;
 }
+
+.select button {
+    width: 300px;
+    height: 50px;
+    border: 1px solid #da4a2b;
+    justify-self: flex-end;
+}
+
+.select select{
+    width: 500px;
+    height: 50px;
+    padding: 15px;
+    font-family: Rubik, sans-serif;
+    font-size: 1.5rem;
+    outline: none;
+    background: #000;
+    border: 1px solid #da4a2b;
+    color: #fff;
+}
+
 
 
 
@@ -33,93 +56,21 @@
     row-gap: 15px;
 }
 
+.select button {
+    width: 300px;
+    height: 50px;
+    border: 1px solid #da4a2b;
+    justify-self: flex-end;
+}
 
-.modal {
-    padding: 30px;
-    position: absolute;
-    width: 80%;
-    height: 500px;
-    background: #000;
-    border: 3px solid rgb(174, 170, 170);
-    border-radius: 15px;
-    top: 150px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    column-gap: 25px;
+.select select {
+    width: 300px;
+    height: 50px;
+    padding: 15px;
     font-family: Rubik, sans-serif;
-}
-
-.modal .modalImage {
-    height: 90%;
-    width: auto;
-    flex: 1;
-    background: #292929;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.modalImage div{
-    height: 50%;
-    width: 80%;
-    border: 1px solid white;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-
-.modal .modalText {
-    padding: 20px 0;
-    height: 90%;
-    width: auto;
-    flex: 3;
-    background: #292929;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-
-}
-
-.modalText input{
-    border: none;
-    font-family: inherit;
-    padding-left: 15px;
-    height: 10%;
-    width: 80%;
-    background-color: #474545;
-    color: #fff;
-    text-indent: 15px;
-    outline: none;
-}
-
-.modalText textarea {
-    border: none;
-    height: 50%;
-    width: 80%;
-    background-color: #474545;
-    color: #fff;
-    font-family: inherit;
-    resize: none;
-    text-indent: 15px;
     font-size: 1.5rem;
     outline: none;
-}
-
- input:focus, textarea:focus{
-    border: 2px solid white;
-}
-
-.modalButton {
-    width: 150px;
-    height: 15px;
-    font-size: 1.5rem;
+    background: #000;
+    border: 1px solid #da4a2b;
+    color: #fff;
 }

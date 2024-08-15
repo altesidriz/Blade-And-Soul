@@ -16,6 +16,7 @@ import Forum from './pages/forum/Forum';
 import Post from './pages/post/Post';
 import Signup from './pages/register/Signup';
 import Login from './pages/login/Login';
+import SingleNew from './pages/news/singleNew/SingleNew';
 
 
 function App() {
@@ -29,10 +30,11 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/news' element={<News />} />
+            <Route path='/news/:id' element={<SingleNew />} />
             <Route path='/shop' element={<Shop />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/forum' element={<Forum />} />
-            <Route path='/post/:id' element={<Post />}/>
+            <Route path='/post/find/:id' element={<Post />}/>
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
           </Routes>

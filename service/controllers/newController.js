@@ -51,9 +51,9 @@ export const deleteNew = async (req, res, next) => {
 
 export const getNew = async (req, res, next) => {
     try {
-        const neW = await Post.findById(req.params.id)
-        if (!neW) return next(createError(404, 'New not found!'));
-        res.status(200).json(neW)
+        const newData = await News.findById(req.params.id)
+        if (!newData) return next(createError(404, 'New not found!'));
+        res.status(200).json(newData)
     } catch (error) {
         next(error)
     }

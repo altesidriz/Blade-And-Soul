@@ -15,9 +15,9 @@ const router = express.Router();
 
 //Create a post/topic
 router.post('/', verifyToken, addPost);
-router.put('/:postId', verifyToken, updatePost);
-router.delete('/:postId', verifyToken, deletePost);
-router.get('/find/:postId', getPost);
+router.put('/:id', verifyToken, updatePost);
+router.delete('/:id', verifyToken, deletePost);
+router.get('/find/:id', getPost);
 router.get('/all', getAllPosts);
 router.get('/tags', getByTags);
 router.get('/search', search);

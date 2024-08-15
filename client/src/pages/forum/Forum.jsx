@@ -5,23 +5,44 @@ import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-ico
 import { useEffect, useState } from 'react';
 import PostCard from '../../components/postCard/PostCard';
 
+
 const Forum = () => {
   const [posts, setPosts] = useState([]);
+  const [query, setQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get('/api/posts/all');
-      setPosts(res.data);
+      try {
+        let res;
+        if (query) {
+          res = await axios.get(`/api/posts/search?q=${query}`);
+        } else {
+          res = await axios.get('/api/posts/all');
+        }
+        setPosts(res.data);
+      } catch (error) {
+        
+      }
     };
-    fetchPosts();
-  }, []);
 
+    fetchPosts();
+  }, [query]);
+
+  const handleSearch = () => {
+    setQuery(searchQuery);
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.searchBar}>
-        <input type="text" name="search" id="" placeholder='Search topic...' />
-        <span><FiSearch /></span>
+        <input type="text"
+          name="search"
+          placeholder='Search topic...'
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <span onClick={handleSearch}><FiSearch /></span>
       </div>
       <div className={styles.postContent}>
         <div className={styles.paginationNum}>
@@ -34,7 +55,7 @@ const Forum = () => {
         </div>
         <div className={styles.postList}>
           {posts.map((post) => (
-            <PostCard key={post._id} post={post}/>
+            <PostCard key={post._id} post={post} />
           ))}
         </div>
       </div>

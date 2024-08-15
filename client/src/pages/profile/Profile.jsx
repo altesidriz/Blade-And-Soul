@@ -3,11 +3,17 @@ import { useState } from 'react';
 import styles from './profile.module.css';
 import cover from '../../assets/user/cover.jpg';
 import portrait from '../../assets/user/portrait.jpg';
+import { useSelector } from 'react-redux';
 
 import { IoMdTime } from "react-icons/io";
+import { format } from 'timeago.js';
+
 
 
 const Profile = () => {
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const { name, role, createdAt } = currentUser;
+
 
     const [active ,setActive] = useState(0);
     // const [auth, isAuth ] = useState(true);
@@ -22,8 +28,8 @@ const Profile = () => {
                 <div className={styles.top}>
                     <img src={cover} alt="" />
                     <div className={styles.playerInfo}>
-                        <h1>Cricket Lia</h1>
-                        <h5>MEMBER</h5>
+                        <h1>{name}</h1>
+                        <h5>{role}</h5>
                     </div>
                 </div>
                 <div className={styles.bottom}>
@@ -32,7 +38,7 @@ const Profile = () => {
                     </div>
                     <div className={styles.joined}>
                         <span>JOINED</span>
-                        <span>26 October 2014</span>
+                        <span>{format(createdAt)}</span>
                     </div>
                 </div>
             </div>
