@@ -3,9 +3,7 @@ import avatar from '../../assets/user/portrait.jpg';
 
 
 const Post = () => {
-    
-    const {curentUser} = useSelector
-    
+        
     return (
         <div className={styles.container}>
             <div className={styles.postContent}>

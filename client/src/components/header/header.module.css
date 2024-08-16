@@ -41,12 +41,48 @@
 }
 
 .user {
+    height: auto;
     width: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+}
+
+.walet{
+    height:100%;
+    width: 150px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.walet a{
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+/* .walet span:hover {
+    color: #477ced;
+    cursor: pointer;
+} */
+
+.ncoin{
+    height:30px;
+    width:auto;
+}
+.walet span{
+font-size: 1.5rem;
+}
+
+.ncoin img{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
 }
 
 .user1 {

@@ -10,6 +10,7 @@ import Header from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
 import News from './pages/news/News';
+import Purchase from './pages/purchase/Purchase';
 import Shop from './pages/shop/Shop';
 import Profile from './pages/profile/Profile';
 import Forum from './pages/forum/Forum';
@@ -32,9 +33,10 @@ function App() {
             <Route path='/news' element={<News />} />
             <Route path='/news/:id' element={<SingleNew />} />
             <Route path='/shop' element={<Shop />} />
+            <Route path='/purchase' element={<Purchase />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/forum' element={<Forum />} />
-            <Route path='/post/find/:id' element={<Post />}/>
+            <Route path='/post/:id' element={<Post />}/>
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
           </Routes>

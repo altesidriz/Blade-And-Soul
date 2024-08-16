@@ -17,12 +17,12 @@ const PostSchema = new mongoose.Schema(
         userId: {
             type: String,
         },
+        replies:{
+            type:[String],
+            default: []
+        },
         category: {
             type: String,
-        },
-        tags: {
-            type: [String],
-            default: []
         },
         likes: {
             type: [String],

@@ -1,4 +1,5 @@
 import styles from './header.module.css';
+import ncoin from '../../assets/shop/ncoin.png'
 import { useDispatch } from 'react-redux';
 import { useSelector } from "react-redux";
 import axios from 'axios';
@@ -39,10 +40,19 @@ const Header = () => {
           </span>
         </div>
         <div className={styles.user}>
+          {currentUser && <div className={styles.walet}>
+            <div className={styles.sepr}></div>
+            <div className={styles.ncoin}>
+              <img src={ncoin} alt="" />
+            </div>
+            <span>{currentUser.wallet}</span>
+            <div className={styles.sepr}></div>
+            <Link to={'/purchase'} className={styles.text}>PURCHASE</Link>
+          </div>}
           <div className={styles.sepr}></div>
           {currentUser ? (
             <div>
-              {<Link to={'/profile'}>{currentUser.name}</Link>}
+              {<Link className={styles.text} to={'/profile'}>{currentUser.name}</Link>}
             </div>) : (
             <Link className={styles.text} to='/signup'>
               Create Account
