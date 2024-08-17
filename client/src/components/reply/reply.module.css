@@ -1,0 +1,34 @@
+.newRep {
+    display: flex;
+    width: 90%;
+    height: auto;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 25px;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ffffff72;
+}
+
+.imgContainer {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.imgContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.replyText {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.replyText span{
+    color: #ffffff72;
+}

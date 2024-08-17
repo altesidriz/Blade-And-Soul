@@ -3,14 +3,23 @@ import Post from "../models/Posts.js";
 import { createError } from "../error.js";
 
 export const addReply = async (req, res, next) => {
-    const newReply = new Reply({ ...req.body, userId: req.user.id });
+    const { userId, postId, description } = req.body;
+
     try {
-        const savedReply = await newReply.save()
+        const newReply = new Reply({ userId, postId, description });
+        const savedReply = await newReply.save();
+
+        await Post.findByIdAndUpdate(
+            postId,
+            { $push: { replies: savedReply._id } },
+            { new: true }
+        );
         res.status(200).send(savedReply)
     } catch (error) {
         next(error)
     }
 };
+
 export const deleteReply = async (req, res, next) => {
     try {
         const reply = await Reply.findById(req.params.id);

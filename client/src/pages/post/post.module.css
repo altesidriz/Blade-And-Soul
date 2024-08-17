@@ -1,10 +1,13 @@
 .container{
-    height: 100vh;
+    padding-top: 50px;
+    height: auto;
     width: 100vw;
     background: #000;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    row-gap: 20px;
 }
 
 .postContent {
@@ -72,4 +75,17 @@
 
 .likes:hover {
     color: #870404;
+}
+
+.replyContent{
+    background: #252323;
+    padding: 25px 25px 25px 0;
+    font-family: Rubik, sans-serif;
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    border-radius: 15px;
 }
