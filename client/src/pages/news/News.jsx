@@ -12,8 +12,6 @@ const News = () => {
     const categories = ['all', 'sales', 'events', 'general'];
     
     const currentUser = useSelector((state) => state.user.currentUser);
-    console.log(currentUser);
-    const { role } = currentUser;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,7 +47,7 @@ const News = () => {
                         </option>
                     ))}
                 </select>
-                {role === "Admin" ? <button onClick={() => { setOpenModal(true) }}>Add a New</button> : <></>}
+                {currentUser && currentUser.role === "Admin" ? <button onClick={() => { setOpenModal(true) }}>Add a New</button> : <></>}
             </div>
             <div className={styles.cardList}>
                 {news.map((data) => (<NewsCard key={data._id} data={data} />))}

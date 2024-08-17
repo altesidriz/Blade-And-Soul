@@ -42,7 +42,7 @@ const Home = () => {
         <button>discover your path</button>
         <div className={styles.bannerVideo}>
           <video autoPlay loop={true} muted playsInline>
-            {/* <source src='https://cdn.ncwest.com/blade-and-soul/06052024-429BE0B7B39B5C83/videos/home/DualBlade-website-loop.mp4' /> */}
+            <source src='https://cdn.ncwest.com/blade-and-soul/06052024-429BE0B7B39B5C83/videos/home/DualBlade-website-loop.mp4' />
           </video>
         </div>
         <div className={styles.character}>

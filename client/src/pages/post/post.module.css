@@ -62,4 +62,14 @@
 }
 .likes{
     align-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+
+.likes:hover {
+    color: #870404;
 }

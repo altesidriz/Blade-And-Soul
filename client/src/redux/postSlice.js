@@ -24,6 +24,8 @@ export const postSlice = createSlice({
     like: (state, action) => {
       if (!state.currentPost.likes.includes(action.payload)) {
         state.currentPost.likes.push(action.payload);
+      }else{
+        return;
       }
     },
   },
