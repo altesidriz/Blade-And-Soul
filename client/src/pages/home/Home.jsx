@@ -5,37 +5,39 @@ import bannerImg from '../../assets/banner/interim-home-define-style-destroyer.p
 import { IoIosKeypad } from "react-icons/io";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { format } from 'timeago.js';
+
 
 const Home = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-        const fetchData = async () => {
-              const res = await axios.get('/api/news/all');
-              setData(res.data);
-            };
-            fetchData();
-          }, []);
+    const fetchData = async () => {
+      const res = await axios.get('/api/news/all');
+      setData(res.data);
+    };
+    fetchData();
+  }, []);
 
-      const curentNews = data.slice(0,4);
+  const curentNews = data.slice(0, 4);
 
   return (
     <div className={styles.container}>
       <Carousel />
       <div className={styles.cards}>
-        {curentNews.map((i) =>  (
+        {curentNews.map((i) => (
           <div key={i._id} className={styles.card}>
-          <img src={i.image} alt="" />
-          <div className={styles.cardInfo}>
-            <span className={styles.title}>{i.title}</span>
-            <div style={{ display: "flex", columnGap: "15px" }}>
-              <span>{i.createdAt}</span>
-              <span>{i.category}</span>
+            <img src={i.image} alt="" />
+            <div className={styles.cardInfo}>
+              <span className={styles.title}>{i.title}</span>
+              <div style={{ display: "flex", columnGap: "15px" }}>
+                <span>{format(i.createdAt)}</span>
+              </div>
             </div>
-          </div>
-        </div>))}
+          </div>))}
       </div>
-      <button><IoIosKeypad /> View More News</button>
+      <Link to={`/news`}><IoIosKeypad /> View More News</Link>
       <div className={styles.banner}>
         <h1>Define you Style</h1>
         <p>Unleash devastating aerial combos, swap martial arts stances, or reign down fury on your enemies. Explore your path.</p>

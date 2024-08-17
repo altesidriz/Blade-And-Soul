@@ -92,6 +92,27 @@ button {
 
 button:hover {
     color: #eb6611;
+    cursor: pointer;
+}
+
+.container a{
+    width: 100vw;
+    padding: 25px;
+    align-self: center;
+    border: none;
+    background: #050a0f;
+    color: #eeeee5;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-family: Rubik, sans-serif;
+}
+
+.container a:hover{
+    color: #eb6611;
+    cursor: pointer;
 }
 
 .banner {

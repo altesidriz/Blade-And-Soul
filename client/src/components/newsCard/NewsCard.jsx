@@ -14,7 +14,9 @@ const NewsCard = ({ data }) => {
     return (
         <div className={styles.card}>
             <div className={styles.cardImg}>
-                <img src={data.image} alt="" />
+                <Link to={`/news/${data._id}`}>
+                    <img src={data.image} alt="" />
+                </Link>
             </div>
             <div className={styles.cardText}>
                 <span>LIVE</span>
