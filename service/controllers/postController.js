@@ -81,6 +81,7 @@ export const getByTags = async (req, res, next) => {
     }
 }
 
+
 export const search = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 10;
     const query = req.query.q
@@ -91,4 +92,33 @@ export const search = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+}
+
+export const paginate = async (req, res, next) => {
+    try {
+        const page = parseInt(req.query.page, 10) || 1;
+        const limit = parseInt(req.query.limit, 10) || 10;
+        const skip = (page - 1) * limit;
+        const searchQuery = req.query.q || '';
+    
+        const filter = searchQuery ? {
+          $or: [
+            { title: { $regex: searchQuery, $options: 'i' } },
+            { description: { $regex: searchQuery, $options: 'i' } }
+          ]
+        } : {};
+    
+        const posts = await Post.find(filter).skip(skip).limit(limit);
+        const totalPosts = await Post.countDocuments(filter);
+    
+        const totalPages = Math.ceil(totalPosts / limit);
+    
+        res.json({
+          posts,
+          totalPages,
+          currentPage: page,
+        });
+      } catch (error) {
+        res.status(500).json({ message: 'Error fetching posts', error });
+      }
 }

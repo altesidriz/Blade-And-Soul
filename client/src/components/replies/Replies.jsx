@@ -43,16 +43,16 @@ const Replies = ({ postId }) => {
     return (
         <div className={styles.container}>
                 {error && <div className={styles.error}>You can't reply with empty text</div>}
-            <div className={styles.newRep}>
+            {currentUser &&<div className={styles.newRep}>
                 <div className={styles.imgContainer}>
-                    <img src={currentUser.image} alt="" />
+                    <img src={currentUser?.image} alt="" />
                 </div>
                 <textarea type="textarea"
                     placeholder='Reply...'
                     value={currentReply}
                     onChange={(e) => { setCurrentReply(e.target.value) }} />
                 <button onClick={handleReply}>Reply</button>
-            </div>
+            </div>}
             {replies.map(reply => (
                 <Reply key={reply._id} reply={reply} />
             ))}

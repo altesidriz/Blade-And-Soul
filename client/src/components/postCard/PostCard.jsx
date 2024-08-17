@@ -28,7 +28,6 @@ const PostCard = ({ post }) => {
             </div>
             <div className={styles.rightContent}>
                 <div className={styles.avatar}>
-                    {/* Database user img add */}
                     <img src={avatar} alt="" />
                 </div>
                 <h3>{user.name}</h3>

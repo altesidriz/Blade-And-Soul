@@ -57,7 +57,7 @@ const Post = () => {
                     <span>Posted on {format(currentPost.createdAt)}</span>
                     <h1>{currentPost.title}</h1>
                     <p>{currentPost.description}</p>
-                    <span className={styles.likes} onClick={handleLike}><FaHeart />{currentPost.likes?.length}</span>
+                    {currentUser && <span className={styles.likes} onClick={handleLike}><FaHeart />{currentPost.likes?.length}</span>}
                 </div>
             </div>
             <div className={styles.replyContent}>

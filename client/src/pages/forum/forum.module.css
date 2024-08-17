@@ -91,3 +91,22 @@
     justify-content: center;
 }
 
+/* forum.module.css */
+
+.paginationNum {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .paginationNum span {
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  .paginationNum .activePage {
+    font-weight: bold;
+    color: #eb6611; /* Highlight color */
+  }
+  

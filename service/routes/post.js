@@ -6,7 +6,8 @@ import {
     updatePost,
     getAllPosts,
     getByTags,
-    search
+    search,
+    paginate
 } from '../controllers/postController.js';
 
 import { verifyToken } from '../verifyToken.js';
@@ -21,5 +22,6 @@ router.get('/find/:id', getPost);
 router.get('/all', getAllPosts);
 router.get('/tags', getByTags);
 router.get('/search', search);
+router.get('/paginate', paginate);
 
 export default router;
