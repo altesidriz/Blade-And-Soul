@@ -70,6 +70,15 @@ export const getAllPosts = async (req, res, next) => {
     }
 }
 
+export const getByUser = async (req, res, next) => {
+    try {
+        const posts = await Post.find({ userId: req.params.userId });
+        res.status(200).json(posts)
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const getByTags = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 10;
     const tags = req.query.tags?.split(',');

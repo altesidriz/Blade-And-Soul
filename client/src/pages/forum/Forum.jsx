@@ -34,7 +34,7 @@ const Forum = () => {
   }, [query, currentPage, limit]);
 
   const handleSearch = () => {
-    setCurrentPage(1); // Reset to the first page on search
+    setCurrentPage(1);
     setQuery(searchQuery);
   };
 

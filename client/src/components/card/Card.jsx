@@ -3,17 +3,18 @@ import ncoin from '../../assets/shop/ncoin.png';
 import styles from './card.module.css';
 
 
-const Card = () => {
+const Card = ({item}) => {
+    
     return (
         <div className={styles.card}>
-            <img src={shopCrad} alt="" />
-            <p>Premium Wind Tiger Heart Upgrade Special Battle Potion (x125)</p>
+            <img src={item.image} alt="" />
+            <p>{item.name}</p>
             <div className={styles.price}>
                 <img src={ncoin} alt="" />
-                <span>3.000</span>
+                <span>{item.price}</span>
             </div>
             <div className={styles.back}>
-                <p>Premium Wind Tiger Heart Upgrade Special Battle Potion (x125)</p>
+                <p>{item.name}</p>
                 <button>PURCHASE</button>
             </div>
         </div>

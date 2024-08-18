@@ -13,6 +13,25 @@ export const addItem = async (req, res, next) => {
     }
 };
 
+export const getAllItems = async (req, res, next) => {
+    try {
+        const items = await Item.find();
+        res.status(200).json(items)
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const getByCategory = async (req, res, next) => {
+    const category = req.params.category
+    try {
+        const items = await Item.find({category:category});
+        res.status(200).json(items)
+    } catch (error) {
+        next(error);
+    }
+}
+
 // export const updatePost = async (req, res, next) => {
 //     try {
 //         const post = await Post.findById(req.params.id);

@@ -18,6 +18,9 @@ import Post from './pages/post/Post';
 import Signup from './pages/register/Signup';
 import Login from './pages/login/Login';
 import SingleNew from './pages/news/singleNew/SingleNew';
+import Item from './pages/shop/item/Item';
+import RouteProtect from './components/routeGuard/RouteProtect';
+import NotFound from './pages/notFound/NotFound';
 
 
 function App() {
@@ -32,13 +35,17 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/news' element={<News />} />
             <Route path='/news/:id' element={<SingleNew />} />
-            <Route path='/shop' element={<Shop />} />
-            <Route path='/purchase' element={<Purchase />} />
-            <Route path='/profile' element={<Profile />} />
+            
+              <Route path='/shop' element={<RouteProtect><Shop /></RouteProtect>} />
+              <Route path='/shop/:id' element={<RouteProtect><Shop /></RouteProtect>} />
+              <Route path='/purchase' element={<RouteProtect><Purchase /></RouteProtect>} />
+              <Route path='/profile' element={<RouteProtect><Profile /></RouteProtect>} />
+
             <Route path='/forum' element={<Forum />} />
-            <Route path='/post/:id' element={<Post />}/>
+            <Route path='/post/:id' element={<Post />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </BrowserRouter>

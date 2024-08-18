@@ -5,7 +5,7 @@ import {
     getPost,
     updatePost,
     getAllPosts,
-    getByTags,
+    getByUser,
     search,
     paginate
 } from '../controllers/postController.js';
@@ -20,7 +20,7 @@ router.put('/:id', verifyToken, updatePost);
 router.delete('/:id', verifyToken, deletePost);
 router.get('/find/:id', getPost);
 router.get('/all', getAllPosts);
-router.get('/tags', getByTags);
+router.get('/users/:userId', getByUser);
 router.get('/search', search);
 router.get('/paginate', paginate);
 

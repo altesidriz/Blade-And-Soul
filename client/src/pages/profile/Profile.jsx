@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './profile.module.css';
 import cover from '../../assets/user/cover.jpg';
 import portrait from '../../assets/user/portrait.jpg';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 import { IoMdTime } from "react-icons/io";
 import { format } from 'timeago.js';
@@ -12,11 +14,25 @@ import { format } from 'timeago.js';
 
 const Profile = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
-    const { name, role, createdAt } = currentUser;
+    const { name, role, avatar, pictures, createdAt } = currentUser;
 
 
     const [active ,setActive] = useState(0);
-    // const [auth, isAuth ] = useState(true);
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const  res = await axios.get(`/api/posts/users/${currentUser._id}`)
+
+                setPosts(res.data);
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
+
+        fetchData();
+    }, [currentUser._id]);
 
     const handleClick = (index) => {
         setActive(index);
@@ -34,7 +50,7 @@ const Profile = () => {
                 </div>
                 <div className={styles.bottom}>
                     <div className={styles.profileImg}>
-                        <img src={portrait} alt="" />
+                        <img src={avatar} alt="" />
                     </div>
                     <div className={styles.joined}>
                         <span>JOINED</span>
@@ -56,57 +72,22 @@ const Profile = () => {
                 <div className={styles.tabsContent}>
                     <div className={active === 0 ? `${styles.imageContent} ${styles.activeContent}` : `${styles.imageContent}`}>
                         <div className={styles.galery}>
-                            <img src={portrait} alt="" />
-                            <img src={portrait} alt="" />
-                            <img src={portrait} alt="" />
-                            <img src={portrait} alt="" />
-                            <img src={portrait} alt="" />
-                            <img src={portrait} alt="" />
-                            <img src={portrait} alt="" />
-                            <img src={portrait} alt="" />
+                            {pictures?.map((pic)=>(<img src={pic} alt="" />))}
                         </div>
                     </div>
                     <div className={active === 1 ? `${styles.postContent} ${styles.activeContent}` : `${styles.postContent}`}>
-                        <div className={styles.post}>
+                        {posts.map((post)=>(
+                            <div key={post._id} className={styles.post}>
                             <div className={styles.postAvatar}>
-                                <img src={portrait} alt="" />
+                                <img src={avatar} alt="" />
                             </div>
                             <div className={styles.postInfo}>
-                                <h3>Tittle of the post</h3>
-                                <p>The post comments</p>
-                                <span> <IoMdTime size={15}/> 26.Oct.2024</span>
+                                <Link to={''}><h3>{post.title}</h3></Link>
+                                {/* <p>{post.}</p> */}
+                                <span> <IoMdTime size={15}/>{format(post.createdAt)}</span>
                             </div>
                         </div>
-                        <div className={styles.post}>
-                            <div className={styles.postAvatar}>
-                                <img src={portrait} alt="" />
-                            </div>
-                            <div className={styles.postInfo}>
-                                <h3>Tittle of the post</h3>
-                                <p>The post comments</p>
-                                <span> <IoMdTime size={15}/> 26.Oct.2024</span>
-                            </div>
-                        </div>
-                        <div className={styles.post}>
-                            <div className={styles.postAvatar}>
-                                <img src={portrait} alt="" />
-                            </div>
-                            <div className={styles.postInfo}>
-                                <h3>Tittle of the post</h3>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa fugit tenetur odit voluptate debitis id ipsum, praesentium nesciunt soluta placeat laudantium sapiente, reiciendis maxime mollitia nihil earum voluptatum accusamus suscipit dolorum, iste temporibus quibusdam odio! Culpa quia laboriosam fuga consectetur necessitatibus possimus quam, odio corrupti dolorem sint nisi sequi, dicta a? Molestiae dignissimos veniam nihil eum corrupti debitis. Iusto consequuntur aspernatur quidem debitis ratione dolorum, earum delectus ullam cupiditate nisi, sunt atque soluta id corrupti labore aliquid? Voluptatem quis nulla illum at nesciunt? Mollitia modi velit, placeat, atque itaque nihil vero repellat quidem voluptatum dolorum blanditiis sapiente alias quia commodi minima voluptas veniam? Laboriosam fugiat possimus unde placeat culpa non officiis facere minus rerum sed! Officiis cumque pariatur minima quas itaque veniam similique quaerat consectetur nobis suscipit quos ipsa quisquam sequi maiores eveniet reiciendis, nihil vero quidem cupiditate voluptatibus nostrum error? Eum cum voluptatibus minus saepe eaque velit rem eius!</p>
-                                <span> <IoMdTime size={15}/> 26.Oct.2024</span>
-                            </div>
-                        </div>
-                        <div className={styles.post}>
-                            <div className={styles.postAvatar}>
-                                <img src={portrait} alt="" />
-                            </div>
-                            <div className={styles.postInfo}>
-                                <h3>Tittle of the post</h3>
-                                <p>The post comments</p>
-                                <span> <IoMdTime size={15}/> 26.Oct.2024</span>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: ""
     },
+    pictures:{
+      type:[String],
+      default: []
+    },
     items: [{
       itemImage: String,
       itemName: String,
