@@ -56,4 +56,21 @@ export const likeComment = async (req, res, next) => {
     }
 };
 
+export const uploadPictures = async (req, res, next) => {
+    if (req.params.id === req.user.id) {
+        try {
+            const updatedUser = await User.findByIdAndUpdate(
+                req.params.id,
+                { $push: { pictures: { $each: req.body.pictures } } },
+                { new: true }
+            );
+            res.status(200).json(updatedUser);
+        } catch (error) {
+            next(error);
+        }
+    } else {
+        return next(createError(403, "You have no permission to update this account!"));
+    }
+};
+
 

@@ -64,7 +64,7 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
         setUploadProgress(0);
 
         const storage = getStorage();
-        const userFolderRef = ref(storage, `users/${currentUser._id}/images`);
+        const userFolderRef = ref(storage, `users/${currentUser._id}/avatar`);
 
         try {
             // Delete existing images
@@ -74,7 +74,7 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
             }));
 
             // Upload new image
-            const newAvatarRef = ref(storage, `users/${currentUser._id}/images/${uuidv4()}`);
+            const newAvatarRef = ref(storage, `users/${currentUser._id}/avatar/${uuidv4()}`);
             const uploadTask = uploadBytesResumable(newAvatarRef, avatarImageFile);
 
             uploadTask.on('state_changed',

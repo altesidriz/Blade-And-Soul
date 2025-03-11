@@ -48,7 +48,7 @@ const Shop = () => {
       <div className={styles.itemsContainer}>
         {items.map((item) => (<Card key={item._id} item={item}/>))}
       </div>
-      {currentUser && <CreateItem/>}
+      {currentUser.role === 'Admin' && <CreateItem/>}
     </div>
   );
 };

@@ -1,19 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import styles from './profile.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import { loginSuccess } from '../../redux/userSlice';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 import { IoMdTime } from "react-icons/io";
 import { LiaEditSolid } from "react-icons/lia";
 import { format } from 'timeago.js';
 import UserModal from './userModal/UserModal';
+import UserCarousel from './userCarousel/UserCarousel';
 
 
 const Profile = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
-    const { name, role, avatar, pictures, createdAt, cover } = currentUser;
+    const { name, role, avatar, pictures, createdAt, cover, _id } = currentUser;
     const params = useParams();
 
     const isOwner = params.id === currentUser._id;
@@ -21,6 +25,14 @@ const Profile = () => {
     const [active, setActive] = useState(0);
     const [posts, setPosts] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [carouselOpen, setCarouselOpen] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState({}); // Track progress of each file
+    const [overallUploadProgress, setOverallUploadProgress] = useState(0); // Track overall progress
+    const [isUploading, setIsUploading] = useState(false); //Track if upload is in progress
+
+    const fileInputRef = useRef(null);
+    const dispatch = useDispatch();
+    const storage = getStorage();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,7 +60,70 @@ const Profile = () => {
         setIsModalOpen(false);
     };
 
+    const openCarousel = () => {
+        setCarouselOpen(true);
+    };
 
+    const closeCarousel = () => {
+        setCarouselOpen(false);
+    };
+
+    const handleFileUpload = async (event) => {
+        const files = event.target.files;
+        if (files.length > 0) {
+            setIsUploading(true);
+            const uploadPromises = [];
+            const imageUrls = [];
+            let completedUploads = 0;
+
+            for (const file of files) {
+                const imageRef = ref(storage, `users/${_id}/images/${uuidv4()}`);
+                const uploadTask = uploadBytesResumable(imageRef, file);
+
+                uploadPromises.push(
+                    new Promise((resolve, reject) => {
+                        uploadTask.on(
+                            'state_changed',
+                            (snapshot) => {
+                                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                setUploadProgress((prevProgress) => ({ ...prevProgress, [file.name]: progress }));
+                                const totalProgress = Object.values({ ...uploadProgress, [file.name]: progress }).reduce((a, b) => a + b, 0) / files.length;
+                                setOverallUploadProgress(totalProgress);
+                            },
+                            (error) => {
+                                console.error('Upload error:', error);
+                                reject(error);
+                            },
+                            async () => {
+                                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                                imageUrls.push(downloadURL);
+                                completedUploads++;
+                                if (completedUploads === files.length) {
+                                    setUploadProgress({});
+                                    setOverallUploadProgress(0);
+                                }
+                                resolve();
+                            }
+                        );
+                    })
+                );
+            }
+
+            try {
+                await Promise.all(uploadPromises);
+                const response = await axios.put(`/api/users/${_id}/pictures`, { pictures: imageUrls });
+                dispatch(loginSuccess({ ...currentUser, pictures: [...currentUser.pictures, ...imageUrls] }));
+                setIsUploading(false);
+            } catch (error) {
+                console.error('Error uploading images:', error);
+                setIsUploading(false);
+            }
+        }
+    };
+
+    const triggerFileInput = () => {
+        fileInputRef.current.click();
+    };
     return (
         <div className={styles.container}>
             <div className={styles.cover}>
@@ -84,8 +159,26 @@ const Profile = () => {
                 </div>
                 <div className={styles.tabsContent}>
                     <div className={active === 0 ? `${styles.imageContent} ${styles.activeContent}` : `${styles.imageContent}`}>
+                        <button onClick={triggerFileInput}>Add More Images</button>
+                        {isUploading && (
+                            <div>
+                                <p>Uploading... {overallUploadProgress.toFixed(2)}%</p>
+                                {Object.entries(uploadProgress).map(([fileName, progress]) => (
+                                    <p key={fileName}>
+                                        {fileName}: {progress.toFixed(2)}%
+                                    </p>
+                                ))}
+                            </div>
+                        )}
+                        <input
+                            type="file"
+                            multiple
+                            ref={fileInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handleFileUpload}
+                        />
                         <div className={styles.galery}>
-                            {pictures?.map((pic) => (<img src={pic} alt="" />))}
+                            {pictures?.map((pic) => (<img src={pic} alt="" onClick={openCarousel} />))}
                         </div>
                     </div>
                     <div className={active === 1 ? `${styles.postContent} ${styles.activeContent}` : `${styles.postContent}`}>
@@ -108,6 +201,10 @@ const Profile = () => {
                 isModalOpen={isModalOpen}
                 closeModal={closeModal}
                 currentUser={currentUser} />}
+            {/* Carousel */}
+            {carouselOpen && (
+                <UserCarousel pictures={pictures} onClose={closeCarousel} />
+            )}
         </div>
     );
 };
