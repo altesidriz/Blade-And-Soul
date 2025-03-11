@@ -24,7 +24,7 @@ const Header = () => {
     dispatch(logout())
     navigate('/')
   }
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
@@ -52,7 +52,7 @@ const Header = () => {
           <div className={styles.sepr}></div>
           {currentUser ? (
             <div>
-              {<Link className={styles.text} to={'/profile'}>{currentUser.name}</Link>}
+              {<Link className={styles.text} to={`/profile/${currentUser._id}`}>{currentUser.name}</Link>}
             </div>) : (
             <Link className={styles.text} to='/signup'>
               Create Account

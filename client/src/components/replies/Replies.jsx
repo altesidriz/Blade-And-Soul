@@ -45,7 +45,7 @@ const Replies = ({ postId }) => {
                 {error && <div className={styles.error}>You can't reply with empty text</div>}
             {currentUser &&<div className={styles.newRep}>
                 <div className={styles.imgContainer}>
-                    <img src={currentUser?.image} alt="" />
+                    <img src={currentUser?.avatar} alt="" />
                 </div>
                 <textarea type="textarea"
                     placeholder='Reply...'

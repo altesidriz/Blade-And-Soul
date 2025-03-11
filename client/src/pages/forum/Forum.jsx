@@ -32,7 +32,9 @@ const Forum = () => {
 
     fetchPosts();
   }, [query, currentPage, limit]);
-
+  
+  console.log(posts);
+  
   const handleSearch = () => {
     setCurrentPage(1);
     setQuery(searchQuery);

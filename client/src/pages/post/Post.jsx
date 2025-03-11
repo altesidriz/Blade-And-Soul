@@ -1,87 +1,81 @@
 import styles from './post.module.css';
 import avatar from '../../assets/user/portrait.jpg';
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-import { fetchSuccess, like } from "../../redux/postSlice.js";
-import { format } from "timeago.js";
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { fetchSuccess, like } from '../../redux/postSlice.js';
+import { format } from 'timeago.js';
 import { useEffect, useState } from 'react';
-import { FaHeart } from "react-icons/fa";
+import { FaHeart } from 'react-icons/fa';
 import Replies from '../../components/replies/Replies.jsx';
-
+import Loading from '../../components/loading/Loading.jsx';
 
 const Post = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const { currentPost } = useSelector((state) => state.post);
+  const dispatch = useDispatch();
 
-    const { currentUser } = useSelector((state) => state.user);
-    const { currentPost } = useSelector((state) => state.post);
-    const dispatch = useDispatch();
+  const path = useLocation().pathname.split('/')[2];
+  const [channel, setChannel] = useState({});
+  const [loading, setLoading] = useState(true); // Add loading state
 
-    const path = useLocation().pathname.split("/")[2];
-    console.log(path);
-
-
-    const [channel, setChannel] = useState({});
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const postRes = await axios.get(`/api/posts/find/${path}`);
-                const channelRes = await axios.get(
-                    `/api/users/find/${postRes.data.userId}`
-                );
-                setChannel(channelRes.data);
-                dispatch(fetchSuccess(postRes.data));
-            } catch (err) {
-
-            }
-        };
-        fetchData();
-    }, [path, dispatch]);
-
-    const handleLike = async () => {
-        await axios.put(`/api/users/like/${currentPost._id}`);
-        dispatch(like(currentUser._id));
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true); // Set loading to true before fetching
+      try {
+        const postRes = await axios.get(`/api/posts/find/${path}`);
+        const channelRes = await axios.get(`/api/users/find/${postRes.data.userId}`);
+        setChannel(channelRes.data);
+        dispatch(fetchSuccess(postRes.data));
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
+      }
     };
+    fetchData();
+  }, [path, dispatch]);
 
-    return (
-        <div className={styles.container}>
-            <div className={styles.postContent}>
-                <div className={styles.leftContent}>
-                    <h3>{channel.name}</h3>
-                    <div className={styles.avatar}>
-                        <img src={channel.image} alt="" />
-                    </div>
-                    <span>{channel.role}</span>
-                </div>
-                <div className={styles.rightContent}>
-                    <span>Posted on {format(currentPost.createdAt)}</span>
-                    <h1>{currentPost.title}</h1>
-                    <p>{currentPost.description}</p>
-                    {currentUser && <span className={styles.likes} onClick={handleLike}><FaHeart />{currentPost.likes?.length}</span>}
-                </div>
-            </div>
-            <div className={styles.replyContent}>
-               <Replies postId={currentPost._id}/>
-            </div>
+  const handleLike = async () => {
+    await axios.put(`/api/users/like/${currentPost._id}`);
+    dispatch(like(currentUser._id));
+  };
+
+  if (loading) {
+    return <Loading />; // Display loading message
+  }
+
+  if (!currentPost) {
+    return <p>Post not found.</p>; // Display message if post is null
+  }
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.postContent}>
+        <div className={styles.leftContent}>
+          <h3>{channel.name}</h3>
+          <div className={styles.avatar}>
+            <img src={channel.avatar} alt="" />
+          </div>
+          <span>{channel.role}</span>
         </div>
-    );
+        <div className={styles.rightContent}>
+          <span>Posted on {format(currentPost.createdAt)}</span>
+          <h1>{currentPost.title}</h1>
+          <p>{currentPost.description}</p>
+          {currentUser && (
+            <span className={styles.likes} onClick={handleLike}>
+              <FaHeart />
+              {currentPost.likes?.length}
+            </span>
+          )}
+        </div>
+      </div>
+      <div className={styles.replyContent}>
+        <Replies postId={currentPost._id} />
+      </div>
+    </div>
+  );
 };
 
 export default Post;
-
-
-
-
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
-
-
-//     const [user, setUser] = useState({});
-
-//   useEffect(() => {
-//     const fetchUser = async () => {
-//       const res = await axios.get('/api/users/find/');
-//       setUser(res.data);
-//     };
-//     fetchUser();
-//   }, {});

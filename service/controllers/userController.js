@@ -3,14 +3,15 @@ import User from '../models/Users.js'
 import Post from '../models/Posts.js'
 
 export const update = async (req, res, next) => {
+    console.log("Backend Request Body:", req.body);
     if (req.params.id === req.user.id) {
         try {
-            const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-                $set: req.body
-            },
+            const updatedUser = await User.findByIdAndUpdate(
+                req.params.id,
+                { $set: req.body }, // Directly use req.body with $set
                 { new: true }
             );
-            res.status(200).json(updatedUser)
+            res.status(200).json(updatedUser);
         } catch (error) {
             next(error);
         }

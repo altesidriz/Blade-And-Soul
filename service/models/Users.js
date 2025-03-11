@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema(
       type:[String],
       default: []
     },
+    cover:{
+      type:String,
+      default: ""
+    },
     items: [{
       itemImage: String,
       itemName: String,

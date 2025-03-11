@@ -3,8 +3,8 @@ import styles from './postcard.module.css';
 import { format } from 'timeago.js';
 
 import { Link } from 'react-router-dom';
-import avatar from '../../assets/user/portrait.jpg';
 import { useEffect, useState } from 'react';
+// import avatar from '../../assets/user/portrait.jpg';
 
 
 
@@ -28,7 +28,7 @@ const PostCard = ({ post }) => {
             </div>
             <div className={styles.rightContent}>
                 <div className={styles.avatar}>
-                    <img src={avatar} alt="" />
+                    <img src={user.avatar} alt="" />
                 </div>
                 <h3>{user.name}</h3>
             </div>
