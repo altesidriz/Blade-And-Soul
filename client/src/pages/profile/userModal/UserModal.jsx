@@ -117,14 +117,27 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
 
             if (response.status === 200) {
                 dispatch(loginSuccess({ ...currentUser, avatar: avatarImagePreviewUrl, cover: coverImagePreviewUrl }));
-                alert("Profile updated successfully!");
-                closeModal();
+                //alert("Profile updated successfully!");
+                setSuccessMsg("Profile updated successfully!");
+                setTimeout(() => {
+                    setSuccessMsg(null);
+                    closeModal();
+                }, 3000);
+                //closeModal();
             } else {
-                alert("Failed to update profile.");
+                setErrorMsg("Failed to update profile.");
+                setTimeout(() => {
+                    setErrorMsg(null);
+                }, 3000);
+                //alert("Failed to update profile.");
             }
         } catch (error) {
             console.error("Error updating profile:", error);
-            alert("Failed to update profile. Please try again.");
+            setErrorMsg("Failed to update profile. Please try again.");
+            setTimeout(() => {
+                setErrorMsg(null);
+            }, 3000);
+           // alert("Failed to update profile. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -160,10 +173,15 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
                 <h3>Upload New Avatar:</h3>
                 {errorMsg && <p className={styles.errorMsg}>{errorMsg}</p>}
                 {successMsg && <p className={styles.successMsg}>{successMsg}</p>}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                 <input type="file" accept="image/*" onChange={handleAvatarImageFileChange} />
-                <button type="button" onClick={handleAvatarImageUpload} disabled={isUploading}>
+                <button type="button" 
+                onClick={handleAvatarImageUpload} 
+                disabled={isUploading}
+                style={{fontSize: '1.2rem', padding: '0.5rem 1rem', marginLeft: '1rem'}}>
                     Upload Avatar {isUploading && `(${uploadProgress.toFixed(0)}%)`}
                 </button>
+                </div>
                 <button type="button" onClick={handleSaveChanges} disabled={isLoading}> {isLoading ? "Saving..." : "Save"}</button>
             </div>
         </div>

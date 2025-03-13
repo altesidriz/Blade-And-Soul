@@ -4,7 +4,6 @@ import { format } from 'timeago.js';
 
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-// import avatar from '../../assets/user/portrait.jpg';
 
 
 

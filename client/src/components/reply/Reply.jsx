@@ -1,6 +1,7 @@
 import styles from './reply.module.css';
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import { format } from 'timeago.js';
 
 const Reply = ({ reply }) => {
@@ -17,7 +18,9 @@ const Reply = ({ reply }) => {
   return (
     <div className={styles.newRep}>
       <div className={styles.imgContainer}>
-        <img src={channel.avatar} alt="" />
+        <Link to={`/profile/${channel._id}`}>
+          <img src={channel.avatar} alt="" />
+        </Link>
       </div>
       <div className={styles.replyText}>
         <p>{reply.description}</p>

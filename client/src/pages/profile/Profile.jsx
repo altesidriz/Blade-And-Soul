@@ -18,14 +18,14 @@ import { MdDeleteForever } from "react-icons/md";
 
 const Profile = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
-    const { name, role, avatar, pictures, createdAt, cover, _id } = currentUser;
+    // const { name, role, avatar, pictures, createdAt, cover, _id } = currentUser;
     const params = useParams();
     const isOwner = params.id === currentUser._id;
     const [active, setActive] = useState(0);
     const [posts, setPosts] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [carouselOpen, setCarouselOpen] = useState(false);
-    const [isUploading, setIsUploading] = useState(false);
+    const [profileUser, setProfileUser] = useState(null);
     const [originalButtonText, setOriginalButtonText] = useState("Add More Images");
     const [hoveredImage, setHoveredImage] = useState(null);
     const fileInputRef = useRef(null);
@@ -33,18 +33,42 @@ const Profile = () => {
     const storage = getStorage();
     const [dialogOpen, setDialogOpen] = useState(false);
     const [imageToDelete, setImageToDelete] = useState(null);
+    const [isUploading, setIsUploading] = useState(false);
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const res = await axios.get(`/api/posts/users/${currentUser._id}`);
+    //             setPosts(res.data);
+    //         } catch (error) {
+    //             console.error("Error fetching user data:", error);
+    //         }
+    //     };
+    //     fetchData();
+    // }, [currentUser._id]);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchUserData = async () => {
             try {
-                const res = await axios.get(`/api/posts/users/${currentUser._id}`);
-                setPosts(res.data);
+                const userRes = await axios.get(`/api/users/find/${params.id}`);
+                setProfileUser(userRes.data);
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
         };
-        fetchData();
-    }, [currentUser._id]);
+
+        const fetchPostsData = async () => {
+            try {
+                const res = await axios.get(`/api/posts/users/${params.id}`);
+                setPosts(res.data);
+            } catch (error) {
+                console.error("Error fetching user posts:", error);
+            }
+        };
+
+        fetchUserData();
+        fetchPostsData();
+    }, [params.id, currentUser.pictures]);
 
     const handleClick = (index) => {
         setActive(index);
@@ -143,25 +167,11 @@ const Profile = () => {
         }
     };
 
-    // const handleDeleteImage = async (imageUrl) => {
-    //     if (window.confirm("Are you sure you want to delete this image?")) {
-    //         try {
-    //             // Delete from Firebase Storage (client-side)
-    //             const imageRef = ref(storage, imageUrl);
-    //             await deleteObject(imageRef);
-    
-    //             // Delete from backend database
-    //             await axios.delete(`/api/users/${_id}/pictures`, { data: { picture: imageUrl } });
-    //             const updatedPictures = currentUser.pictures.filter(pic => pic !== imageUrl);
-    //             dispatch(loginSuccess({ ...currentUser, pictures: updatedPictures }));
-    
-    //             alert("Image deleted successfully.");
-    //         } catch (error) {
-    //             console.error("Error deleting image:", error);
-    //             alert("Failed to delete image.");
-    //         }
-    //     }
-    // };
+    if (!profileUser) {
+        return <p>Loading profile...</p>;
+    }
+    const { name, role, avatar, pictures, createdAt, cover, _id } = profileUser;
+
 
     return (
         <div className={styles.container}>
@@ -191,7 +201,7 @@ const Profile = () => {
                 </div>
                 <div className={styles.tabsContent}>
                     <div className={active === 0 ? `${styles.imageContent} ${styles.activeContent}` : `${styles.imageContent}`}>
-                        <button className={styles.addMoreBtn} onClick={triggerFileInput}>Add More Images</button>
+                        {isOwner && <button className={styles.addMoreBtn} onClick={triggerFileInput}>Add More Images</button>}
                         <input type="file" multiple ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileUpload} />
                         <div className={styles.galery}>
                         {pictures?.map((pic) => (
@@ -202,7 +212,7 @@ const Profile = () => {
                                     onMouseLeave={() => setHoveredImage(null)}
                                 >
                                     <img src={pic} alt="" onClick={openCarousel} />
-                                    {hoveredImage === pic && (
+                                    {hoveredImage === pic && isOwner && (
                                         <button className={styles.deleteButton} onClick={() => handleDeleteClick(pic)}>
                                             <MdDeleteForever size={25}/>
                                         </button>

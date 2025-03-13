@@ -45,7 +45,7 @@
   font-size: 20px;
 }
 
-.closeBtn:hover{
+.closeBtn, .modalContent button:hover{
   color: #eb6611;;
 }
 
@@ -85,8 +85,8 @@
 }
 
 .coverOptionImage {
-  width: 200px;
-  height: 120px;
+  width: 120px;
+  height: 60px;
   object-fit: cover;
   margin: 5px;
   cursor: pointer;

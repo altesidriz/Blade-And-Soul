@@ -1,7 +1,6 @@
 import styles from './post.module.css';
-import avatar from '../../assets/user/portrait.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import { fetchSuccess, like } from '../../redux/postSlice.js';
 import { format } from 'timeago.js';
@@ -17,11 +16,11 @@ const Post = () => {
 
   const path = useLocation().pathname.split('/')[2];
   const [channel, setChannel] = useState({});
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // Set loading to true before fetching
+      setLoading(true);
       try {
         const postRes = await axios.get(`/api/posts/find/${path}`);
         const channelRes = await axios.get(`/api/users/find/${postRes.data.userId}`);
@@ -30,7 +29,7 @@ const Post = () => {
       } catch (err) {
         console.error('Error fetching data:', err);
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false);
       }
     };
     fetchData();
@@ -53,9 +52,13 @@ const Post = () => {
     <div className={styles.container}>
       <div className={styles.postContent}>
         <div className={styles.leftContent}>
-          <h3>{channel.name}</h3>
+          <Link to={`/profile/${channel._id}`}>
+            <h3>{channel.name}</h3>
+          </Link>
           <div className={styles.avatar}>
-            <img src={channel.avatar} alt="" />
+            <Link to={`/profile/${channel._id}`}>
+              <img src={channel.avatar} alt="" />
+            </Link>
           </div>
           <span>{channel.role}</span>
         </div>
