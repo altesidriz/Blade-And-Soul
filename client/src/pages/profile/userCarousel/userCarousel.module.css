@@ -1,4 +1,3 @@
-/* components/UserCarousel.module.css */
 .overlay {
     position: fixed;
     top: 0;
@@ -23,6 +22,7 @@
   }
   
   .closeButton {
+    width: auto;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -30,6 +30,7 @@
     border: none;
     font-size: 16px;
     cursor: pointer;
+    color: #000;
   }
   
   .carousel {
@@ -38,21 +39,24 @@
     align-items: center;
     gap: 10px;
     width: 100%;
-    height: 80vh; /*80 percent of viewport height*/
+    height: 80vh; 
   }
   
   .carouselImage {
-    max-height: 80%; /*80 percent of carousel height*/
-    max-width: 80%; /*80 percent of carousel width*/
+    /* max-height: 80%;
+    max-width: 80%; */
+    width: 80vh;
+    height: 80vh;
     object-fit: contain;
   }
   
   .arrowButton {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 44px;
     cursor: pointer;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
+    color:#000;
   }
