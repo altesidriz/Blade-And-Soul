@@ -4,6 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { useEffect, useState } from 'react';
 import PostCard from '../../components/postCard/PostCard';
+import CreatePost from './createPost/CreatePost';
 
 const Forum = () => {
   const [posts, setPosts] = useState([]);
@@ -12,29 +13,31 @@ const Forum = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [postModal, setPostModal] = useState(false);
 
+
+  const fetchPosts = async () => {
+    try {
+      const res = await axios.get('/api/posts/paginate', {
+        params: {
+          page: currentPage,
+          limit: limit,
+          q: query
+        }
+      });
+      setPosts(res.data.posts);
+      setTotalPages(res.data.totalPages);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
+  
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await axios.get('/api/posts/paginate', {
-          params: {
-            page: currentPage,
-            limit: limit,
-            q: query
-          }
-        });
-        setPosts(res.data.posts);
-        setTotalPages(res.data.totalPages);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
-
     fetchPosts();
   }, [query, currentPage, limit]);
-  
+
   console.log(posts);
-  
+
   const handleSearch = () => {
     setCurrentPage(1);
     setQuery(searchQuery);
@@ -44,8 +47,14 @@ const Forum = () => {
     setCurrentPage(page);
   };
 
+  const toggleModal = () => {
+    setPostModal(!postModal);
+  };
+
+
   return (
     <div className={styles.container}>
+      <button style={{ width: '250px', alignSelf: 'end' }} onClick={toggleModal}>Create a topic</button>
       <div className={styles.searchBar}>
         <input
           type="text"
@@ -84,6 +93,7 @@ const Forum = () => {
           </span>
         </div>
       </div>
+      {postModal && <CreatePost closeModal={toggleModal} refetchPosts={fetchPosts} />}
     </div>
   );
 };

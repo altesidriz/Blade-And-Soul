@@ -242,6 +242,8 @@ const Profile = () => {
                 isOpen={dialogOpen}
                 onClose={() => setDialogOpen(false)}
                 onConfirm={handleConfirmDelete}
+                successMessage="Image deleted successfully!"
+                errorMessage="Error deleting image."
                 message="Are you sure you want to delete this image?" />
         </div>
     );
