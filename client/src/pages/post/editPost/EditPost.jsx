@@ -59,8 +59,10 @@ const EditPost = ({ closeModal }) => {
                         onChange={(e) => setCategory(e.target.value)}
                         required
                     />
-                    <button type="submit">Update Post</button>
-                    <button type='button' onClick={closeModal}>Close</button>
+                    <div className={styles.buttons}>
+                        <button type="submit">Update Post</button>
+                        <button type='button' onClick={closeModal}>Close</button>
+                    </div>
                 </form>
             </div>
         </div>

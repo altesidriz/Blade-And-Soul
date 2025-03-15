@@ -21,7 +21,8 @@ const Post = () => {
   const [channel, setChannel] = useState({});
   const [loading, setLoading] = useState(true);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,10 +64,10 @@ const Post = () => {
   };
 
   const openEditModal = () => {
-    setIsEditModalOpen(true);
+    setShowEdit(true);
   };
   const closeEditModal = () => {
-    setIsEditModalOpen(false);
+    setShowEdit(false);
   };
 
   if (loading) {
@@ -91,27 +92,28 @@ const Post = () => {
           </div>
           <span>{channel.role}</span>
         </div>
-        <div className={styles.rightContent}>
-          {currentUser && currentPost.userId === currentUser._id && (
-            <div className={styles.deleteButtons}>
-              <span >
-                <FaEdit onClick={openEditModal} />
+        {showEdit ? <EditPost closeModal={closeEditModal} /> :
+          <div className={styles.rightContent}>
+            {currentUser && currentPost.userId === currentUser._id && (
+              <div className={styles.deleteButtons}>
+                <span >
+                  <FaEdit onClick={openEditModal} />
+                </span>
+                <span onClick={openDeleteDialog}>
+                  <FaTrash />
+                </span>
+              </div>
+            )}
+            <span>Posted on {format(currentPost.createdAt)}</span>
+            <h1>{currentPost.title}</h1>
+            <p>{currentPost.description}</p>
+            {currentUser && (
+              <span className={styles.likes} onClick={handleLike}>
+                <FaHeart />
+                {currentPost.likes?.length}
               </span>
-              <span onClick={openDeleteDialog}>
-                <FaTrash />
-              </span>
-            </div>
-          )}
-          <span>Posted on {format(currentPost.createdAt)}</span>
-          <h1>{currentPost.title}</h1>
-          <p>{currentPost.description}</p>
-          {currentUser && (
-            <span className={styles.likes} onClick={handleLike}>
-              <FaHeart />
-              {currentPost.likes?.length}
-            </span>
-          )}
-        </div>
+            )}
+          </div>}
       </div>
       <div className={styles.replyContent}>
         <Replies postId={currentPost._id} />
@@ -124,7 +126,7 @@ const Post = () => {
         errorMessage="Error deleting post."
         message="Are you sure you want to delete this post?"
       />
-      {isEditModalOpen && <EditPost closeModal={closeEditModal} />}
+      {/* {isEditModalOpen && <EditPost closeModal={closeEditModal} />} */}
     </div>
   );
 };
