@@ -1,62 +1,70 @@
 import { useEffect, useState } from "react";
-import { generatePath, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Loading from "../../../components/loading/Loading";
 import styles from './singleNew.module.css';
 import { format } from 'timeago.js';
 
 const SingleNew = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null); // Add error state
 
-  const path = useLocation().pathname.split("/")[2];
-  console.log(path);
+    const path = useLocation().pathname.split("/")[2];
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`/api/news/find/${path}`);
 
-  useEffect(() => {
-    // Define an asynchronous function to fetch data
-    const fetchData = async () => {
-      try {
-        // Perform the GET request
-        const response = await fetch(`/api/news/find/${path}`);
+                if (!response.ok) {
+                    // Handle non-200 status codes
+                    if (response.status === 404) {
+                        setError("News not found.");
+                    } else {
+                        setError(`Network response was not ok: ${response.status}`);
+                    }
+                    return; // Exit the function to prevent further processing
+                }
 
-        // Check if the response is OK (status code 200-299)
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+                const result = await response.json();
+                setData(result);
+            } catch (err) {
+                setError(err.message); // Capture error message
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        // Parse the JSON data
-        const result = await response.json();
+        fetchData();
+    }, [path]);
 
-        // Update the state with the fetched data
-        setData(result);
-      } catch (error) {
-        // Update the error state if an exception occurs
-        setError(error.message);
-      } finally {
-        // Set loading to false once the request is complete
-        setLoading(false);
-      }
-    };
+    if (loading) {
+        return <Loading />;
+    }
 
-    // Call the asynchronous function
-    fetchData();
-  }, []);
+    if (error) {
+        return <div className={styles.error}>Error: {error}</div>; // Display error message
+    }
 
-  return (
-    <div className={styles.container}>
-      {loading && <Loading />}
-      <div className={styles.banner}>
-        <img src={data.image} alt="" />
-      </div>
-      <div className={styles.info}>
-        <span>{format(data.createdAt)}</span>
-        <h1>{data.title}</h1>
-      </div>
-      <div className={styles.text}>
-        <p>{data.desc}</p>
-      </div>
-    </div>
-  );
+    if (!data) {
+        return <div className={styles.notFound}>News not found.</div>; // Handle case where data is null after loading
+    }
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.banner}>
+                <img src={data.image} alt={data.title} />
+            </div>
+            <div className={styles.info}>
+                <span>{format(data.createdAt)}</span>
+                <h1>{data.title}</h1>
+            </div>
+            <div className={styles.text}>
+                <p>{data.desc}</p>
+                <div dangerouslySetInnerHTML={{ __html: data.content }} />
+            </div>
+        </div>
+    );
 };
 
 export default SingleNew;

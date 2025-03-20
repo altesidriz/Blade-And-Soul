@@ -2,12 +2,24 @@ import { createError } from "../error.js";
 import News from "../models/News.js";
 
 export const addNew = async (req, res, next) => {
-    const newNew = new News({ userId: req.user.id, ...req.body });
     try {
+        // Validation (example using basic checks)
+        if (!req.body.title || !req.body.desc || !req.body.category || !req.body.image || !req.body.content) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+
+        const newNew = new News({
+            title: req.body.title,
+            desc: req.body.desc,
+            category: req.body.category,
+            image: req.body.image,
+            content: req.body.content,
+        });
+
         const savedNew = await newNew.save();
-        res.status(200).json(savedNew);
+        res.status(201).json(savedNew);
     } catch (error) {
-        next(error)
+        next(error);
     }
 };
 
