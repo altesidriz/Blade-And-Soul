@@ -58,10 +58,11 @@ const SingleNew = () => {
             <div className={styles.info}>
                 <span>{format(data.createdAt)}</span>
                 <h1>{data.title}</h1>
+                <span>{data.category}</span>
+                <p>{data.desc}</p>
             </div>
             <div className={styles.text}>
-                <p>{data.desc}</p>
-                <div dangerouslySetInnerHTML={{ __html: data.content }} />
+                <div className={styles.content}dangerouslySetInnerHTML={{ __html: data.content }} />
             </div>
         </div>
     );

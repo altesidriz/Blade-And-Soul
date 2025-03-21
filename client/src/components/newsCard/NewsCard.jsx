@@ -3,10 +3,10 @@ import styles from './newsCard.module.css';
 import { format } from 'timeago.js';
 
 const categoryColors = {
-    sales: 'red',
-    events: 'yellow',
-    general: 'white',
-    'patch notes': 'green'
+    Sales: 'red',
+    Events: 'yellow',
+    General: 'white',
+    'Patch Notes': 'green'
 };
 
 const NewsCard = ({ data }) => {
