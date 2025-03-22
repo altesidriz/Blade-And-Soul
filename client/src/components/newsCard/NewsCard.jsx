@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 import styles from './newsCard.module.css';
 import { format } from 'timeago.js';
+import { LiaEditSolid } from "react-icons/lia";
+import { MdDeleteForever } from "react-icons/md";
+import { useSelector } from 'react-redux';
+
 
 const categoryColors = {
     Sales: 'red',
@@ -10,6 +14,8 @@ const categoryColors = {
 };
 
 const NewsCard = ({ data }) => {
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const isAdmin = currentUser.role === 'Admin'
     const textColor = categoryColors[data.category];
     return (
         <div className={styles.card}>
@@ -28,6 +34,10 @@ const NewsCard = ({ data }) => {
                 <div className={styles.separator}></div>
                 <Link to={`/news/${data._id}`}>Read More</Link>
             </div>
+           {isAdmin && <div className={styles.buttons}>
+                <span><LiaEditSolid size={25}/></span>
+                <span><MdDeleteForever size={25}/></span>
+            </div>}
         </div>
     )
 }

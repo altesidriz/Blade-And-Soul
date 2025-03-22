@@ -9,7 +9,7 @@ const News = () => {
     const [news, setNews] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('all');
-    const categories = ['all', 'sales', 'events', 'general'];
+    const categories = ['All', 'Sales', 'Events', 'General', 'Patch Notes'];
     
     const currentUser = useSelector((state) => state.user.currentUser);
 
@@ -18,7 +18,7 @@ const News = () => {
 
             try {
                 let res;
-                if (selectedCategory === ('all' || '')) {
+                if (selectedCategory === ('All' || '')) {
                     res = await axios.get('/api/news/all');
                 } else {
                     res = await axios.get(`/api/news/${selectedCategory}`);
@@ -43,7 +43,7 @@ const News = () => {
                 >
                     {categories.map((category) => (
                         <option key={category} value={category}>
-                            {category.charAt(0).toUpperCase() + category.slice(1)}
+                            {category}
                         </option>
                     ))}
                 </select>

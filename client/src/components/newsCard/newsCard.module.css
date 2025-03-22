@@ -5,6 +5,7 @@
     align-items: start;
     justify-content: left;
     column-gap: 20px;
+    position: relative;
 }
 
 .cardImg {
@@ -56,4 +57,27 @@
     color: chocolate;
     text-decoration: underline;
     font-size: 1.5rem;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.buttons span{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.buttons span:hover {
+    color: tomato;
 }
