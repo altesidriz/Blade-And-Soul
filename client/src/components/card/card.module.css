@@ -65,7 +65,10 @@
     transition: linear 0.2s;
 }
 
-.back>button {
+.back>a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 150px;
     height: 40px;
     background: #4d0489;
@@ -73,9 +76,10 @@
     border-radius: 30px;
     color: white;
     font-family: Rubik, sans-serif;
+    text-decoration: none;
 }
 
-.back>button:hover {
+.back>a:hover {
     background: #6704b8;
     cursor: pointer;
 }

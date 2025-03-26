@@ -1,41 +1,60 @@
 import Carousel from '../../components/carousel/Carousel';
 import styles from './home.module.css';
-import cardImg from '../../assets/news/card1.jpg';
 import bannerImg from '../../assets/banner/interim-home-define-style-destroyer.png';
 import { IoIosKeypad } from "react-icons/io";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { format } from 'timeago.js';
+import Loading from '../../components/loading/Loading';
+import { ErrorContext } from '../../context/ErrorContext';
+import Error from '../../components/error/Error.jsx';
 
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { appError, setAppError } = useContext(ErrorContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('/api/news/all');
-      setData(res.data);
+      setLoading(true);
+      try {
+        const res = await axios.get('/api/news/all');
+        setData(res.data);
+        setLoading(false)
+      } catch (error) {
+        // console.error("Error fetching news:", error);
+        setLoading(false);
+        setAppError('Something went wrong. Please try again later!');
+      }
     };
     fetchData();
   }, []);
 
   const curentNews = data.slice(0, 4);
 
+  console.log(appError);
+  
   return (
     <div className={styles.container}>
+      {appError && (
+        <Error message={appError} onClose={() => setAppError(null)} isModal />
+      )}
       <Carousel />
       <div className={styles.cards}>
-        {curentNews.map((i) => (
-          <div key={i._id} className={styles.card}>
-            <img src={i.image} alt="" />
-            <div className={styles.cardInfo}>
-              <span className={styles.title}>{i.title}</span>
-              <div style={{ display: "flex", columnGap: "15px" }}>
-                <span>{format(i.createdAt)}</span>
+        {loading ? <Loading /> :
+        (curentNews.map((i) => (
+            <Link to={`/news/${i._id}`} key={i._id} className={styles.card}>
+              <img src={i.image} alt="" />
+              <div className={styles.cardInfo}>
+                <span className={styles.title}>{i.title}</span>
+                <div style={{ display: "flex", columnGap: "15px" }}>
+                  <span>{format(i.createdAt)}</span>
+                </div>
               </div>
-            </div>
-          </div>))}
+            </Link>))
+            )}
       </div>
       <Link to={`/news`}><IoIosKeypad /> View More News</Link>
       <div className={styles.banner}>

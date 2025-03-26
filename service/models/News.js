@@ -27,4 +27,4 @@ const NewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("New", NewSchema);
+export default mongoose.model("News", NewSchema);

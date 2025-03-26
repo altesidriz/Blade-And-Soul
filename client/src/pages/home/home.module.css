@@ -31,10 +31,17 @@ img {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-around;
-    column-gap: 15px;
+    column-gap: 25px;
+}
+
+.cards a{
+    padding: 0;
+    margin: 0;
 }
 
 .card {
+    padding: 0;
+    margin: 0;
     background: inherit;
     border-radius: 10px;
     height: 250px;
@@ -51,13 +58,17 @@ img {
 .card img {
     height: 100%;
     width: 100%;
-    /* object-fit: cover; */
     object-position: center;
     border-radius: 10px 10px 0 0;
+    transition: transform 0.3s ease-in-out;
 }
 
 img {
     object-fit: cover;
+}
+
+.card img:hover{
+    transform: scale(1.1);
 }
 
 .cardInfo {
@@ -74,6 +85,9 @@ img {
 
 .title {
     font-size: 1.8rem;
+}
+.title:hover {
+    color: white;
 }
 
 button {
@@ -97,7 +111,6 @@ button:hover {
 
 .container a{
     width: 100vw;
-    padding: 25px;
     align-self: center;
     border: none;
     background: #050a0f;

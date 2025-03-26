@@ -7,7 +7,7 @@ import { format } from 'timeago.js';
 const SingleNew = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); // Add error state
+    const [error, setError] = useState(null); 
 
     const path = useLocation().pathname.split("/")[2];
 
@@ -17,19 +17,18 @@ const SingleNew = () => {
                 const response = await fetch(`/api/news/find/${path}`);
 
                 if (!response.ok) {
-                    // Handle non-200 status codes
                     if (response.status === 404) {
                         setError("News not found.");
                     } else {
                         setError(`Network response was not ok: ${response.status}`);
                     }
-                    return; // Exit the function to prevent further processing
+                    return; 
                 }
 
                 const result = await response.json();
                 setData(result);
             } catch (err) {
-                setError(err.message); // Capture error message
+                setError(err.message); 
             } finally {
                 setLoading(false);
             }
@@ -43,11 +42,11 @@ const SingleNew = () => {
     }
 
     if (error) {
-        return <div className={styles.error}>Error: {error}</div>; // Display error message
+        return <div className={styles.error}>Error: {error}</div>; 
     }
 
     if (!data) {
-        return <div className={styles.notFound}>News not found.</div>; // Handle case where data is null after loading
+        return <div className={styles.notFound}>News not found.</div>; 
     }
 
     return (

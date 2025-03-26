@@ -35,11 +35,11 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/news' element={<News />} />
             <Route path='/news/:id' element={<SingleNew />} />
-            
-              <Route path='/shop' element={<RouteProtect><Shop /></RouteProtect>} />
-              <Route path='/shop/:id' element={<RouteProtect><Shop /></RouteProtect>} />
-              <Route path='/purchase' element={<RouteProtect><Purchase /></RouteProtect>} />
-              <Route path='/profile/:id' element={<RouteProtect><Profile /></RouteProtect>} />
+
+            <Route path='/shop' element={<RouteProtect><Shop /></RouteProtect>} />
+            <Route path='/item/:id' element={<RouteProtect><Item /></RouteProtect>} />
+            <Route path='/purchase' element={<RouteProtect><Purchase /></RouteProtect>} />
+            <Route path='/profile/:id' element={<RouteProtect><Profile /></RouteProtect>} />
 
             <Route path='/forum' element={<Forum />} />
             <Route path='/post/:id' element={<Post />} />

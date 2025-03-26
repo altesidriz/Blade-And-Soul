@@ -1,5 +1,5 @@
 import { createError } from "../error.js";
-import News from "../models/News.js";
+import News from '../models/News.js';
 
 export const addNew = async (req, res, next) => {
     try {
@@ -23,41 +23,23 @@ export const addNew = async (req, res, next) => {
     }
 };
 
-export const updateNew = async (req, res, next) => {
-    try {
-        const neW = await Post.findById(req.params.id);
-        if (!neW) return next(createError(404, 'New not found!'));
-
-        if (req.user.id === neW.userId) {
-            const updatedPost = await News.findByIdAndUpdate(req.params.id, {
-                $set: req.body
-            },
-                { neW: true }
-            );
-            res.status(200).json(updatedPost)
-        } else {
-            return next(createError(403, 'You have no permission to change this new!'))
-        }
-
-    } catch (error) {
-        next(error)
-    }
-};
-
 export const deleteNew = async (req, res, next) => {
     try {
-        const neW = await Post.findById(req.params.id);
-        if (!neW) return next(createError(404, 'Post not found!'));
+        console.log("Deleting news with ID:", req.params.id);
 
-        if (req.user.id === neW.userId) {
-            await News.findByIdAndDelete(req.params.id);
-            res.status(200).json('Post has been deleted!')
-        } else {
-            return next(createError(403, 'You have no permission to delete this new!'))
+        const newsItem = await News.findById(req.params.id);
+
+        console.log(newsItem);
+        
+        if (!newsItem) {
+            return next(createError(404, 'News not found!'));
         }
 
+        await News.findByIdAndDelete(req.params.id);
+        res.status(200).json('News has been deleted!');
+
     } catch (error) {
-        next(error)
+        next(error);
     }
 };
 

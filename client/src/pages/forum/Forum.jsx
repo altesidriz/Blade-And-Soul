@@ -5,6 +5,7 @@ import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-ico
 import { useEffect, useState } from 'react';
 import PostCard from '../../components/postCard/PostCard';
 import CreatePost from './createPost/CreatePost';
+import { useSelector } from 'react-redux';
 
 const Forum = () => {
   const [posts, setPosts] = useState([]);
@@ -14,6 +15,7 @@ const Forum = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [limit, setLimit] = useState(10);
   const [postModal, setPostModal] = useState(false);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
 
   const fetchPosts = async () => {
@@ -54,7 +56,7 @@ const Forum = () => {
 
   return (
     <div className={styles.container}>
-      <button style={{ width: '250px', alignSelf: 'end' }} onClick={toggleModal}>Create a topic</button>
+      {currentUser && <button style={{ width: '250px', alignSelf: 'end' }} onClick={toggleModal}>Create a topic</button>}
       <div className={styles.searchBar}>
         <input
           type="text"

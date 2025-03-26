@@ -57,41 +57,6 @@ const CreateNew = ({ setOpenModal }) => {
         );
     };
 
-    // useEffect(() => {
-    //     const uploadFile = () => {
-    //         const name = new Date().getTime() + image.name;
-    //         const storage = getStorage(app);
-    //         const storageRef = ref(storage, `nnews/${name}`);
-    //         const uploadTask = uploadBytesResumable(storageRef, image);
-
-    //         uploadTask.on('state_changed',
-    //             (snapshot) => {
-    //                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //                 setUploadPerc(progress);
-    //                 switch (snapshot.state) {
-    //                     case 'paused':
-    //                         console.log('Upload is paused');
-    //                         break;
-    //                     case 'running':
-    //                         console.log('Upload is running');
-    //                         break;
-    //                     default:
-    //                         break;
-    //                 }
-    //             },
-    //             (error) => {
-    //                 console.log(error);
-    //             },
-    //             () => {
-    //                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-    //                     setImageUrl(downloadURL);
-    //                     setUploadTriggered(true);
-    //                 });
-    //             }
-    //         );
-    //     };
-    //     image && uploadFile();
-    // }, [image]);
 
     const handleCreateNew = async () => {
         try {

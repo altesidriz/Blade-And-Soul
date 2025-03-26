@@ -16,7 +16,10 @@ export const userSlice = createSlice({
     },
     loginSuccess: (state, action) => {
       state.loading = false;
-      state.currentUser = action.payload;
+      state.currentUser = {
+        ...action.payload,
+        wallet: action.payload.wallet || 0
+      };
     },
     loginFailure: (state) => {
       state.loading = false;
@@ -28,10 +31,14 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = false;
     },
+    updateUserWallet: (state, action) => {
+      if (state.currentUser) {
+        state.currentUser.wallet -= action.payload;
+      }
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
-  userSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout, updateUserWallet} = userSlice.actions;
 
 export default userSlice.reducer;

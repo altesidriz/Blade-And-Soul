@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.container {
+    padding: 4em;
+    height: 80vh;
+    width: 100vw;
+    background-color: #141414;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    column-gap: 1em;
+    position: relative;
+    font-family: 'Noto Sans';
+}
+
+.left {
+    background-color: #292929;
+    width: 40%;
+    height: 80%;
+    position: sticky;
+    top: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.left img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+}
+
+.right {
+    background-color: #292929;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    row-gap: 15px;
+    padding: 15px 0;
+}
+
+span {
+    color: #969696;
+}
+
+.price {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+}
+
+.bottom,
+.upper {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-around;
+}
+
+.upper {
+    height: 60%;
+    border-bottom: 1px solid #969696;
+}
+
+.bottom {
+    height: 40%;
+}
+
+.counter {
+    padding: 15px 30px;
+    background: #171717;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #969696;
+    border-radius: 15px;
+}
+
+.counter div {
+    display: flex;
+    column-gap: 10px;
+}
+
+.counter button {
+    background: none;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #969696;
+    border-radius: 2px;
+}
+
+.counter button:disabled{
+    color: #969696;
+}
+
+.counter button:hover{
+    color: inherit;
+}
+
+.bottom > button:last-child{
+    width: 100%;
+    padding: 15px;
+    background: #747cd7;
+    border-radius: 15px;
+}
+
+.bottom > button:hover {
+    background: #7e86d8;
+    color: white;
+}

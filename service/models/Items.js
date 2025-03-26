@@ -13,9 +13,11 @@ const ItemSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
+      min:0,
     },
     category: {
       type: String,
+      enum: ['featured', 'cosmetics', 'suplies', 'service']
     }
   },
   { timestamps: true }

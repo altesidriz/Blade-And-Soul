@@ -71,9 +71,11 @@
     background: #eb6611;
     padding: 15px;
     font-family: Rubik, sans-serif;
+    width: 20%;
 }
 
 .center .button:hover {
     cursor: pointer;
+    color: inherit;
     background: #e87810;
 }

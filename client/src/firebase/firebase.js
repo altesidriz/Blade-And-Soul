@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBAUNRew6g8Ds0TAn1eqpVfzNUNYfDdsu8",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "balde-and-soul-7c14b.firebaseapp.com",
   projectId: "balde-and-soul-7c14b",
   storageBucket: "balde-and-soul-7c14b.appspot.com",

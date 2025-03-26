@@ -1,6 +1,7 @@
 import shopCrad from '../../assets/shop/shopcard.png';
 import ncoin from '../../assets/shop/ncoin.png';
 import styles from './card.module.css';
+import { Link } from 'react-router-dom';
 
 
 const Card = ({item}) => {
@@ -15,7 +16,7 @@ const Card = ({item}) => {
             </div>
             <div className={styles.back}>
                 <p>{item.name}</p>
-                <button>PURCHASE</button>
+                <Link to={`/item/${item._id}`}>PURCHASE</Link>
             </div>
         </div>
     );

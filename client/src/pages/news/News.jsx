@@ -32,6 +32,9 @@ const News = () => {
         fetchData();
     }, [selectedCategory]);
 
+    const handleDeleteNews = (deletedId) => {
+        setNews((prevNews) => prevNews.filter((item) => item._id !== deletedId));
+    };
     
     return (
 
@@ -50,7 +53,7 @@ const News = () => {
                 {currentUser && currentUser.role === "Admin" ? <button onClick={() => { setOpenModal(true) }}>Add a New</button> : <></>}
             </div>
             <div className={styles.cardList}>
-                {news.map((data) => (<NewsCard key={data._id} data={data} />))}
+                {news.map((data) => (<NewsCard key={data._id} data={data} onDelete={handleDeleteNews}/>))}
             </div>
 
             {openModal && <CreateNew setOpenModal={setOpenModal} />}

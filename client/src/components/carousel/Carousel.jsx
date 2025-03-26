@@ -42,7 +42,7 @@ const Carousel = () => {
                 </div>
                 <div className={styles.center}>
                     <h1>{images[curImg].title}</h1>
-                    <span className={styles.button}>Learn More</span>
+                    <button className={styles.button}>Learn More</button>
                 </div>
             </div>
         </div>

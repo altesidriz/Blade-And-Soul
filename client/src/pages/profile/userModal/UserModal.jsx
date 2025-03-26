@@ -103,10 +103,6 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
         }
     };
 
-    console.log(avatarImagePreviewUrl);
-    console.log(coverImagePreviewUrl);
-    
-
     const handleSaveChanges = async () => {
         setIsLoading(true);
         try {
@@ -116,20 +112,17 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
             });
 
             if (response.status === 200) {
-                dispatch(loginSuccess({ ...currentUser, avatar: avatarImagePreviewUrl, cover: coverImagePreviewUrl }));
-                //alert("Profile updated successfully!");
                 setSuccessMsg("Profile updated successfully!");
                 setTimeout(() => {
                     setSuccessMsg(null);
                     closeModal();
                 }, 3000);
-                //closeModal();
+                dispatch(loginSuccess(response.data));
             } else {
                 setErrorMsg("Failed to update profile.");
                 setTimeout(() => {
                     setErrorMsg(null);
                 }, 3000);
-                //alert("Failed to update profile.");
             }
         } catch (error) {
             console.error("Error updating profile:", error);
@@ -137,15 +130,10 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
             setTimeout(() => {
                 setErrorMsg(null);
             }, 3000);
-           // alert("Failed to update profile. Please try again.");
         } finally {
             setIsLoading(false);
         }
     };
-
-    console.log(currentUser._id);
-    
-    
 
     return (
         <div className={styles.modalOverlay} onClick={closeModal}>

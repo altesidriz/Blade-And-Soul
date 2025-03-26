@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './newsCard.module.css';
 import { format } from 'timeago.js';
-import { LiaEditSolid } from "react-icons/lia";
 import { MdDeleteForever } from "react-icons/md";
 import { useSelector } from 'react-redux';
-
+import axios from 'axios';
 
 const categoryColors = {
     Sales: 'red',
@@ -13,10 +12,24 @@ const categoryColors = {
     'Patch Notes': 'green'
 };
 
-const NewsCard = ({ data }) => {
+const NewsCard = ({ data, onDelete }) => { // added onDelete prop.
     const currentUser = useSelector((state) => state.user.currentUser);
-    const isAdmin = currentUser.role === 'Admin'
+    const isAdmin = currentUser?.role === 'Admin';
     const textColor = categoryColors[data.category];
+
+    const handleDelete = async () => {
+        if (window.confirm("Are you sure you want to delete this news article?")) {
+            try {
+                console.log("Deleting news with ID:", data._id);
+                await axios.delete(`/api/news/${data._id}`);
+                onDelete(data._id); // Notify the parent component
+            } catch (error) {
+                console.error('Error deleting news:', error);
+                alert('Failed to delete news. Please try again.');
+            }
+        }
+    };
+
     return (
         <div className={styles.card}>
             <div className={styles.cardImg}>
@@ -34,12 +47,15 @@ const NewsCard = ({ data }) => {
                 <div className={styles.separator}></div>
                 <Link to={`/news/${data._id}`}>Read More</Link>
             </div>
-           {isAdmin && <div className={styles.buttons}>
-                <span><LiaEditSolid size={25}/></span>
-                <span><MdDeleteForever size={25}/></span>
-            </div>}
+            {isAdmin && (
+                <div className={styles.buttons}>
+                    <span onClick={handleDelete}>
+                        <MdDeleteForever size={25} />
+                    </span>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default NewsCard
+export default NewsCard;
