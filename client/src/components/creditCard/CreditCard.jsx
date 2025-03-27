@@ -1,10 +1,10 @@
 import styles from './creditCard.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from "axios"
 import { useState } from 'react';
 import { loginSuccess } from '../../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../loading/Loading';
+import axiosInstance from '../../lib/axiosInstance';
 
 
 
@@ -67,7 +67,7 @@ const CreditCard = ({ price, ncoins }) => {
 
     setTimeout(async () => {
       try {
-        const response = await axios.put(`/api/users/${_id}`, { wallet: finalWallet });
+        const response = await axiosInstance.put(`/api/users/${_id}`, { wallet: finalWallet });
 
         if (response.status === 200) {
           setSuccess('Payment successful!');

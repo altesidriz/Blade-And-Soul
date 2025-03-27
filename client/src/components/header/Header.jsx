@@ -2,7 +2,6 @@ import styles from './header.module.css';
 import ncoin from '../../assets/shop/ncoin.png'
 import { useDispatch } from 'react-redux';
 import { useSelector } from "react-redux";
-import axios from 'axios';
 
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FiMonitor } from "react-icons/fi";
@@ -10,6 +9,7 @@ import { MdPhoneAndroid } from "react-icons/md";
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/userSlice';
+import axiosInstance from '../../lib/axiosInstance';
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -20,7 +20,7 @@ const Header = () => {
 
 
   const handleLogout = async () => {
-    await axios.get('/api/auth/logout')
+    await axiosInstance.get('/api/auth/logout')
     dispatch(logout())
     navigate('/')
   }

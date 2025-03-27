@@ -3,9 +3,9 @@ import styles from './createNew.module.css';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from '../../../firebase/firebase.js';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { IoCloseCircle } from "react-icons/io5";
 import TextEditor from '../../../components/textEditor/TextEditor.jsx';
+import axiosInstance from '../../../lib/axiosInstance.js';
 
 const CreateNew = ({ setOpenModal }) => {
     const [image, setImage] = useState(undefined);
@@ -60,7 +60,7 @@ const CreateNew = ({ setOpenModal }) => {
 
     const handleCreateNew = async () => {
         try {
-            await axios.post('/api/news', {
+            await axiosInstance.post('/api/news', {
                 ...inputs,
                 content: editorContent,
                 image: imageUrl

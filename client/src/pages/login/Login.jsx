@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../../redux/userSlice';
 import Loading from '../../components/loading/Loading';
+import axiosInstance from '../../lib/axiosInstance';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginStart())
     try {
-      const res = await axios.post('/api/auth/signin', {email, password});
+      const res = await axiosInstance.post('/api/auth/signin', {email, password});
       dispatch(loginSuccess(res.data))
       navigate('/');   
     } catch (error) {

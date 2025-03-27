@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './editPost.module.css';
-import axios from 'axios';
 import { fetchSuccess } from '../../../redux/postSlice';
+import axiosInstance from '../../../lib/axiosInstance';
 
 const EditPost = ({ closeModal }) => {
     const { currentPost } = useSelector((state) => state.post);
@@ -22,7 +22,7 @@ const EditPost = ({ closeModal }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.put(`/api/posts/${currentPost._id}`, {
+            const res = await axiosInstance.put(`/api/posts/${currentPost._id}`, {
                 title,
                 description,
                 category,

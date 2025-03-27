@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styles from './signup.module.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/loading/Loading';
+import axiosInstance from '../../lib/axiosInstance';
 
 
 const Signup = () => {
@@ -48,7 +48,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      await axios.post('/api/auth/signup', { name, email, password });
+      await axiosInstance.post('/api/auth/signup', { name, email, password });
       setLoading(false);
       navigate('/login');
     } catch (error) {

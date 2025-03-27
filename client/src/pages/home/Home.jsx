@@ -3,12 +3,12 @@ import styles from './home.module.css';
 import bannerImg from '../../assets/banner/interim-home-define-style-destroyer.png';
 import { IoIosKeypad } from "react-icons/io";
 import { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { format } from 'timeago.js';
 import Loading from '../../components/loading/Loading';
 import { ErrorContext } from '../../context/ErrorContext';
 import Error from '../../components/error/Error.jsx';
+import axiosInstance from '../../lib/axiosInstance.js';
 
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('/api/news/all');
+        const res = await axiosInstance.get('/api/news/all');
         setData(res.data);
         setLoading(false)
       } catch (error) {

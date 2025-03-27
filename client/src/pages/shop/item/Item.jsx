@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import styles from './item.module.css';
 import ncoin from '../../../assets/shop/ncoin.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserWallet } from '../../../redux/userSlice';
+import axiosInstance from '../../../lib/axiosInstance';
 
 const Item = () => {
   const { id } = useParams();
@@ -24,7 +24,7 @@ const Item = () => {
     const fetchItem = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`/api/items/${id}`);
+        const response = await axiosInstance.get(`/api/items/${id}`);
         setItem(response.data);
         setLoading(false);
       } catch (err) {
@@ -69,7 +69,7 @@ const Item = () => {
       dispatch(updateUserWallet(totalPrice));
 
       try {
-        await axios.put(`/api/users/${_id}`, {
+        await axiosInstance.put(`/api/users/${_id}`, {
           wallet: userWallet - totalPrice,
         });
         alert("Purchase successful!");

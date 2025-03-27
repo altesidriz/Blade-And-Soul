@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import styles from './createItem.module.css';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from '../../firebase/firebase.js';
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../lib/axiosInstance.js';
 
 
 
@@ -61,7 +61,7 @@ const CreateItem = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const res = await axios.post("/api/items", { ...inputs })
+        const res = await axiosInstance.post("/api/items", { ...inputs })
         res.status === 200 && navigte(`/shop/${res.data._id}`)
     }
 

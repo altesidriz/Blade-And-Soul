@@ -1,9 +1,9 @@
-import axios from 'axios';
 import styles from './postcard.module.css';
 import { format } from 'timeago.js';
 
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import axiosInstance from '../../lib/axiosInstance';
 
 
 
@@ -13,7 +13,7 @@ const PostCard = ({ post }) => {
     useEffect(() => {
 
         const fetchUser = async () => {
-            const res = await axios.get(`/api/users/find/${post.userId}`);
+            const res = await axiosInstance.get(`/api/users/find/${post.userId}`);
             setUser(res.data);
         };
         fetchUser();

@@ -2,8 +2,8 @@ import styles from './news.module.css';
 import NewsCard from '../../components/newsCard/NewsCard';
 import CreateNew from './createNew/CreateNew';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
+import axiosInstance from '../../lib/axiosInstance';
 
 const News = () => {
     const [news, setNews] = useState([]);
@@ -19,9 +19,9 @@ const News = () => {
             try {
                 let res;
                 if (selectedCategory === ('All' || '')) {
-                    res = await axios.get('/api/news/all');
+                    res = await axiosInstance.get('/api/news/all');
                 } else {
-                    res = await axios.get(`/api/news/${selectedCategory}`);
+                    res = await axiosInstance.get(`/api/news/${selectedCategory}`);
                 }
                 setNews(res.data);
             } catch (err) {

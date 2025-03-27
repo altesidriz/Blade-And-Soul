@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import styles from './createPost.module.css';
+import axiosInstance from '../../../lib/axiosInstance';
 
 const CreatePost = ({ closeModal, refetchPosts }) => {
     const [title, setTitle] = useState('');
@@ -12,7 +12,7 @@ const CreatePost = ({ closeModal, refetchPosts }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/posts', {
+            await axiosInstance.post('/api/posts', {
                 title,
                 description,
                 category,

@@ -15,6 +15,7 @@ import Dialog from '../../components/dialog/Dialog';
 import { IoMdCloseCircle } from "react-icons/io";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { MdDeleteForever } from "react-icons/md";
+import axiosInstance from '../../lib/axiosInstance';
 
 const Profile = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
@@ -50,7 +51,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const userRes = await axios.get(`/api/users/find/${params.id}`);
+                const userRes = await axiosInstance.get(`/api/users/find/${params.id}`);
                 setProfileUser(userRes.data);
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -59,7 +60,7 @@ const Profile = () => {
 
         const fetchPostsData = async () => {
             try {
-                const res = await axios.get(`/api/posts/users/${params.id}`);
+                const res = await axiosInstance.get(`/api/posts/users/${params.id}`);
                 setPosts(res.data);
             } catch (error) {
                 console.error("Error fetching user posts:", error);
@@ -132,7 +133,7 @@ const Profile = () => {
 
             try {
                 await Promise.all(uploadPromises);
-                const response = await axios.put(`/api/users/${_id}/pictures`, { pictures: imageUrls });
+                const response = await axiosInstance.put(`/api/users/${_id}/pictures`, { pictures: imageUrls });
                 dispatch(loginSuccess({ ...currentUser, pictures: [...currentUser.pictures, ...imageUrls] }));
                 setIsUploading(false);
             } catch (error) {
@@ -158,7 +159,7 @@ const Profile = () => {
             await deleteObject(imageRef);
 
             
-            await axios.delete(`/api/users/${_id}/pictures`, { data: { picture: imageToDelete } });
+            await axiosInstance.delete(`/api/users/${_id}/pictures`, { data: { picture: imageToDelete } });
             const updatedPictures = currentUser.pictures.filter(pic => pic !== imageToDelete);
             dispatch(loginSuccess({ ...currentUser, pictures: updatedPictures }));
 

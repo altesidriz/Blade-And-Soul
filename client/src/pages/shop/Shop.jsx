@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import Card from '../../components/card/Card';
 import styles from './shop.module.css';
-import { IoSearchSharp } from "react-icons/io5";
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import CreateItem from '../../components/createItem/CreateItem';
+import axiosInstance from '../../lib/axiosInstance';
 
 
 
@@ -19,7 +18,7 @@ const Shop = () => {
     const fetchData = async () => {
 
       try {
-        const res = await axios.get(`/api/items/category/${selectedCategory}`);
+        const res = await axiosInstance.get(`/api/items/category/${selectedCategory}`);
         setItems(res.data);
       } catch (err) {
 

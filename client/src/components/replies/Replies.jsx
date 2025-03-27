@@ -1,8 +1,8 @@
 import Reply from '../reply/Reply';
 import styles from './replies.module.css';
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import axiosInstance from '../../lib/axiosInstance';
 
 const Replies = ({ postId }) => {
     const { currentUser } = useSelector((state) => state.user);
@@ -13,7 +13,7 @@ const Replies = ({ postId }) => {
     useEffect(() => {
         const fetchReplies = async () => {
             try {
-                const res = await axios.get(`/api/replies/${postId}`);
+                const res = await axiosInstance.get(`/api/replies/${postId}`);
                 setReplies(res.data);
             } catch (err) { }
         };
@@ -26,7 +26,7 @@ const Replies = ({ postId }) => {
             setError(true)
         }
         try {
-            const res = await axios.post('/api/replies', {
+            const res = await axiosInstance.post('/api/replies', {
                 userId: currentUser._id,
                 postId: postId,
                 description: currentReply,

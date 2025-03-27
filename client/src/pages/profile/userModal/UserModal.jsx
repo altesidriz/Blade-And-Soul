@@ -4,7 +4,7 @@ import { getStorage, ref, listAll, getDownloadURL, uploadBytesResumable, deleteO
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import {loginSuccess} from '../../../redux/userSlice';
-import axios from 'axios';
+import axiosInstance from '../../../lib/axiosInstance';
 
 
 
@@ -106,7 +106,7 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
     const handleSaveChanges = async () => {
         setIsLoading(true);
         try {
-            const response = await axios.put(`/api/users/${currentUser._id}`, {
+            const response = await axiosInstance.put(`/api/users/${currentUser._id}`, {
                 avatar: avatarImagePreviewUrl,
                 cover: coverImagePreviewUrl,
             });
