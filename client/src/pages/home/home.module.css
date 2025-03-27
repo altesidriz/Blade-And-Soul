@@ -34,12 +34,8 @@ img {
     column-gap: 25px;
 }
 
-.cards a{
-    padding: 0;
-    margin: 0;
-}
 
-.card {
+.card{
     padding: 0;
     margin: 0;
     background: inherit;
@@ -55,8 +51,8 @@ img {
     row-gap: 15px;
 }
 
-.card img {
-    height: 100%;
+.card img{
+    height: 80%;
     width: 100%;
     object-position: center;
     border-radius: 10px 10px 0 0;
