@@ -11,10 +11,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/userSlice';
 import axiosInstance from '../../lib/axiosInstance';
 
-import ncsoftSeeklogo from './assets/header/ncsoft-seeklogo.svg';
-import lineage from './assets/header/lineage.png';
-import aion from './assets/header/aion.png';
-import bns from './assets/header/bns.png';
+import ncsoftSeeklogo from '../../assets/header/ncsoft-seeklogo.svg';
+import lineage from '../../assets/header/lineage.png';
+import aion from '../../assets/header/aion.png';
+import bns from '../../assets/header/bns.png';
 
 const Header = () => {
   const [show, setShow] = useState(false);
