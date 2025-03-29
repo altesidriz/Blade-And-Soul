@@ -1,6 +1,6 @@
 import styles from './footer.module.css';
-import pegi from './assets/footer/pegi.png';
-import ncImg from './assets/footer/logo-plaync.png';
+import pegi from '../../assets/footer/pegi.png';
+import ncImg from '../../assets/footer/logo-plaync.png';
 import { FaFacebookF, FaYoutube, FaTwitch } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";

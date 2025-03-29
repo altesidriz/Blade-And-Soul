@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-import navLogo from './assets/navbar/nav-logo.png'
+import navLogo from '../../assets/navbar/nav-logo.png'
 
 const Navbar = () => {
   const [arrow, setArrow] = useState(false);
