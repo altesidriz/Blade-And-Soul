@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+import navLogo from '../../assets/navbar/nav-logo.png'
 
 const Navbar = () => {
   const [arrow, setArrow] = useState(false);
@@ -13,7 +14,7 @@ const Navbar = () => {
       <div className={styles.leftContent}>
         <Link to='/'>
           <div className={styles.logo}>
-            <img src='/src/assets/navbar/nav-logo.png' />
+            <img src={navLogo} alt='nav-logo' />
           </div>
         </Link>
         <div className={styles.menu}>

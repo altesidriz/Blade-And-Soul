@@ -11,6 +11,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/userSlice';
 import axiosInstance from '../../lib/axiosInstance';
 
+import ncsoftSeeklogo from '../../assets/header/ncsoft-seeklogo.svg';
+import lineage from '../../assets/header/lineage.png';
+import aion from '../../assets/header/aion.png';
+import bns from '../../assets/header/bns.png';
+
 const Header = () => {
   const [show, setShow] = useState(false);
 
@@ -30,7 +35,7 @@ const Header = () => {
       <div className={styles.logoContainer}>
         <div className={styles.user1}>
           <div className={styles.logo}>
-            <img src="/src/assets/header/ncsoft-seeklogo.svg" alt="" />
+            <img src={ncsoftSeeklogo} alt="nc-logo" />
           </div>
           <span className={styles.games}
             onClick={() => setShow(!show)}
@@ -70,7 +75,7 @@ const Header = () => {
       {show &&
         <div className={styles.cards}>
           <div className={styles.card}>
-            <img src='/src/assets/header/lineage.png' alt='lineage.png' />
+            <img src={lineage} alt='lineage.png' />
             <div className={styles.cardText}>
               <MdPhoneAndroid />
               <FiMonitor />
@@ -78,19 +83,19 @@ const Header = () => {
             </div>
           </div>
           <div className={styles.card2}>
-            <img src='/src/assets/header/aion.png' alt='lineage.png' />
+            <img src={aion} alt='aion.png' />
             <div className={styles.cardText}>
               <MdPhoneAndroid />
               <FiMonitor />
-              <span>Lineage II</span>
+              <span>Aion</span>
             </div>
           </div>
           <div className={styles.card3}>
-            <img src='/src/assets/header/bns.png' alt='lineage.png' />
+            <img src={bns} alt='bns.png' />
             <div className={styles.cardText}>
               <MdPhoneAndroid />
               <FiMonitor />
-              <span>Lineage II</span>
+              <span>Blade And Soul</span>
             </div>
           </div>
         </div>
