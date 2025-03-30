@@ -28,8 +28,8 @@ const Post = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const postRes = await axiosInstance.get(`/api/posts/find/${path}`);
-        const channelRes = await axiosInstance.get(`/api/users/find/${postRes.data.userId}`);
+        const postRes = await axiosInstance.get(`posts/find/${path}`);
+        const channelRes = await axiosInstance.get(`users/find/${postRes.data.userId}`);
         setChannel(channelRes.data);
         dispatch(fetchSuccess(postRes.data));
       } catch (err) {
@@ -42,7 +42,7 @@ const Post = () => {
   }, [path, dispatch]);
 
   const handleLike = async () => {
-    await axiosInstance.put(`/api/users/like/${currentPost._id}`);
+    await axiosInstance.put(`users/like/${currentPost._id}`);
     dispatch(like(currentUser._id));
   };
 
@@ -57,7 +57,7 @@ const Post = () => {
 
   const confirmDelete = async () => {
     try {
-      await axiosInstance.delete(`/api/posts/${path}`);
+      await axiosInstance.delete(`posts/${path}`);
     } catch (error) {
       console.error('Error deleting post:', error);
     }

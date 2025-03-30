@@ -13,7 +13,7 @@ const PostCard = ({ post }) => {
     useEffect(() => {
 
         const fetchUser = async () => {
-            const res = await axiosInstance.get(`/api/users/find/${post.userId}`);
+            const res = await axiosInstance.get(`users/find/${post.userId}`);
             setUser(res.data);
         };
         fetchUser();

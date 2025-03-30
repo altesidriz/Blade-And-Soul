@@ -18,7 +18,7 @@ const Shop = () => {
     const fetchData = async () => {
 
       try {
-        const res = await axiosInstance.get(`/api/items/category/${selectedCategory}`);
+        const res = await axiosInstance.get(`items/category/${selectedCategory}`);
         setItems(res.data);
       } catch (err) {
 

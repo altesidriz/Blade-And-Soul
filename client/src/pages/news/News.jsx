@@ -21,7 +21,7 @@ const News = () => {
                 if (selectedCategory === ('All' || '')) {
                     res = await axiosInstance.get('news/all');
                 } else {
-                    res = await axiosInstance.get(`/api/news/${selectedCategory}`);
+                    res = await axiosInstance.get(`news/${selectedCategory}`);
                 }
                 setNews(res.data);
             } catch (err) {

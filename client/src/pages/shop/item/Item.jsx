@@ -24,7 +24,7 @@ const Item = () => {
     const fetchItem = async () => {
       setLoading(true);
       try {
-        const response = await axiosInstance.get(`/api/items/${id}`);
+        const response = await axiosInstance.get(`items/${id}`);
         setItem(response.data);
         setLoading(false);
       } catch (err) {
@@ -69,7 +69,7 @@ const Item = () => {
       dispatch(updateUserWallet(totalPrice));
 
       try {
-        await axiosInstance.put(`/api/users/${_id}`, {
+        await axiosInstance.put(`users/${_id}`, {
           wallet: userWallet - totalPrice,
         });
         alert("Purchase successful!");

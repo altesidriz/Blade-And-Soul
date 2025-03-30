@@ -21,7 +21,7 @@ const NewsCard = ({ data, onDelete }) => { // added onDelete prop.
         if (window.confirm("Are you sure you want to delete this news article?")) {
             try {
                 console.log("Deleting news with ID:", data._id);
-                await axiosInstance.delete(`/api/news/${data._id}`);
+                await axiosInstance.delete(`news/${data._id}`);
                 onDelete(data._id); // Notify the parent component
             } catch (error) {
                 console.error('Error deleting news:', error);

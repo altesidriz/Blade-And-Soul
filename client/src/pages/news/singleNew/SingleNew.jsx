@@ -14,7 +14,7 @@ const SingleNew = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`/api/news/find/${path}`);
+                const response = await fetch(`news/find/${path}`);
 
                 if (!response.ok) {
                     if (response.status === 404) {

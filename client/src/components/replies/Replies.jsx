@@ -13,7 +13,7 @@ const Replies = ({ postId }) => {
     useEffect(() => {
         const fetchReplies = async () => {
             try {
-                const res = await axiosInstance.get(`/api/replies/${postId}`);
+                const res = await axiosInstance.get(`replies/${postId}`);
                 setReplies(res.data);
             } catch (err) { }
         };

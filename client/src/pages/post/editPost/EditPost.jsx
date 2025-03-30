@@ -22,7 +22,7 @@ const EditPost = ({ closeModal }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axiosInstance.put(`/api/posts/${currentPost._id}`, {
+            const res = await axiosInstance.put(`posts/${currentPost._id}`, {
                 title,
                 description,
                 category,

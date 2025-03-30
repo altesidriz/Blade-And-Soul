@@ -106,7 +106,7 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
     const handleSaveChanges = async () => {
         setIsLoading(true);
         try {
-            const response = await axiosInstance.put(`/api/users/${currentUser._id}`, {
+            const response = await axiosInstance.put(`users/${currentUser._id}`, {
                 avatar: avatarImagePreviewUrl,
                 cover: coverImagePreviewUrl,
             });

@@ -67,7 +67,7 @@ const CreditCard = ({ price, ncoins }) => {
 
     setTimeout(async () => {
       try {
-        const response = await axiosInstance.put(`/api/users/${_id}`, { wallet: finalWallet });
+        const response = await axiosInstance.put(`users/${_id}`, { wallet: finalWallet });
 
         if (response.status === 200) {
           setSuccess('Payment successful!');

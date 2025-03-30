@@ -61,7 +61,7 @@ const CreateItem = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const res = await axiosInstance.post("/api/items", { ...inputs })
+        const res = await axiosInstance.post("items", { ...inputs })
         res.status === 200 && navigte(`/shop/${res.data._id}`)
     }
 

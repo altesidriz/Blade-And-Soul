@@ -9,7 +9,7 @@ const Reply = ({ reply }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axiosInstance.get(`/api/users/find/${reply.userId}`);
+      const res = await axiosInstance.get(`users/find/${reply.userId}`);
       setChannel(res.data)
     };
     fetchUser();
