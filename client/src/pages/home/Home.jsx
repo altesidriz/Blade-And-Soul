@@ -20,7 +20,7 @@ const Home = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axiosInstance.get('/api/news/all');
+        const res = await axiosInstance.get('news/all');
         setData(res.data);
         setLoading(false)
       } catch (error) {

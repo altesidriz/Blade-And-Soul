@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginStart())
     try {
-      const res = await axiosInstance.post('/api/auth/signin', {email, password});
+      const res = await axiosInstance.post('auth/signin', {email, password});
       dispatch(loginSuccess(res.data))
       navigate('/');   
     } catch (error) {

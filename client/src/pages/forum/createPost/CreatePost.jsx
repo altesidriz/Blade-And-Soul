@@ -12,7 +12,7 @@ const CreatePost = ({ closeModal, refetchPosts }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axiosInstance.post('/api/posts', {
+            await axiosInstance.post('posts', {
                 title,
                 description,
                 category,

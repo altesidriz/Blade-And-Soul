@@ -25,7 +25,7 @@ const Header = () => {
 
 
   const handleLogout = async () => {
-    await axiosInstance.get('/api/auth/logout')
+    await axiosInstance.get('auth/logout')
     dispatch(logout())
     navigate('/')
   }

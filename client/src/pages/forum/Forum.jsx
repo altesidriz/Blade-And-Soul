@@ -20,7 +20,7 @@ const Forum = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await axiosInstance.get('/api/posts/paginate', {
+      const res = await axiosInstance.get('posts/paginate', {
         params: {
           page: currentPage,
           limit: limit,

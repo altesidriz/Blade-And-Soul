@@ -60,7 +60,7 @@ const CreateNew = ({ setOpenModal }) => {
 
     const handleCreateNew = async () => {
         try {
-            await axiosInstance.post('/api/news', {
+            await axiosInstance.post('news', {
                 ...inputs,
                 content: editorContent,
                 image: imageUrl

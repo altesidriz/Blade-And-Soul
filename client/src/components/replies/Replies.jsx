@@ -26,7 +26,7 @@ const Replies = ({ postId }) => {
             setError(true)
         }
         try {
-            const res = await axiosInstance.post('/api/replies', {
+            const res = await axiosInstance.post('replies', {
                 userId: currentUser._id,
                 postId: postId,
                 description: currentReply,

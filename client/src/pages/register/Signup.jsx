@@ -48,7 +48,7 @@ const Signup = () => {
 
     try {
       setLoading(true);
-      await axiosInstance.post('/api/auth/signup', { name, email, password });
+      await axiosInstance.post('auth/signup', { name, email, password });
       setLoading(false);
       navigate('/login');
     } catch (error) {
