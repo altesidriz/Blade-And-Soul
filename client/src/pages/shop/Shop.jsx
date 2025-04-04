@@ -14,6 +14,7 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState('featured');
   const categories = ['featured', 'cosmetics', 'suplies', 'service'];
 
+
   useEffect(() => {
     const fetchData = async () => {
 
@@ -27,6 +28,10 @@ const Shop = () => {
 
     fetchData();
   }, [selectedCategory]);
+
+  const handleDeleteItem = (itemId) => {
+    setItems((prevItems) => prevItems.filter((item) => item._id !== itemId));
+  };
 
   return (
     <div className={styles.container}>
@@ -45,7 +50,10 @@ const Shop = () => {
       </div>
       {/* ITEMS CONTAINER */}
       <div className={styles.itemsContainer}>
-        {items.map((item) => (<Card key={item._id} item={item}/>))}
+        {items.map((item) => (<Card 
+        key={item._id} 
+        item={item} 
+        onDelete={handleDeleteItem}/>))}
       </div>
       {currentUser.role === 'Admin' && <CreateItem/>}
     </div>

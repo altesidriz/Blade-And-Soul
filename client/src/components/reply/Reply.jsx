@@ -24,7 +24,7 @@ const Reply = ({ reply }) => {
       </div>
       <div className={styles.replyText}>
         <p>{reply.description}</p>
-        <span>{format(channel.createdAt)}</span>
+        <span>{format(reply.createdAt)}</span>
       </div>
     </div>
   )

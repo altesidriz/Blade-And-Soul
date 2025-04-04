@@ -9,9 +9,4 @@ export const verifyAdmin = (req, res, next) => {
     } else {
         res.status(403).json({ message: 'Access denied. Admins only.' });
     }
-
-
 };
-
-
-

@@ -11,12 +11,17 @@ const CreateItem = () => {
     const [image, setImage] = useState(undefined);
     const [uploadPerc, setUploadPerc] = useState(0);
     const [inputs, setInputs] = useState({});
+    const [success, setSuccess] = useState(false);
     const navigte = useNavigate()
 
     const handleChange = (e) => {
-        setInputs(prev => {
-            return { ...prev, [e.target.name]: e.target.value }
-        });
+        const { name, value } = e.target;
+
+        if (name === 'category') {
+            setInputs((prev) => ({ ...prev, [name]: value.toLowerCase() }));
+        } else {
+            setInputs((prev) => ({ ...prev, [name]: value }));
+        }
     };
 
     const uploadFile = (file) => {
@@ -61,21 +66,22 @@ const CreateItem = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const res = await axiosInstance.post("items", { ...inputs })
-        res.status === 200 && navigte(`/shop/${res.data._id}`)
+        const res = await axiosInstance.post('items', { ...inputs })
+        res.status === 200 && setSuccess(true) && navigte(`/shop`)
     }
 
     return (
         <div className={styles.container}>
             <div className={styles.inputs}>
                 {uploadPerc ?
-                        (<div>Uploading....{uploadPerc}%</div>
-                        ) : (
-                            <input type='file' accept='image/*' onChange={e => setImage(e.target.files[0])} />)
-                    }
-                <input type="text" name='name' placeholder='Name...' onChange={handleChange}/>
-                <input type="text" name='price' placeholder='Price..' onChange={handleChange}/>
-                <input type="text" name='category' placeholder='Category' onChange={handleChange}/>
+                    (<div>Uploading....{uploadPerc}%</div>
+                    ) : (
+                        <input type='file' accept='image/*' onChange={e => setImage(e.target.files[0])} />)
+                }
+                <input type="text" name='name' placeholder='Name...' onChange={handleChange} />
+                <input type="text" name='price' placeholder='Price..' onChange={handleChange} />
+                <input type="text" name='category' placeholder='Category' onChange={handleChange} />
+                {success && <p>Item has been created</p>}
                 <span onClick={handleUpload}>Create</span>
             </div>
         </div>
