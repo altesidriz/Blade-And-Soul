@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import Loading from "../../../components/loading/Loading";
 import styles from './singleNew.module.css';
 import { format } from 'timeago.js';
+import axiosInstance from '../../../lib/axiosInstance';
+
 
 const SingleNew = () => {
     const [data, setData] = useState(null);
@@ -10,22 +12,27 @@ const SingleNew = () => {
     const [error, setError] = useState(null); 
 
     const path = useLocation().pathname.split("/")[2];
+    console.log(path);
+    
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`news/find/${path}`);
-
-                if (!response.ok) {
+                const response = await axiosInstance.get(`news/find/${path}`);
+                console.log(response);
+                
+                if (response.status !== 200) {
                     if (response.status === 404) {
                         setError("News not found.");
                     } else {
                         setError(`Network response was not ok: ${response.status}`);
                     }
-                    return; 
+                    return;
                 }
 
-                const result = await response.json();
+                const result = await response.data;
+                console.log(result);
+                
                 setData(result);
             } catch (err) {
                 setError(err.message); 
@@ -37,6 +44,8 @@ const SingleNew = () => {
         fetchData();
     }, [path]);
 
+    console.log(data);
+    
     if (loading) {
         return <Loading />;
     }

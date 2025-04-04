@@ -7,7 +7,7 @@ export default defineConfig({
 // NEED TO DELETE THIS AT DEPLOY
     server: {
       proxy: {
-        '/api': 'http://localhost:8800'
+        '/api': 'http://localhost:2426'
       }
     },
 // NEED TO DELETE THIS AT DEPLOY
