@@ -23,7 +23,7 @@ const Navbar = () => {
           >Game {!arrow && <IoIosArrowDown />} {arrow && <IoIosArrowUp />}  </a>
           <Link to="/news">News</Link>
           <Link to="/forum">Forum</Link>
-          <Link to="#">Support</Link>
+          <Link to="/support">Support</Link>
           <Link to="/shop">Shop</Link>
           {arrow && <div className={styles.subMenu}>
             <Link to='#'>Races</Link>

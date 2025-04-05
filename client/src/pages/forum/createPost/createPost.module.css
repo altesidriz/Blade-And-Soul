@@ -56,6 +56,14 @@
     min-height: 150px;
 }
 
+.modalContent select{
+    height: 30px;
+    padding-left: 10px;
+    background: #1f1d1d;
+    border: none;
+    color: #989797;
+}
+
 .modalContent button {
     width: max-content;
     padding: 10px 15px;

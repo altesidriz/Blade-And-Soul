@@ -9,6 +9,8 @@ const CreatePost = ({ closeModal, refetchPosts }) => {
     const [category, setCategory] = useState('');
     const currentUser = useSelector((state) => state.user.currentUser);
 
+    const categories = ["Service Issues", "Game Update", "Bugs & Issues", "Items & Market", "General Discussion", "PvP", "PvE"];
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -44,13 +46,18 @@ const CreatePost = ({ closeModal, refetchPosts }) => {
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
-                    <input
-                        type="text"
-                        placeholder="Category"
+                    <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="">Select Category</option>
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat}>
+                                {cat}
+                            </option>
+                        ))}
+                    </select>
                     <button type="submit">Create Post</button>
                     <button type='button' onClick={closeModal}>Close</button>
                 </form>

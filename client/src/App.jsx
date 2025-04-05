@@ -21,6 +21,7 @@ import SingleNew from './pages/news/singleNew/SingleNew';
 import Item from './pages/shop/item/Item';
 import RouteProtect from './components/routeGuard/RouteProtect';
 import NotFound from './pages/notFound/NotFound';
+import Support from './pages/support/Support';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
 
             <Route path='/forum' element={<Forum />} />
             <Route path='/post/:id' element={<Post />} />
+            <Route path='/support' element={<Support />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
             <Route path="*" element={<NotFound />} />
