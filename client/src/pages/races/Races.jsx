@@ -140,7 +140,7 @@ const Races = () => {
 
             <section ref={jin} id="Jin" className={styles.section}>
                 <div className={styles.image}>
-                    <img src={yun[currentGender]} />
+                    <img src={jin[currentGender]} />
                 </div>
                 <div className={styles.description}>
                     <h1>Jin</h1>

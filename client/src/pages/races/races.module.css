@@ -134,6 +134,7 @@
     position: absolute;
     bottom: 40px;
     right: 30px;
+    animation: floatUpDown 3.5s infinite ease-in-out;
 }
 
 .upArrow:hover{
@@ -178,3 +179,13 @@
 .buttons span:hover {
     color: white;
 }
+
+
+@keyframes floatUpDown {
+    0%, 100% {
+      transform: translateY(0); 
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
