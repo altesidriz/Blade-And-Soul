@@ -4,6 +4,8 @@ import { format } from 'timeago.js';
 import { MdDeleteForever } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import axiosInstance from '../../lib/axiosInstance';
+import Dialog from '../dialog/Dialog';
+import { useState } from 'react';
 
 const categoryColors = {
     Sales: 'red',
@@ -12,21 +14,29 @@ const categoryColors = {
     'Patch Notes': 'green'
 };
 
+
 const NewsCard = ({ data, onDelete }) => { // added onDelete prop.
     const currentUser = useSelector((state) => state.user.currentUser);
     const isAdmin = currentUser?.role === 'Admin';
     const textColor = categoryColors[data.category];
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
 
+    const openDialog = () => {
+        setIsDialogOpen(true);
+    };
+    
+    const closeDialog = () => {
+        setIsDialogOpen(false);
+    };
+    
     const handleDelete = async () => {
-        if (window.confirm("Are you sure you want to delete this news article?")) {
-            try {
-                console.log("Deleting news with ID:", data._id);
-                await axiosInstance.delete(`news/${data._id}`);
-                onDelete(data._id); // Notify the parent component
-            } catch (error) {
-                console.error('Error deleting news:', error);
-                alert('Failed to delete news. Please try again.');
-            }
+        try {
+            console.log("Deleting news with ID:", data._id);
+            await axiosInstance.delete(`news/${data._id}`);
+            onDelete(data._id);
+            closeDialog();
+        } catch (error) {
+            console.error('Error deleting news:', error);
         }
     };
 
@@ -49,11 +59,19 @@ const NewsCard = ({ data, onDelete }) => { // added onDelete prop.
             </div>
             {isAdmin && (
                 <div className={styles.buttons}>
-                    <span onClick={handleDelete}>
+                    <span onClick={openDialog}>
                         <MdDeleteForever size={25} />
                     </span>
                 </div>
             )}
+            <Dialog
+                isOpen={isDialogOpen}
+                onClose={closeDialog}
+                onConfirm={handleDelete}
+                message="Are you sure you want to delete this news article?"
+                successMessage="News article deleted successfully!"
+                errorMessage="Failed to delete news article. Please try again."
+            />
         </div>
     );
 };

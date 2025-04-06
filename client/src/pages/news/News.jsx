@@ -10,32 +10,31 @@ const News = () => {
     const [openModal, setOpenModal] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const categories = ['All', 'Sales', 'Events', 'General', 'Patch Notes'];
-    
+
     const currentUser = useSelector((state) => state.user.currentUser);
 
-    useEffect(() => {
-        const fetchData = async () => {
-
-            try {
-                let res;
-                if (selectedCategory === ('All' || '')) {
-                    res = await axiosInstance.get('news/all');
-                } else {
-                    res = await axiosInstance.get(`news/${selectedCategory}`);
-                }
-                setNews(res.data);
-            } catch (err) {
-
+    const fetchData = async () => {
+        try {
+            let res;
+            if (selectedCategory === ('All' || '')) {
+                res = await axiosInstance.get('news/all');
+            } else {
+                res = await axiosInstance.get(`news/${selectedCategory}`);
             }
-        };
+            setNews(res.data);
+        } catch (err) {
+            console.error(err); 
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, [selectedCategory]);
 
     const handleDeleteNews = (deletedId) => {
         setNews((prevNews) => prevNews.filter((item) => item._id !== deletedId));
     };
-    
+
     return (
 
         <div className={styles.container}>
@@ -53,10 +52,10 @@ const News = () => {
                 {currentUser && currentUser.role === "Admin" ? <button onClick={() => { setOpenModal(true) }}>Add a New</button> : <></>}
             </div>
             <div className={styles.cardList}>
-                {news.map((data) => (<NewsCard key={data._id} data={data} onDelete={handleDeleteNews}/>))}
+                {news.map((data) => (<NewsCard key={data._id} data={data} onDelete={handleDeleteNews} />))}
             </div>
 
-            {openModal && <CreateNew setOpenModal={setOpenModal} />}
+            {openModal && <CreateNew setOpenModal={setOpenModal} fetchData={fetchData}/>}
         </div>
     );
 };

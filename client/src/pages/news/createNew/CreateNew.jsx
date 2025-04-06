@@ -7,7 +7,7 @@ import { IoCloseCircle } from "react-icons/io5";
 import TextEditor from '../../../components/textEditor/TextEditor.jsx';
 import axiosInstance from '../../../lib/axiosInstance.js';
 
-const CreateNew = ({ setOpenModal }) => {
+const CreateNew = ({ setOpenModal, fetchData }) => {
     const [image, setImage] = useState(undefined);
     const [uploadPerc, setUploadPerc] = useState(0);
     const [inputs, setInputs] = useState({});
@@ -66,7 +66,8 @@ const CreateNew = ({ setOpenModal }) => {
                 image: imageUrl
             });
             setOpenModal(false);
-            navigate('/');
+            fetchData();
+            navigate('/news');
         } catch (error) {
             console.log(error);
         }

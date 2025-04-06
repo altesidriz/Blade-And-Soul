@@ -22,6 +22,7 @@ import Item from './pages/shop/item/Item';
 import RouteProtect from './components/routeGuard/RouteProtect';
 import NotFound from './pages/notFound/NotFound';
 import Support from './pages/support/Support';
+import Races from './pages/races/Races';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/news' element={<News />} />
             <Route path='/news/:id' element={<SingleNew />} />
+            <Route path='/races' element={<Races />} />
 
             <Route path='/shop' element={<RouteProtect><Shop /></RouteProtect>} />
             <Route path='/item/:id' element={<RouteProtect><Item /></RouteProtect>} />

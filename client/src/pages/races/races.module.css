@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.racesContainer {
+    width: 100vw;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    position: relative;
+}
+
+
+.mainSection {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+}
+
+.mainSection {
+    background-image: url('../../assets/races/race_expanded_bg_top.jpg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: calc(100vh - 108.15px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.text {
+    position: absolute;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.text h1 {
+    font-family: 'Caveat', cursive;
+    color: white;
+    font-size: 6rem;
+    font-weight: 40;
+}
+
+.text p {
+    font-family: 'Pt Sans', sans-serif;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.imageContainer {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    width: 90%;
+    height: 100%;
+    font-family: 'Caveat', cursive;
+    font-size: 5rem;
+}
+
+.imageContainer a {
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+}
+
+.imageContainer p {
+    position: absolute;
+    font-size: 6rem;
+    transition: transform 0.3s ease;
+}
+
+.imageContainer p:hover {
+    transform: scale(1.1);
+    text-shadow: 4px 4px 8px #ff9933;
+}
+
+.imageContainer img {
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+}
+
+.imageContainer img:hover {
+    filter: brightness(1.3);
+}
+
+.section {
+    background-image: url('../../assets/races/race_expanded_bg_middle.jpg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.section .image {
+    width: 50%;
+    height: 95%;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.section .description {
+    width: 50%;
+    height: 100%;
+    padding: 25px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    row-gap: 30px;
+    position: relative;
+}
+
+.upArrow {
+    position: absolute;
+    bottom: 40px;
+    right: 30px;
+}
+
+.upArrow:hover{
+    color: white;
+}
+
+.description h1 {
+    font-family: 'Caveat', cursive;
+    color: white;
+    font-size: 6rem;
+    font-weight: 40;
+}
+
+.description p {
+    font-family: 'Pt Sans', sans-serif;
+    color: white;
+    font-size: 1.6rem;
+    text-indent: 20px;
+}
+
+.buttons {
+    background-image: url('../../assets/races/male-female-bg.png');
+    background-repeat: no-repeat;
+    width: 280px;
+    height: 70px;
+    font-family: 'Caveat', cursive;
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    column-gap: 25px;
+    padding-left: 15px;
+}
+
+.buttons span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.buttons span:hover {
+    color: white;
+}

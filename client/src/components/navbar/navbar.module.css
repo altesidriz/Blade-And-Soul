@@ -33,8 +33,8 @@
     display: flex;
     justify-content: space-around;
     width: max-content;
-    font-family: Splash, sans-serif;
-    font-size: 2rem;
+    font-family: 'Caveat', sans-serif;
+    font-size: 2.7rem;
     gap: 20px;
 }
 .menu a{
@@ -60,6 +60,7 @@
     background: #000000ad;
     justify-content: space-around;
     padding-left: 15px;
+    z-index: 1000;
 }
 
 .subMenu span:hover{

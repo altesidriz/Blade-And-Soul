@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './navbar.module.css';
@@ -8,6 +8,33 @@ import navLogo from '../../assets/navbar/nav-logo.png'
 
 const Navbar = () => {
   const [arrow, setArrow] = useState(false);
+  const subMenuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+        if (arrow && subMenuRef.current && !subMenuRef.current.contains(event.target)) {
+            setArrow(false);
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setArrow(false);
+    };
+
+    if (arrow) {
+        document.addEventListener('mousedown', handleClickOutside);
+        if (subMenuRef.current) {
+            subMenuRef.current.addEventListener('mouseleave', handleMouseLeave);
+        }
+    }
+
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        if (subMenuRef.current) {
+            subMenuRef.current.removeEventListener('mouseleave', handleMouseLeave);
+        }
+    };
+}, [arrow]);
 
   return (
     <div className={styles.container}>
@@ -25,8 +52,8 @@ const Navbar = () => {
           <Link to="/forum">Forum</Link>
           <Link to="/support">Support</Link>
           <Link to="/shop">Shop</Link>
-          {arrow && <div className={styles.subMenu}>
-            <Link to='#'>Races</Link>
+          {arrow && <div className={styles.subMenu} ref={subMenuRef}>
+            <Link to='/races'>Races</Link>
             <Link to='#'>Classes</Link>
             <Link to='#'>Wiki</Link>
           </div>}
