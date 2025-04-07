@@ -5,20 +5,21 @@ import ncoin from '../../../assets/shop/ncoin.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserWallet } from '../../../redux/userSlice';
 import axiosInstance from '../../../lib/axiosInstance';
+import Dialog from '../../../components/dialog/Dialog';
+import Loading from '../../../components/loading/Loading';
 
 const Item = () => {
   const { id } = useParams();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [number, setNumber] = useState(1);
   const userWallet = useSelector((state) => state.user.currentUser.wallet); 
   const currentUser = useSelector((state) => state.user.currentUser);
   const { _id } = currentUser;
-  const dispatch = useDispatch(); // Get dispatch function
-
-  console.log(id);
-
+  const dispatch = useDispatch();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState(null);
+  const [feedbackType, setFeedbackType] = useState(null);
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -28,7 +29,8 @@ const Item = () => {
         setItem(response.data);
         setLoading(false);
       } catch (err) {
-        setError(err);
+        setFeedbackMessage(err.message);
+        setFeedbackType('error');
         setLoading(false);
       }
     };
@@ -36,17 +38,25 @@ const Item = () => {
     fetchItem();
   }, [id]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  useEffect(() => {
+    if (feedbackMessage) {
+      const timeoutId = setTimeout(() => {
+        setFeedbackMessage(null);
+        setFeedbackType(null);
+      }, 5000);
 
-  if (error) {
-    return <p>Error: {error.message}</p>;
+      return () => clearTimeout(timeoutId);
+    }
+  }, [feedbackMessage]);
+
+  if (loading) {
+    return <Loading />;
   }
 
   if (!item) {
-    return <p>Item not found</p>;
+    return <p className={styles.itemNotFound}>Item not found.</p>;
   }
+
   const incrementNumber = () => {
     setNumber((prevNumber) => prevNumber + 1);
   };
@@ -55,28 +65,33 @@ const Item = () => {
     setNumber((prevNumber) => prevNumber - 1);
   };
 
-  const handlePurchase = async () => { // Make handlePurchase async
+  const handlePurchase = () => {
     const totalPrice = item.price * number;
 
     if (userWallet < totalPrice) {
-      alert("Insufficient funds!");
+      setFeedbackMessage('Insufficient funds!');
+      setFeedbackType('error');
       return;
     }
+    setIsDialogOpen(true);
+  };
 
-    const confirmPurchase = window.confirm("Are you sure you want to purchase?");
+  const confirmPurchase = async () => {
+    setIsDialogOpen(false); // Close the Dialog
+    const totalPrice = item.price * number;
 
-    if (confirmPurchase) {
-      dispatch(updateUserWallet(totalPrice));
+    dispatch(updateUserWallet(totalPrice));
 
-      try {
-        await axiosInstance.put(`users/${_id}`, {
-          wallet: userWallet - totalPrice,
-        });
-        alert("Purchase successful!");
-      } catch (error) {
-        console.error("Error updating wallet:", error);
-        alert("Purchase failed. Please try again.");
-      }
+    try {
+      await axiosInstance.put(`users/${_id}`, {
+        wallet: userWallet - totalPrice,
+      });
+      setFeedbackMessage('Purchase successful! Items are sent to you game account!');
+      setFeedbackType('success');
+    } catch (error) {
+      console.error('Error updating wallet:', error);
+      setFeedbackMessage('Purchase failed. Please try again.');
+      setFeedbackType('error');
     }
   };
 
@@ -90,7 +105,9 @@ const Item = () => {
           <span>{item.category}</span>
           <h1>{item.name}</h1>
           <div className={styles.price}>
-            <span><img src={ncoin} alt="" /> {item.price}</span>
+            <span>
+              <img src={ncoin} alt="" /> {item.price}
+            </span>
           </div>
           <p>Details: Details about the item</p>
         </div>
@@ -99,20 +116,39 @@ const Item = () => {
           <div className={styles.counter}>
             <span>{item.name}</span>
             <div>
-              <button disabled={number <= 1} onClick={decrementNumber}>-</button>
+              <button disabled={number <= 1} onClick={decrementNumber}>
+                -
+              </button>
               <p>{number}</p>
               <button onClick={incrementNumber}>+</button>
             </div>
           </div>
           <div className={styles.price}>
             <span>Total</span>
-            <span><img src={ncoin} alt="" /> {item.price * number}</span>
+            <span>
+              <img src={ncoin} alt="" /> {item.price * number}
+            </span>
           </div>
           <button onClick={handlePurchase}>Purchase</button>
         </div>
       </div>
+      {/* Feedback */}
+      {feedbackMessage && (
+        <p className={`${styles.feedback} ${styles[feedbackType]}`}>
+          {feedbackMessage}
+        </p>
+      )}
+      {/* Dialog Component */}
+      <Dialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onConfirm={confirmPurchase}
+        message="Are you sure you want to purchase items?"
+        successMessage="Purchase successful!"
+        errorMessage="Purchase failed. Please try again."
+      />
     </div>
   );
 };
 
-export default Item
+export default Item;

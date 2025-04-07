@@ -12,10 +12,10 @@ import { format } from 'timeago.js';
 import UserModal from './userModal/UserModal';
 import UserCarousel from './userCarousel/UserCarousel';
 import Dialog from '../../components/dialog/Dialog';
-import { IoMdCloseCircle } from "react-icons/io";
-import { RiDeleteBin6Fill } from "react-icons/ri";
 import { MdDeleteForever } from "react-icons/md";
 import axiosInstance from '../../lib/axiosInstance';
+import NoAvatar from '../../assets/user/no-avatar.png';
+import DefaultCover from '../../assets/user/cover.jpg'
 
 const Profile = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
@@ -35,18 +35,6 @@ const Profile = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [imageToDelete, setImageToDelete] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const res = await axios.get(`posts/users/${currentUser._id}`);
-    //             setPosts(res.data);
-    //         } catch (error) {
-    //             console.error("Error fetching user data:", error);
-    //         }
-    //     };
-    //     fetchData();
-    // }, [currentUser._id]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -179,7 +167,7 @@ const Profile = () => {
             <div className={styles.cover}>
                 <div className={styles.top}>
                     {isOwner && <LiaEditSolid size={25} className={styles.editBtn} onClick={openModal} />}
-                    <img src={cover} alt="" />
+                    <img src={cover ? cover : DefaultCover} alt="" />
                     <div className={styles.playerInfo}>
                         <h1>{name}</h1>
                         <h5>{role}</h5>
@@ -187,7 +175,7 @@ const Profile = () => {
                 </div>
                 <div className={styles.bottom}>
                     <div className={styles.profileImg}>
-                        <img src={avatar} alt="" />
+                        <img src={avatar ? avatar : NoAvatar} alt="" />
                     </div>
                     <div className={styles.joined}>
                         <span>JOINED</span>

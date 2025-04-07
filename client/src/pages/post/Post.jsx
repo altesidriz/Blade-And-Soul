@@ -10,6 +10,7 @@ import Loading from '../../components/loading/Loading.jsx';
 import Dialog from '../../components/dialog/Dialog.jsx';
 import EditPost from './editPost/EditPost.jsx';
 import axiosInstance from '../../lib/axiosInstance.js';
+import NoAvatar from '../../assets/user/no-avatar.png';
 
 const Post = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -87,7 +88,7 @@ const Post = () => {
           </Link>
           <div className={styles.avatar}>
             <Link to={`/profile/${channel._id}`}>
-              <img src={channel.avatar} alt="" />
+              <img src={channel.avatar ? channel.avatar : NoAvatar} alt="" />
             </Link>
           </div>
           <span>{channel.role}</span>

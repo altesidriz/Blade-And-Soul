@@ -3,7 +3,7 @@ import styles from './home.module.css';
 import bannerImg from '../../assets/banner/interim-home-define-style-destroyer.png';
 import { IoIosKeypad } from "react-icons/io";
 import { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { format } from 'timeago.js';
 import Loading from '../../components/loading/Loading';
 import { ErrorContext } from '../../context/ErrorContext';
@@ -15,6 +15,7 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const { appError, setAppError } = useContext(ErrorContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +25,6 @@ const Home = () => {
         setData(res.data);
         setLoading(false)
       } catch (error) {
-        // console.error("Error fetching news:", error);
         setLoading(false);
         setAppError('Something went wrong. Please try again later!');
       }
@@ -34,7 +34,9 @@ const Home = () => {
 
   const curentNews = data.slice(0, 4);
 
-  console.log(appError);
+  const handleNavigate = () => {
+    navigate('/races')
+  }
   
   return (
     <div className={styles.container}>
@@ -58,9 +60,9 @@ const Home = () => {
       </div>
       <Link to={`/news`}><IoIosKeypad /> View More News</Link>
       <div className={styles.banner}>
-        <h1>Define you Style</h1>
+        <h1>Define your Style</h1>
         <p>Unleash devastating aerial combos, swap martial arts stances, or reign down fury on your enemies. Explore your path.</p>
-        <button>discover your path</button>
+        <button onClick={handleNavigate}>discover your path</button>
         <div className={styles.bannerVideo}>
           <video autoPlay loop={true} muted playsInline>
             <source src='https://cdn.ncwest.com/blade-and-soul/06052024-429BE0B7B39B5C83/videos/home/DualBlade-website-loop.mp4' />
@@ -75,12 +77,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
-{/* <div className={styles.carousel}>
-          <img src="/src/assets/banner/carousel-img1.jpg" alt="" />
-        <img src="/src/assets/banner/ashira_big.jpg" alt="" />
-        <img src="/src/assets/banner/purple.jpg" alt="" />
-        <img src="/src/assets/banner/infernal.jpg" alt="" />
-      </div> */}

@@ -31,7 +31,6 @@ const NewsCard = ({ data, onDelete }) => { // added onDelete prop.
     
     const handleDelete = async () => {
         try {
-            console.log("Deleting news with ID:", data._id);
             await axiosInstance.delete(`news/${data._id}`);
             onDelete(data._id);
             closeDialog();

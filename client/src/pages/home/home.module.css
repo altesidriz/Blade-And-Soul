@@ -139,7 +139,7 @@ button:hover {
 }
 
 .banner h1 {
-    font-family: Splash, sans-serif;
+    font-family: 'Caveat', sans-serif;
     font-size: 5rem;
     z-index: 10;
 
@@ -163,6 +163,11 @@ button:hover {
     text-transform: uppercase;
     font-size: 1.5rem;
     z-index: 1;
+    color: white;
+}
+
+.banner button:hover{
+    background: #e87810;
 }
 
 .bannerVideo {

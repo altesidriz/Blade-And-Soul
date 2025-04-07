@@ -4,6 +4,7 @@ import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../../lib/axiosInstance';
+import NoAvatar from '../../assets/user/no-avatar.png'
 
 
 
@@ -27,7 +28,7 @@ const PostCard = ({ post }) => {
             </div>
             <div className={styles.rightContent}>
                 <div className={styles.avatar}>
-                    <img src={user.avatar} alt="" />
+                    <img src={user.avatar ? user.avatar : NoAvatar} alt="" />
                 </div>
                 <h3>{user.name}</h3>
             </div>
