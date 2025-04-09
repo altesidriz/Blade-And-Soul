@@ -1,6 +1,6 @@
 .container{
     background-image: url("../../assets/news/news-bg.jpg");
-    width: 100vw;
+    width: 100%;
     min-height: 80vh;
     height: auto;
     display: flex;

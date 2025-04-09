@@ -6,16 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../loading/Loading';
 import axiosInstance from '../../lib/axiosInstance';
 
-
-
-
 const CreditCard = ({ price, ncoins }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [cardNumberRaw, setCardNumberRaw] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [cardholderName, setCardholderName] = useState('');
-  const [expiry, setExpiry] = useState('');
+  const [expiryRaw, setExpiryRaw] = useState(''); // Raw expiry input
+  const [expiry, setExpiry] = useState('');       // Formatted expiry
   const [cvv, setCvv] = useState('');
 
   const [loading, setLoading] = useState(false);
@@ -28,23 +27,56 @@ const CreditCard = ({ price, ncoins }) => {
   const { _id, wallet } = currentUser;
   let finalWallet = wallet + ncoins;
 
+  const formatCardNumber = (value) => {
+    const cleanedValue = value.replace(/\D/g, '');
+    const spacedValue = cleanedValue.replace(/(\d{4})(?=\d)/g, '$1 ');
+    return spacedValue;
+  };
+
+  const handleCardNumberChange = (e) => {
+    const rawValue = e.target.value.replace(/\s/g, '');
+    setCardNumberRaw(rawValue);
+    setCardNumber(formatCardNumber(rawValue));
+  };
+
+  const formatExpiryDate = (value) => {
+    const cleanedValue = value.replace(/\D/g, '').slice(0, 4); // Allow max 4 digits
+    if (cleanedValue.length >= 2) {
+      return `${cleanedValue.slice(0, 2)}/${cleanedValue.slice(2)}`;
+    }
+    return cleanedValue;
+  };
+
+  const handleExpiryChange = (e) => {
+    const rawValue = e.target.value.replace(/\//g, ''); // Remove existing slashes for raw value
+    setExpiryRaw(rawValue);
+    setExpiry(formatExpiryDate(rawValue));
+  };
+
+  const handleCardholderNameChange = (e) => {
+    setCardholderName(e.target.value.toUpperCase()); // Allow spaces in name
+  };
+
   const validateCardDetails = () => {
     const today = new Date();
     const currentYear = today.getFullYear() % 100;
     const currentMonth = today.getMonth() + 1;
 
-    setError(null); // Reset error state
+    setError(null); 
 
-    if (!/^\d{16}$/.test(cardNumber)) {
+    if (!/^\d{16}$/.test(cardNumberRaw)) {
       setError('Card number must be 16 digits.');
       return false;
     }
-    if (cardholderName.length < 2) {
-      setError('Cardholder name must be at least 2 characters.');
+    if (cardholderName.trim().length < 2 || !/^[a-zA-Z\s]+$/.test(cardholderName)) {
+      setError('Cardholder name must be at least 2 characters and contain only letters and spaces.');
       return false;
     }
-    const [month, year] = expiry.split('/').map(Number);
-    if (isNaN(month) || isNaN(year) || month < 1 || month > 12 || year < currentYear || (year === currentYear && month === currentMonth && month < currentMonth)) {
+    const [monthStr, yearStr] = expiry.split('/');
+    const month = parseInt(monthStr, 10);
+    const year = parseInt(yearStr, 10);
+
+    if (isNaN(month) || isNaN(year) || month < 1 || month > 12 || year < currentYear || (year === currentYear && month < currentMonth)) {
       setError('Invalid expiry date. Must be MM/YY and not in the past.');
       return false;
     }
@@ -85,7 +117,7 @@ const CreditCard = ({ price, ncoins }) => {
 
   const handleGoHome = () => {
     navigate('/');
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -96,20 +128,20 @@ const CreditCard = ({ price, ncoins }) => {
           type="text"
           placeholder="Card Number"
           value={cardNumber}
-          onChange={(e) => setCardNumber(e.target.value)}
+          onChange={handleCardNumberChange}
         />}
         {showInputs && <input
           type="text"
           placeholder="Cardholder's Name"
           value={cardholderName}
-          onChange={(e) => setCardholderName(e.target.value)}
+          onChange={handleCardholderNameChange}
         />}
         <div className={styles.bottom}>
           {showInputs && <input
             type="text"
             placeholder="MM/YY"
             value={expiry}
-            onChange={(e) => setExpiry(e.target.value)}
+            onChange={handleExpiryChange}
           />}
           {showInputs && <input
             type="text"
@@ -133,4 +165,4 @@ const CreditCard = ({ price, ncoins }) => {
   );
 };
 
-export default CreditCard
+export default CreditCard;

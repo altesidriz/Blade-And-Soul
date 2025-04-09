@@ -40,13 +40,13 @@ function App() {
             <Route path='/races' element={<Races />} />
 
             <Route path='/shop' element={<RouteProtect><Shop /></RouteProtect>} />
+            <Route path='/support' element={<RouteProtect><Support /></RouteProtect>} />
             <Route path='/item/:id' element={<RouteProtect><Item /></RouteProtect>} />
             <Route path='/purchase' element={<RouteProtect><Purchase /></RouteProtect>} />
             <Route path='/profile/:id' element={<RouteProtect><Profile /></RouteProtect>} />
 
             <Route path='/forum' element={<Forum />} />
             <Route path='/post/:id' element={<Post />} />
-            <Route path='/support' element={<Support />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
             <Route path="*" element={<NotFound />} />

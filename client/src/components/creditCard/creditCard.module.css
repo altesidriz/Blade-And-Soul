@@ -11,10 +11,10 @@
     justify-content: center;
     row-gap: 15px;
     background: rgb(28, 104, 159);
-    background: linear-gradient(0deg, rgba(28, 104, 159, 1) 0%, rgba(232, 126, 29, 1) 100%);
+    background: linear-gradient(0deg, rgba(28, 104, 159, 1) 0%, rgb(232, 126, 29) 100%);
 }
 
-.container button{
+.container button {
     width: 550px;
 }
 
@@ -30,24 +30,29 @@
     justify-content: space-around;
 }
 
-.card input{
+.card input {
     width: 80%;
     height: 40px;
     padding-left: 15px;
     font-size: 1.6rem;
+    outline: none;
 }
 
-.card .bottom{
+.card input:focus {
+    border: 2px solid #e87e1d;
+}
+
+.card .bottom {
     display: flex;
     flex-direction: row;
     width: 80%;
-    gap:5px;
+    gap: 5px;
 }
 
-.bottom input:nth-child(1){
-    flex:3;
-}
-.bottom input:nth-child(2){
-    flex:1;
+.bottom input:nth-child(1) {
+    flex: 3;
 }
 
+.bottom input:nth-child(2) {
+    flex: 1;
+}
