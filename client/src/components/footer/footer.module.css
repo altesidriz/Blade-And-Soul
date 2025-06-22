@@ -89,3 +89,16 @@
     height: auto;
     object-fit: cover;
 }
+
+
+@media (max-width: 480px){
+    .social{
+        gap: 30px;
+    }
+
+    .links{
+        padding-left: 10px;
+        font-size: 1rem;
+        column-gap: 10px;
+    }
+}
