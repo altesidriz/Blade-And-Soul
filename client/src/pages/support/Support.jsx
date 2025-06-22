@@ -15,13 +15,12 @@ const Support = () => {
         e.preventDefault();
         setLoading(true);
 
-        // Simulate email submission with setTimeout
         setTimeout(() => {
             setSuccess(true);
             setLoading(false);
             setCategory('');
             setMessage('');
-        }, 3000); // 3 seconds
+        }, 3000); 
 
     };
 

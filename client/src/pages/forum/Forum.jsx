@@ -13,7 +13,7 @@ const Forum = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(10); //?
   const [postModal, setPostModal] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
 
