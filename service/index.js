@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
     })
 })
 
-app.listen(8800, () => {
+app.listen(2426, () => {
     connect();
     console.log("Connected to Server");
 });

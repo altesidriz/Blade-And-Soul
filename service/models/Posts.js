@@ -19,6 +19,7 @@ const PostSchema = new mongoose.Schema(
         },
         category: {
             type: String,
+            enum: ["Service Issues", "Game Update", "Bugs & Issues", "Items & Market", "General Discussion", "PvP", "PvE"],
         },
         likes: {
             type: [String],

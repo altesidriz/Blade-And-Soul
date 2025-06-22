@@ -13,6 +13,18 @@ export const addItem = async (req, res, next) => {
     }
 };
 
+export const deleteItem = async (req, res, next) => {
+    try {
+        const deletedItem = await Item.findByIdAndDelete(req.params.itemId);
+        if (!deletedItem) {
+            return res.status(404).json({ message: "Item not found" });
+        }
+        res.status(204).send(); 
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const getAllItems = async (req, res, next) => {
     try {
         const items = await Item.find();
@@ -40,3 +52,5 @@ export const getItemById = async (req, res, next) => {
         next(error);
     }
 }
+
+

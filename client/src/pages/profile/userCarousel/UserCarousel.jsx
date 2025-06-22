@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './userCarousel.module.css';
 import { IoMdCloseCircle } from "react-icons/io";
 import { MdArrowCircleLeft } from "react-icons/md";

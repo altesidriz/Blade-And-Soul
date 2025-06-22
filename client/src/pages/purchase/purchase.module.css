@@ -86,3 +86,9 @@
     align-items: center;
     justify-content: center;
   }
+
+  @media (max-width: 480px) {
+    .info {
+      width: 95%;
+    }
+  }

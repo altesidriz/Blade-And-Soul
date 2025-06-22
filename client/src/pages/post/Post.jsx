@@ -1,7 +1,6 @@
 import styles from './post.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { fetchSuccess, like } from '../../redux/postSlice.js';
 import { format } from 'timeago.js';
 import { useEffect, useState } from 'react';
@@ -10,6 +9,8 @@ import Replies from '../../components/replies/Replies.jsx';
 import Loading from '../../components/loading/Loading.jsx';
 import Dialog from '../../components/dialog/Dialog.jsx';
 import EditPost from './editPost/EditPost.jsx';
+import axiosInstance from '../../lib/axiosInstance.js';
+import NoAvatar from '../../assets/user/no-avatar.png';
 
 const Post = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -28,8 +29,8 @@ const Post = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const postRes = await axios.get(`/api/posts/find/${path}`);
-        const channelRes = await axios.get(`/api/users/find/${postRes.data.userId}`);
+        const postRes = await axiosInstance.get(`posts/find/${path}`);
+        const channelRes = await axiosInstance.get(`users/find/${postRes.data.userId}`);
         setChannel(channelRes.data);
         dispatch(fetchSuccess(postRes.data));
       } catch (err) {
@@ -42,7 +43,7 @@ const Post = () => {
   }, [path, dispatch]);
 
   const handleLike = async () => {
-    await axios.put(`/api/users/like/${currentPost._id}`);
+    await axiosInstance.put(`users/like/${currentPost._id}`);
     dispatch(like(currentUser._id));
   };
 
@@ -57,7 +58,7 @@ const Post = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`/api/posts/${path}`);
+      await axiosInstance.delete(`posts/${path}`);
     } catch (error) {
       console.error('Error deleting post:', error);
     }
@@ -87,7 +88,7 @@ const Post = () => {
           </Link>
           <div className={styles.avatar}>
             <Link to={`/profile/${channel._id}`}>
-              <img src={channel.avatar} alt="" />
+              <img src={channel.avatar ? channel.avatar : NoAvatar} alt="" />
             </Link>
           </div>
           <span>{channel.role}</span>

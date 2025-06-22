@@ -3,10 +3,12 @@ import { images } from '../../lib/carouselData.js';
 import { useEffect, useState } from "react";
 import { LiaAngleDoubleLeftSolid } from "react-icons/lia";
 import { LiaAngleDoubleRightSolid } from "react-icons/lia";
+import { useNavigate } from "react-router-dom";
 
 
 const Carousel = () => {
     const [curImg, setCurImg] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -15,6 +17,10 @@ const Carousel = () => {
 
         return () => clearInterval(timer);
     }, [images.length]);
+
+    const handleClick = () =>{
+        navigate('/news')
+    }
 
     return (
         <div className={styles.carousel}>
@@ -31,18 +37,18 @@ const Carousel = () => {
                     onClick={() => setCurImg(curImg > 0 ? curImg - 1 : images.length - 1)}
                     aria-label="Previous image"
                 >
-                    <LiaAngleDoubleLeftSolid size={50} color="grey" />
+                    <LiaAngleDoubleLeftSolid size={30} color="grey" />
                 </div>
                 <div
                     className={`${styles['carousel-control']} ${styles.right}`}
                     onClick={() => setCurImg(curImg < images.length - 1 ? curImg + 1 : 0)}
                     aria-label="Next image"
                 >
-                    <LiaAngleDoubleRightSolid size={50} color="grey" />
+                    <LiaAngleDoubleRightSolid size={30} color="grey"/>
                 </div>
                 <div className={styles.center}>
                     <h1>{images[curImg].title}</h1>
-                    <button className={styles.button}>Learn More</button>
+                    <button className={styles.button} onClick={handleClick}>Learn More</button>
                 </div>
             </div>
         </div>

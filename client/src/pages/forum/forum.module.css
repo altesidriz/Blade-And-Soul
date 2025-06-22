@@ -1,7 +1,7 @@
 .container {
     background: #000;
     width: 100%;
-    height: 950px;
+    height: max-content;
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@
 
 .postContent {
     width: 60%;
-    height: 800px;
+    height: max-content;
     border-radius: 15px;
 }
 
@@ -98,15 +98,34 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-  }
-  
-  .paginationNum span {
+}
+
+.paginationNum span {
     cursor: pointer;
     padding: 5px 10px;
-  }
-  
-  .paginationNum .activePage {
+}
+
+.paginationNum .activePage {
     font-weight: bold;
-    color: #eb6611; /* Highlight color */
-  }
-  
+    color: #eb6611;
+    /* Highlight color */
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+
+    .searchBar {
+        width: 100%;
+    }
+
+    .postContent {
+        width: 100%;
+    }
+
+    .paginationNum .activePage {
+        color: #ffffff;
+        /* Highlight color */
+    }
+}

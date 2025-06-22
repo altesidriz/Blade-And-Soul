@@ -1,4 +1,3 @@
-import axios from 'axios';
 import styles from './forum.module.css';
 import { FiSearch } from "react-icons/fi";
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-icons/md";
@@ -6,6 +5,7 @@ import { useEffect, useState } from 'react';
 import PostCard from '../../components/postCard/PostCard';
 import CreatePost from './createPost/CreatePost';
 import { useSelector } from 'react-redux';
+import axiosInstance from '../../lib/axiosInstance';
 
 const Forum = () => {
   const [posts, setPosts] = useState([]);
@@ -13,14 +13,14 @@ const Forum = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(10); //?
   const [postModal, setPostModal] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
 
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get('/api/posts/paginate', {
+      const res = await axiosInstance.get('posts/paginate', {
         params: {
           page: currentPage,
           limit: limit,
@@ -38,7 +38,6 @@ const Forum = () => {
     fetchPosts();
   }, [query, currentPage, limit]);
 
-  console.log(posts);
 
   const handleSearch = () => {
     setCurrentPage(1);

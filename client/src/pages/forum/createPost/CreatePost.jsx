@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import styles from './createPost.module.css';
+import axiosInstance from '../../../lib/axiosInstance';
 
 const CreatePost = ({ closeModal, refetchPosts }) => {
     const [title, setTitle] = useState('');
@@ -9,10 +9,12 @@ const CreatePost = ({ closeModal, refetchPosts }) => {
     const [category, setCategory] = useState('');
     const currentUser = useSelector((state) => state.user.currentUser);
 
+    const categories = ["Service Issues", "Game Update", "Bugs & Issues", "Items & Market", "General Discussion", "PvP", "PvE"];
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/posts', {
+            await axiosInstance.post('posts', {
                 title,
                 description,
                 category,
@@ -44,13 +46,18 @@ const CreatePost = ({ closeModal, refetchPosts }) => {
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
-                    <input
-                        type="text"
-                        placeholder="Category"
+                    <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="">Select Category</option>
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat}>
+                                {cat}
+                            </option>
+                        ))}
+                    </select>
                     <button type="submit">Create Post</button>
                     <button type='button' onClick={closeModal}>Close</button>
                 </form>

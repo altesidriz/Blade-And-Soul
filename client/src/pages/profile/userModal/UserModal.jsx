@@ -3,8 +3,8 @@ import styles from './userModal.module.css';
 import { getStorage, ref, listAll, getDownloadURL, uploadBytesResumable, deleteObject } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
-import {loginSuccess} from '../../../redux/userSlice';
-import axios from 'axios';
+import { loginSuccess } from '../../../redux/userSlice';
+import axiosInstance from '../../../lib/axiosInstance';
 
 
 
@@ -50,10 +50,10 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
     }, []);
 
     // Handle cover image selection
-    const handleCoverImageSelection = (url) => { 
+    const handleCoverImageSelection = (url) => {
         setCoverImagePreviewUrl(url);
     };
-    
+
     const handleAvatarImageUpload = async () => {
         if (!avatarImageFile) {
             setErrorMsg('Please select an image to upload.');
@@ -106,7 +106,7 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
     const handleSaveChanges = async () => {
         setIsLoading(true);
         try {
-            const response = await axios.put(`/api/users/${currentUser._id}`, {
+            const response = await axiosInstance.put(`users/${currentUser._id}`, {
                 avatar: avatarImagePreviewUrl,
                 cover: coverImagePreviewUrl,
             });
@@ -153,22 +153,22 @@ const UserModal = ({ isModalOpen, closeModal, currentUser }) => {
                 <h3>Choose a Cover Image:</h3>
                 <div className={styles.coverOptions}>
                     {coverImageUrls.map((url) => (
-                        <img key={url} src={url} alt="Cover" 
-                        className={styles.coverOptionImage} 
-                        onClick={() => handleCoverImageSelection(url)}/>
+                        <img key={url} src={url} alt="Cover"
+                            className={styles.coverOptionImage}
+                            onClick={() => handleCoverImageSelection(url)} />
                     ))}
                 </div>
                 <h3>Upload New Avatar:</h3>
                 {errorMsg && <p className={styles.errorMsg}>{errorMsg}</p>}
                 {successMsg && <p className={styles.successMsg}>{successMsg}</p>}
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                <input type="file" accept="image/*" onChange={handleAvatarImageFileChange} />
-                <button type="button" 
-                onClick={handleAvatarImageUpload} 
-                disabled={isUploading}
-                style={{fontSize: '1.2rem', padding: '0.5rem 1rem', marginLeft: '1rem'}}>
-                    Upload Avatar {isUploading && `(${uploadProgress.toFixed(0)}%)`}
-                </button>
+                <div className={styles.uploadAvatar}>
+                    <input type="file" accept="image/*" onChange={handleAvatarImageFileChange} />
+                    <button type="button"
+                        onClick={handleAvatarImageUpload}
+                        disabled={isUploading}
+                        style={{ fontSize: '1.2rem', padding: '0.5rem 1rem', marginLeft: '1rem' }}>
+                        Upload Avatar {isUploading && `(${uploadProgress.toFixed(0)}%)`}
+                    </button>
                 </div>
                 <button type="button" onClick={handleSaveChanges} disabled={isLoading}> {isLoading ? "Saving..." : "Save"}</button>
             </div>

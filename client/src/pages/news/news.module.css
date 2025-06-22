@@ -1,5 +1,5 @@
 .container {
-    width: 100vw;
+    width: 100%;
     height: auto;
     padding-bottom: 25px;
     background-image: url("../../assets/news/news-bg.jpg");
@@ -73,4 +73,43 @@
     background: #000;
     border: 1px solid #da4a2b;
     color: #fff;
+}
+
+.mobileMsg{
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .newBtn{
+        display: none;
+    }
+
+    .select{
+        flex-direction: column;
+    }
+
+    .mobileMsg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 100%;
+        color: red;
+        background: white;
+        font-family: Rubik;
+        border-radius: 15px;
+        animation: fadeIn 1s forwards, fadeOut 1.5s 2.5s forwards;
+    }
+
+}@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }

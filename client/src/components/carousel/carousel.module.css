@@ -1,5 +1,5 @@
 .carousel {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background: white;
     position: relative;
@@ -56,7 +56,7 @@
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
-    font-family: Splash, sans-serif;
+    font-family: 'Caveat', sans-serif;
     font-size: 2.4rem;
     color: white;
     display: flex;
@@ -78,4 +78,16 @@
     cursor: pointer;
     color: inherit;
     background: #e87810;
+}
+
+@media (max-width: 480px) {
+    .center h1{
+        text-align: center;
+        font-size: 2.8rem;
+    }
+
+    .center .button {
+        width: 70%;
+    }
+
 }
