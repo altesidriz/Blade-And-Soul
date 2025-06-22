@@ -58,7 +58,7 @@ const Home = () => {
             </Link>))
             )}
       </div>
-      <Link to={`/news`}><IoIosKeypad /> View More News</Link>
+      <Link to={`/news`} className={styles.viewMore}><IoIosKeypad /> View More News</Link>
       <div className={styles.banner}>
         <h1>Define your Style</h1>
         <p>Unleash devastating aerial combos, swap martial arts stances, or reign down fury on your enemies. Explore your path.</p>

@@ -199,3 +199,50 @@ video {
 .character img {
     height: 900px;
 }
+
+
+@media (max-width: 480px) {
+    .cards {
+       display: none;
+    }
+
+    .viewMore{
+        padding: 15px 0;
+    }
+
+    .banner {
+        height: 800px;
+    }
+
+    .banner h1 {
+        font-size: 4rem;
+    }
+
+    .banner p {
+        font-size: 1.8rem;
+        width: 80%;
+    }
+
+    .bannerVideo {
+        width: 80%;
+        height: 250px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    video {
+        width: 93%;
+        height: auto;
+    }
+
+    .character {
+        position: absolute;
+        top: 200px;
+        z-index: 0;
+    }
+
+    .character img {
+        width: 600px;
+        height: auto;
+    }
+}
