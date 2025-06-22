@@ -22,7 +22,7 @@ const Shop = () => {
         const res = await axiosInstance.get(`items/category/${selectedCategory}`);
         setItems(res.data);
       } catch (err) {
-
+        //to do
       }
     };
 

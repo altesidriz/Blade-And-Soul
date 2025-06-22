@@ -59,7 +59,7 @@ const Support = () => {
                     </form>
                 )}
                 {loading && <Loading />}
-                {success && <p>Email sent successfully!</p>}
+                {success && <p>Ticket submitted successfully!</p>}
             </div>
         </div>
     );

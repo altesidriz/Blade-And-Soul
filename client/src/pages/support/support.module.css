@@ -69,3 +69,11 @@
   .supportContainer button:hover {
     background-color: #d37f00;
   }
+
+  @media (max-width: 480px) {
+    .supportContainer{
+      width: 90%;
+    }
+
+    
+}

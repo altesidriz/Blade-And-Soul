@@ -64,3 +64,9 @@ input:focus {
 .inputs span:hover{
     color: #da4a2b;
 }
+
+@media (max-width: 480px) {
+    .container{
+        width: 90%;
+    }
+}
