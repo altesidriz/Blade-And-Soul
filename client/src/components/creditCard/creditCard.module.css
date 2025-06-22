@@ -56,3 +56,16 @@
 .bottom input:nth-child(2) {
     flex: 1;
 }
+
+
+@media (max-width: 480px) {
+    .card p{
+        width: 90%;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .card {
+        width: 90%;
+        height: 200px;
+    }
+}

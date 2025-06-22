@@ -121,7 +121,7 @@ const Profile = () => {
 
             try {
                 await Promise.all(uploadPromises);
-                const response = await axiosInstance.put(`users/${_id}/pictures`, { pictures: imageUrls });
+                await axiosInstance.put(`users/${_id}/pictures`, { pictures: imageUrls });
                 dispatch(loginSuccess({ ...currentUser, pictures: [...currentUser.pictures, ...imageUrls] }));
                 setIsUploading(false);
             } catch (error) {
