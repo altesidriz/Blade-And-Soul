@@ -60,3 +60,14 @@
     background: #dd813b;
 
 }
+
+@media (max-width: 480px) {
+    .container{
+        background-position: right;
+    }
+    .loginForm{
+        width: 90%;
+        height: 350px;
+        background: #ffffffc5;
+    }
+}
