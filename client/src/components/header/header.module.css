@@ -2,6 +2,7 @@
     background: #000;
     height: auto;
     width: 100%;
+    padding-top: 5px;
 }
 
 .logoContainer {
@@ -190,4 +191,111 @@ font-size: 1.5rem;
     to {
         top: 20px;
     }
+}
+
+@keyframes move1 {
+    from {
+        top: -200px;
+    }
+
+    to {
+        top: 200px;
+    }
+}
+
+@keyframes move2 {
+    from {
+        top: -200px;
+    }
+
+    to {
+        top: 400px;
+    }
+}
+
+@media (max-width: 480px){
+.container {
+    background: #000;
+    height: max-content;
+    width: 100%;
+    border-bottom: 1px solid grey;
+    border-radius: 20px;
+    padding-bottom: 2px;
+}
+
+.logoContainer {
+    flex-direction: column;
+    padding: 0 10px;
+    font-size: 14px;
+    height: 120px;
+}
+
+
+.user {
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sepr {
+   display: none;
+}
+
+
+/* Cards(Games) */
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: 99;
+}
+
+.card {
+    top: -200px;
+    left: 50%;
+    transform: translate(-50%,0);
+    animation-name: move;
+}
+
+.card2 {
+    top: -200px;
+    left: 50%;
+    transform: translate(-50%,0);
+    animation-name: move1; 
+}
+
+.card3 {
+    top: -200px;
+   left: 50%;
+    transform: translate(-50%,0);
+    animation-name: move2;
+}
+
+.card img,
+.card2 img,
+.card3 img {
+    padding: 0 10px;
+    background: #2d2a2a;
+    height: 130px;
+    width: 200px;
+    border-radius: 1em;
+    object-fit: contain;
+}
+
+.cardText {
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    color: #9c8e7f;
+    font-family: Rubik, sans-serif;
+}
 }
