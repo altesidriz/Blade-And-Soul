@@ -37,14 +37,14 @@ const Carousel = () => {
                     onClick={() => setCurImg(curImg > 0 ? curImg - 1 : images.length - 1)}
                     aria-label="Previous image"
                 >
-                    <LiaAngleDoubleLeftSolid size={50} color="grey" />
+                    <LiaAngleDoubleLeftSolid size={30} color="grey" />
                 </div>
                 <div
                     className={`${styles['carousel-control']} ${styles.right}`}
                     onClick={() => setCurImg(curImg < images.length - 1 ? curImg + 1 : 0)}
                     aria-label="Next image"
                 >
-                    <LiaAngleDoubleRightSolid size={50} color="grey" />
+                    <LiaAngleDoubleRightSolid size={30} color="grey"/>
                 </div>
                 <div className={styles.center}>
                     <h1>{images[curImg].title}</h1>

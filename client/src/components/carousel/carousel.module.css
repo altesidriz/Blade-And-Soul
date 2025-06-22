@@ -79,3 +79,15 @@
     color: inherit;
     background: #e87810;
 }
+
+@media (max-width: 480px) {
+    .center h1{
+        text-align: center;
+        font-size: 2.8rem;
+    }
+
+    .center .button {
+        width: 70%;
+    }
+
+}
