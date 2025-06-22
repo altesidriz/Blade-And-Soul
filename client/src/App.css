@@ -78,3 +78,9 @@ a {
 .mce-content-body {
   direction: ltr !important;
 }
+
+@media (max-width: 480px) {
+  html{
+    overflow-x: hidden;
+  }
+}
