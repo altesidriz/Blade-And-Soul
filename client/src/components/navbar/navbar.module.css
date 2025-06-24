@@ -20,12 +20,12 @@
 .logo {
     width: 150px;
     height: auto;
-    object-fit: cover;
 }
 
 .logo img {
     width: 100%;
-    height: fit-content;
+    height: auto;
+    object-fit: cover;
 }
 
 .menu {
