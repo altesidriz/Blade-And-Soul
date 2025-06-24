@@ -105,3 +105,54 @@
     justify-content: start;
     border-radius: 15px;
 }
+
+@media (max-width: 480px) {
+    .postContent {
+        padding: 10px;
+        align-items: start;
+    }
+
+    .leftContent{
+        width: 20%;
+        height: auto;
+        align-items: center;
+        justify-content: start;
+        row-gap: 20px;
+        padding: 0;
+    }
+
+    .leftContent h3{
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    .leftContent span{
+        font-size: 1rem;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .rightContent{
+        padding: 0;
+        padding-left: 5px;
+        width: 80%;
+        align-items: start;
+        justify-content: start;
+        line-height: 1.5;
+        border-left: 1px solid #565252;
+    }
+
+    .rightContent span {
+        font-size: 1.2rem;
+    }
+    .rightContent h1 {
+        font-size: 1.8rem;
+    }
+
+    .rightContent p {
+        font-size: 1.5rem;
+    }
+
+}
