@@ -32,3 +32,15 @@
 .replyText span{
     color: #ffffff72;
 }
+
+@media (max-width: 480px) {
+     .replyText{
+        width:70%
+     }
+     .replyText p{
+        font-size: 1.2rem;
+     }
+     .replyText span{
+        font-size: 1rem;
+     }
+}
