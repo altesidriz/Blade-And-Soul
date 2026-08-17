@@ -21,21 +21,29 @@ const Home = () => {
       setLoading(true);
       try {
         const res = await axios.get('/api/news/all');
-        setData(res.data);
-        setLoading(false)
-      } catch (error) {
-        // console.error("Error fetching news:", error);
+        // Проверка дали върнатите данни са наистина масив
+        if (Array.isArray(res.data)) {
+          setData(res.data);
+        } else if (res.data && Array.isArray(res.data.news)) {
+          // Ако бекендът връща обект от рода на { news: [...] }
+          setData(res.data.news);
+        } else {
+          setData([]);
+        }
         setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setData([]); // Винаги нулирайте до празен масив при грешка
         setAppError('Something went wrong. Please try again later!');
       }
     };
     fetchData();
   }, []);
 
-  const curentNews = data.slice(0, 4);
+  const curentNews = Array.isArray(data) ? data.slice(0, 4) : [];
 
-  console.log(appError);
-  
+  // console.log(appError);
+
   return (
     <div className={styles.container}>
       {appError && (
@@ -43,8 +51,10 @@ const Home = () => {
       )}
       <Carousel />
       <div className={styles.cards}>
-        {loading ? <Loading /> :
-        (curentNews.map((i) => (
+        {loading ? (
+          <Loading />
+        ) : (
+          curentNews.map((i) => (
             <Link to={`/news/${i._id}`} key={i._id} className={styles.card}>
               <img src={i.image} alt="" />
               <div className={styles.cardInfo}>
@@ -53,8 +63,9 @@ const Home = () => {
                   <span>{format(i.createdAt)}</span>
                 </div>
               </div>
-            </Link>))
-            )}
+            </Link>
+          ))
+        )}
       </div>
       <Link to={`/news`}><IoIosKeypad /> View More News</Link>
       <div className={styles.banner}>
