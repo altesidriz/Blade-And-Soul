@@ -1,0 +1,36 @@
+name: Deploy to Firebase on Merge
+
+on:
+  push:
+    branches:
+      - main  # Сменете с master, ако клонът ви се казва така
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 1. Инсталиране и билдване на Бекенда
+      - name: Install & Build Backend
+        run: |
+          cd backend
+          npm ci
+          npm run build --if-present
+
+      # 2. Инсталиране и билдване на Фронтенда
+      - name: Install & Build Frontend
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      # 3. Качване във Firebase
+      - name: Deploy to Firebase Hosting and Functions
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BALDE_AND_SOUL_7C14B }}'
+          channelId: live
+          projectId: balde-and-soul-7c14b
