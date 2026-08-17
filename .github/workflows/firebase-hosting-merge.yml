@@ -16,7 +16,7 @@ jobs:
       - name: Install & Build Backend
         run: |
           cd service
-          npm ci
+          npm install
           npm run build --if-present
 
       # 2. Инсталиране и билдване на Фронтенда
