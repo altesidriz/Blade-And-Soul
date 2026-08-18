@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import axios from 'axios';
 import styles from './textEditor.module.css';
+import axiosInstance from '../../lib/axiosInstance';
 
 const TextEditor = ({ onChange }) => {
     const [editorContent, setEditorContent] = useState('');
@@ -12,7 +12,7 @@ const TextEditor = ({ onChange }) => {
             formData.append('file', blobInfo.blob(), blobInfo.filename());
             formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
 
-            axios.post(
+            axiosInstance.post(
                 `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
                 formData,
                 {

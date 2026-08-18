@@ -83,3 +83,23 @@
     background: #6704b8;
     cursor: pointer;
 }
+
+.deleteBtn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 10px;
+    right: 10px;
+    color: white;
+    border-radius: 100%;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.deleteBtn:hover {
+    color: #4d0489;
+    background: white;
+}

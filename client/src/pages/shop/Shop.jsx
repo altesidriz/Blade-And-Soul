@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import Card from '../../components/card/Card';
 import styles from './shop.module.css';
-import { IoSearchSharp } from "react-icons/io5";
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import CreateItem from '../../components/createItem/CreateItem';
+import axiosInstance from '../../lib/axiosInstance';
 
 
 
@@ -15,11 +14,12 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState('featured');
   const categories = ['featured', 'cosmetics', 'suplies', 'service'];
 
+
   useEffect(() => {
     const fetchData = async () => {
 
       try {
-        const res = await axios.get(`/api/items/category/${selectedCategory}`);
+        const res = await axiosInstance.get(`items/category/${selectedCategory}`);
         setItems(res.data);
       } catch (err) {
 
@@ -28,6 +28,10 @@ const Shop = () => {
 
     fetchData();
   }, [selectedCategory]);
+
+  const handleDeleteItem = (itemId) => {
+    setItems((prevItems) => prevItems.filter((item) => item._id !== itemId));
+  };
 
   return (
     <div className={styles.container}>
@@ -46,7 +50,10 @@ const Shop = () => {
       </div>
       {/* ITEMS CONTAINER */}
       <div className={styles.itemsContainer}>
-        {items.map((item) => (<Card key={item._id} item={item}/>))}
+        {items.map((item) => (<Card 
+        key={item._id} 
+        item={item} 
+        onDelete={handleDeleteItem}/>))}
       </div>
       {currentUser.role === 'Admin' && <CreateItem/>}
     </div>

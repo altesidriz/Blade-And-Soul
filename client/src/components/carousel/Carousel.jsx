@@ -3,10 +3,12 @@ import { images } from '../../lib/carouselData.js';
 import { useEffect, useState } from "react";
 import { LiaAngleDoubleLeftSolid } from "react-icons/lia";
 import { LiaAngleDoubleRightSolid } from "react-icons/lia";
+import { useNavigate } from "react-router-dom";
 
 
 const Carousel = () => {
     const [curImg, setCurImg] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -15,6 +17,10 @@ const Carousel = () => {
 
         return () => clearInterval(timer);
     }, [images.length]);
+
+    const handleClick = () =>{
+        navigate('/news')
+    }
 
     return (
         <div className={styles.carousel}>
@@ -42,7 +48,7 @@ const Carousel = () => {
                 </div>
                 <div className={styles.center}>
                     <h1>{images[curImg].title}</h1>
-                    <button className={styles.button}>Learn More</button>
+                    <button className={styles.button} onClick={handleClick}>Learn More</button>
                 </div>
             </div>
         </div>
