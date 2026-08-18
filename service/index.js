@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { onRequest } from "firebase-functions/v2/https";
+import { defineSecret } from "firebase-functions/params";
 
 import userRoutes from './routes/user.js';
 import itemRoutes from './routes/item.js';
@@ -15,6 +16,8 @@ import authRoutes from './routes/auth.js';
 dotenv.config();
 
 const app = express();
+const mongodbSecret = defineSecret("MONGODB");
+const secretKey = defineSecret("SECRETKEY");
 
 // Управление на MongoDB връзката за Serverless среда
 let isConnected = false;
@@ -59,6 +62,6 @@ app.use((err, req, res, next) => {
 
 // Експортиране на функцията за Firebase Cloud Functions
 export const api = onRequest(
-  { secrets: ["MONGODB"] }, // Дава достъп на функцията до запазения Firebase Secret
+  { secrets: [mongodbSecret, secretKey] },
   app
 );
