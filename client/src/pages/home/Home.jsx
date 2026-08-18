@@ -21,7 +21,6 @@ const Home = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-<<<<<<< HEAD
         const res = await axios.get('/api/news/all');
         // Проверка дали върнатите данни са наистина масив
         if (Array.isArray(res.data)) {
@@ -32,12 +31,6 @@ const Home = () => {
         } else {
           setData([]);
         }
-=======
-        const res = await axiosInstance.get('news/all');
-        setData(res.data);
-        setLoading(false)
-      } catch (error) {
->>>>>>> workflow
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -52,13 +45,10 @@ const Home = () => {
 
   // console.log(appError);
 
-<<<<<<< HEAD
-=======
   const handleNavigate = () => {
     navigate('/races')
   }
   
->>>>>>> workflow
   return (
     <div className={styles.container}>
       {appError && (
@@ -101,7 +91,6 @@ const Home = () => {
 };
 
 export default Home;
-<<<<<<< HEAD
 
 
 
@@ -111,5 +100,3 @@ export default Home;
         <img src="/assets/banner/purple.jpg" alt="" />
         <img src="/assets/banner/infernal.jpg" alt="" />
       </div> */}
-=======
->>>>>>> workflow
