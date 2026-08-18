@@ -2,7 +2,8 @@
   "functions": [
     {
       "source": "service",
-      "codebase": "default"
+      "codebase": "default",
+      "runtime": "nodejs22"
     }
   ],
   "hosting": {

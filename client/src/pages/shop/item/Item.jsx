@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import styles from './item.module.css';
-import ncoin from '../../../assets/shop/ncoin.png';
+import ncoin from '..//assets/shop/ncoin.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserWallet } from '../../../redux/userSlice';
 

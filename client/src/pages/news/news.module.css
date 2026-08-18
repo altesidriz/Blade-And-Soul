@@ -2,7 +2,7 @@
     width: 100vw;
     height: auto;
     padding-bottom: 25px;
-    background-image: url("../../assets/news/news-bg.jpg");
+    background-image: url("/assets/news/news-bg.jpg");
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;

@@ -127,7 +127,7 @@ button:hover {
 .banner {
     width: 100vw;
     height: 1000px;
-    background-image: url("../../assets/banner/home-bg-2.jpg");
+    background-image: url("/assets/banner/home-bg-2.jpg");
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
@@ -168,7 +168,7 @@ button:hover {
 .bannerVideo {
     width: 565px;
     height: 332px;
-    background-image: url("../../assets/banner/video-frame.png");
+    background-image: url("/assets/banner/video-frame.png");
     background-position: center;
     z-index: 11;
     display: flex;

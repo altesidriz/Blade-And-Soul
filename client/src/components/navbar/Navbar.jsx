@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className={styles.leftContent}>
         <Link to='/'>
           <div className={styles.logo}>
-            <img src='/src/assets/navbar/nav-logo.png' />
+            <img src='/assets/navbar/nav-logo.png' />
           </div>
         </Link>
         <div className={styles.menu}>

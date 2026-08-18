@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './purchase.module.css';
-import ncoin from '../../assets/shop/ncoin.png'
+import ncoin from '/assets/shop/ncoin.png'
 import CreditCard from '../../components/creditCard/CreditCard';
 
 

@@ -1,5 +1,5 @@
-import shopCrad from '../../assets/shop/shopcard.png';
-import ncoin from '../../assets/shop/ncoin.png';
+import shopCrad from '/assets/shop/shopcard.png';
+import ncoin from '/assets/shop/ncoin.png';
 import styles from './card.module.css';
 import { Link } from 'react-router-dom';
 

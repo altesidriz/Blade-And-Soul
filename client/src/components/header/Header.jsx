@@ -1,5 +1,5 @@
 import styles from './header.module.css';
-import ncoin from '../../assets/shop/ncoin.png'
+import ncoin from '/assets/shop/ncoin.png'
 import { useDispatch } from 'react-redux';
 import { useSelector } from "react-redux";
 import axios from 'axios';
@@ -30,7 +30,7 @@ const Header = () => {
       <div className={styles.logoContainer}>
         <div className={styles.user1}>
           <div className={styles.logo}>
-            <img src="/src/assets/header/ncsoft-seeklogo.svg" alt="" />
+            <img src="/assets/header/ncsoft-seeklogo.svg" alt="" />
           </div>
           <span className={styles.games}
             onClick={() => setShow(!show)}
@@ -70,7 +70,7 @@ const Header = () => {
       {show &&
         <div className={styles.cards}>
           <div className={styles.card}>
-            <img src='/src/assets/header/lineage.png' alt='lineage.png' />
+            <img src='/assets/header/lineage.png' alt='lineage.png' />
             <div className={styles.cardText}>
               <MdPhoneAndroid />
               <FiMonitor />
@@ -78,7 +78,7 @@ const Header = () => {
             </div>
           </div>
           <div className={styles.card2}>
-            <img src='/src/assets/header/aion.png' alt='lineage.png' />
+            <img src='/assets/header/aion.png' alt='lineage.png' />
             <div className={styles.cardText}>
               <MdPhoneAndroid />
               <FiMonitor />
@@ -86,7 +86,7 @@ const Header = () => {
             </div>
           </div>
           <div className={styles.card3}>
-            <img src='/src/assets/header/bns.png' alt='lineage.png' />
+            <img src='/assets/header/bns.png' alt='lineage.png' />
             <div className={styles.cardText}>
               <MdPhoneAndroid />
               <FiMonitor />
