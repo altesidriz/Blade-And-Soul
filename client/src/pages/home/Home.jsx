@@ -22,6 +22,7 @@ const Home = () => {
       setLoading(true);
       try {
         const res = await axiosInstance.get('/api/news/all');
+        console.log('News API Response:', res.data);
         // Проверка дали върнатите данни са наистина масив
         if (Array.isArray(res.data)) {
           setData(res.data);
@@ -48,7 +49,7 @@ const Home = () => {
   const handleNavigate = () => {
     navigate('/races')
   }
-  
+
   return (
     <div className={styles.container}>
       {appError && (
@@ -58,10 +59,10 @@ const Home = () => {
       <div className={styles.cards}>
         {loading ? (
           <Loading />
-        ) : (
+        ) : curentNews.length > 0 ? (
           curentNews.map((i) => (
             <Link to={`/news/${i._id}`} key={i._id} className={styles.card}>
-              <img src={i.image} alt="" />
+              <img src={i.image} alt={i.title} />
               <div className={styles.cardInfo}>
                 <span className={styles.title}>{i.title}</span>
                 <div style={{ display: "flex", columnGap: "15px" }}>
@@ -70,6 +71,8 @@ const Home = () => {
               </div>
             </Link>
           ))
+        ) : (
+          <p>No news available at the moment.</p> // Показва, че няма намерени новини или заявката е върнала празен масив
         )}
       </div>
       <Link to={`/news`}><IoIosKeypad /> View More News</Link>
