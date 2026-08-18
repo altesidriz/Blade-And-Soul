@@ -21,7 +21,7 @@ const Home = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('/api/news/all');
+        const res = await axiosInstance.get('/api/news/all');
         // Проверка дали върнатите данни са наистина масив
         if (Array.isArray(res.data)) {
           setData(res.data);
