@@ -22,7 +22,7 @@ const Home = () => {
       setLoading(true);
       try {
         const res = await axiosInstance.get('news/all');
-        console.log('News API Response:', res.data);
+        // console.log('News API Response:', res.data);
         // Проверка дали върнатите данни са наистина масив
         if (Array.isArray(res.data)) {
           setData(res.data);
@@ -72,7 +72,7 @@ const Home = () => {
             </Link>
           ))
         ) : (
-          <p style={{ color: "white" }}>No news available at the moment.</p> // Показва, че няма намерени новини или заявката е върнала празен масив
+          <p style={{ color: "white", fontFamily: "inherit" }}>No news available at the moment.</p> // Показва, че няма намерени новини или заявката е върнала празен масив
         )}
       </div>
       <Link to={`/news`}><IoIosKeypad /> View More News</Link>
